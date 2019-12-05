@@ -16,6 +16,11 @@
 
 ### 🏠 [Homepage](https://github.com/frinyvonnick/node-html-to-image)
 
+
+## Description
+
+This module expose a function that generates images (png, jpeg) from HTML. It uses puppeteer in headless mode to achieve it. Additionally, it embarks [handlebars](https://handlebarsjs.com/) to provide a way to add logic in your HTML.
+
 ## Install
 
 ```sh
