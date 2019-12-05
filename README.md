@@ -62,7 +62,7 @@ const nodeHtmlToImage = require('node-html-to-image')
 async function makeNiceImage() {
   await nodeHtmlToImage({
     output: './image.png',
-    html: '<html><body>Hello {{name}}!</body></html>'
+    html: '<html><body>Hello {{name}}!</body></html>',
     content: { name: 'you' }
   })
 }
