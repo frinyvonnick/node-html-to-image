@@ -38,7 +38,7 @@ nodeHtmlToImage({
   output: './image.png',
   html: '<html><body>Hello world!</body></html>'
 })
-  .then(console.log('The image was created successfully!'))
+  .then(() => console.log('The image was created successfully!'))
 ```
 
 ### Options
@@ -65,7 +65,7 @@ nodeHtmlToImage({
   html: '<html><body>Hello {{name}}!</body></html>',
   content: { name: 'you' }
 })
-  .then(console.log('The image was created successfully!'))
+  .then(() => console.log('The image was created successfully!'))
 ```
 
 [Handlebars](https://handlebarsjs.com/) provides a lot of expressions to handle common use cases like conditions or loops.
