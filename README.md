@@ -19,7 +19,7 @@
 
 ## Description
 
-This module exposes a function that generates images (png, jpeg) from HTML. It uses puppeteer in headless mode to achieve it. Additionally, it embarks [handlebars](https://handlebarsjs.com/) to provide a way to add logic in your HTML.
+This module exposes a function that generates images (png, jpeg) from HTML. It uses puppeteer in headless mode to achieve it. Additionally, it embarks [Handlebars](https://handlebarsjs.com/) to provide a way to add logic in your HTML.
 
 ## Install
 
@@ -34,12 +34,11 @@ yarn add node-html-to-image
 ```js
 const nodeHtmlToImage = require('node-html-to-image')
 
-async function makeNiceImage() {
-  await nodeHtmlToImage({
-    output: './image.png',
-    html: '<html><body>Hello world!</body></html>'
-  })
-}
+nodeHtmlToImage({
+  output: './image.png',
+  html: '<html><body>Hello world!</body></html>'
+})
+  .then(console.log('The image was created successfully!'))
 ```
 
 ### Options
@@ -54,19 +53,22 @@ List of all available options:
 | content                 | If provided html property is considered an handlebars template and use content value to fill it | object                     | optional    |
 | puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer                  | object                     | optional    |
 
-### Example with handlebars
+### Example with Handlebars
+
+[Handlerbars](https://handlebarsjs.com/) is a templating language. It generates HTML from a template and an input object. In the following example we provide a template to `node-html-to-image` and a content object to fill the template.
 
 ```js
 const nodeHtmlToImage = require('node-html-to-image')
 
-async function makeNiceImage() {
-  await nodeHtmlToImage({
-    output: './image.png',
-    html: '<html><body>Hello {{name}}!</body></html>',
-    content: { name: 'you' }
-  })
-}
+nodeHtmlToImage({
+  output: './image.png',
+  html: '<html><body>Hello {{name}}!</body></html>',
+  content: { name: 'you' }
+})
+  .then(console.log('The image was created successfully!'))
 ```
+
+[Handlebars](https://handlebarsjs.com/) provides a lot of expressions to handle common use cases like conditions or loops.
 
 ## Run tests
 
