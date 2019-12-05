@@ -6,6 +6,7 @@ module.exports = async function({
   output,
   type,
   content,
+  waitUntil = 'load',
   puppeteerArgs = {},
 }) {
   if (!html) {
@@ -18,11 +19,10 @@ module.exports = async function({
   const page = await browser.newPage()
   if (content) {
     const template = handlebars.compile(html)
-    html = template(content)
+    html = template(content, { waitUntil })
   } 
   await page.setContent(html)
-  const elements = await page.$$('body')
-  const element = elements[0]
+  const element = await page.$('body')
   await element.screenshot({ path: output, type })
   await browser.close()
 }
