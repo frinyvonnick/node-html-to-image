@@ -1,0 +1,20 @@
+{
+  "name": "node-html-to-image",
+  "version": "0.0.1",
+  "description": "A Node.js library that generates images from HTML",
+  "main": "src/index.js",
+  "repository": "git@github.com:frinyvonnick/node-html-to-image.git",
+  "author": "FRIN Yvonnick <frin.yvonnick@gmail.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "handlebars": "^4.5.3",
+    "puppeteer": "^2.0.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "node-tesseract-ocr": "^1.0.0"
+  }
+}
