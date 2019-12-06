@@ -71,6 +71,10 @@ nodeHtmlToImage({
 
 [Handlebars](https://handlebarsjs.com/) provides a lot of expressions to handle common use cases like conditions or loops.
 
+## Related
+
+- [node-html-to-image-cli](https://github.com/frinyvonnick/node-html-to-image-cli) - CLI for this module
+
 ## Run tests
 
 You need to install tesseract on your computer before launching tests. Here is the procedure for Mac users:
