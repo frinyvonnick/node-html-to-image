@@ -1,5 +1,18 @@
 # Changelog
 
+<a name="1.0.1"></a>
+## 1.0.1 (2019-12-06)
+
+### Added
+
+- ✨ Add waitUntil option [[a8f1b46](https://github.com/frinyvonnick/node-html-to-image/commit/a8f1b46c7ab702553f66c3d6a26adec6b7f05a8c)]
+
+### Miscellaneous
+
+- 📝 Add a mention to the cli [[bebd0f6](https://github.com/frinyvonnick/node-html-to-image/commit/bebd0f6211fcacca307949670d0eb9f4954f7e46)]
+- 📝 Fix examples [[2b1879b](https://github.com/frinyvonnick/node-html-to-image/commit/2b1879b796d61873be6957c37e7aab084c045112)]
+
+
 <a name="1.0.0"></a>
 ## 1.0.0 (2019-12-05)
 
