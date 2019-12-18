@@ -54,6 +54,32 @@ List of all available options:
 | waitUntil               | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagesetcontenthtml-options).                                                        | string or Array<string>    | optional    |
 | puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions).                  | object                     | optional    |
 
+### Setting output image resolution
+
+`node-html-to-image` takes a screenshot of the body tag's content. If you want to set output image's resolution you need to set its dimension using CSS like in the following example.
+
+```js
+const nodeHtmlToImage = require('node-html-to-image')
+
+nodeHtmlToImage({
+  output: './image.png',
+  html: `<html>
+    <head>
+      <style>
+        body {
+          width: 2480px;
+          height: 3508px;
+        }
+      <style>
+      </style>
+    </head>
+    <body>Hello world!</body>
+  </html>
+  `
+})
+  .then(() => console.log('The image was created successfully!'))
+```
+
 ### Example with Handlebars
 
 [Handlerbars](https://handlebarsjs.com/) is a templating language. It generates HTML from a template and an input object. In the following example we provide a template to `node-html-to-image` and a content object to fill the template.
