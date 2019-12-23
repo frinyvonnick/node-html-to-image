@@ -15,6 +15,6 @@
   },
   "devDependencies": {
     "jest": "^24.9.0",
-    "node-tesseract-ocr": "^1.0.0"
+    "tesseract.js": "^2.0.1"
   }
 }

@@ -58,4 +58,9 @@ typings/
 .env
 
 # next.js build output
+
 .next
+
+# Tesseract.js
+
+eng.traineddata

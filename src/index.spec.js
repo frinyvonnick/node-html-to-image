@@ -1,5 +1,5 @@
 const fs = require('fs')
-const tesseract = require('node-tesseract-ocr')
+const { createWorker } = require('tesseract.js')
 
 const nodeHtmlToImage = require('./index.js')
 
@@ -60,12 +60,7 @@ describe('node-html-to-image', () => {
       html: '<html><body>Hello world!</body></html>'
     })
 
-    const config = {
-      lang: "eng",
-      oem: 1,
-      psm: 3,
-    } 
-    const text = await tesseract.recognize('./image.png')
+    const text = await getTextFromImage()
     expect(text.trim()).toBe('Hello world!')
   })
 
@@ -76,13 +71,19 @@ describe('node-html-to-image', () => {
       content: { name: 'Yvonnick' }
     })
 
-    const config = {
-      lang: "eng",
-      oem: 1,
-      psm: 3,
-    } 
-    const text = await tesseract.recognize('./image.png')
+    const text = await getTextFromImage()
     expect(text.trim()).toBe('Hello Yvonnick!')
   })
 })
 
+async function getTextFromImage() {
+  const worker = createWorker()
+  await worker.load()
+  await worker.loadLanguage('eng')
+  await worker.initialize('eng')
+
+  const { data: { text } } = await worker.recognize('./image.png');
+  await worker.terminate();
+
+  return text
+}
