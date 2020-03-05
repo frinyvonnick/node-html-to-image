@@ -97,6 +97,24 @@ nodeHtmlToImage({
 
 [Handlebars](https://handlebarsjs.com/) provides a lot of expressions to handle common use cases like conditions or loops.
 
+### Dealing with images
+
+If you want to display an image which is stored remotely do it as usual. In case your image is stored locally I recommend having your image in `base64`. Then you need to pass it to the template with the content property. Here is an example:
+
+```js
+const nodeHtmlToImage = require('node-html-to-image')
+const fs = require('fs');
+
+const image = fs.readFileSync('./image.jpg');
+const base64Image = new Buffer(bitmap).toString('base64');
+
+nodeHtmlToImage({
+  output: './image.png',
+  html: '<html><body><img src="{{imageSource}}" /></body></html>',
+  content: { imageSource: base64Image }
+})
+```
+
 ## Related
 
 - [node-html-to-image-cli](https://github.com/frinyvonnick/node-html-to-image-cli) - CLI for this module
