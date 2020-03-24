@@ -7,6 +7,7 @@ module.exports = async function({
   type,
   content,
   waitUntil = 'load',
+  transparent = false,
   puppeteerArgs = {},
 }) {
   if (!html) {
@@ -23,6 +24,6 @@ module.exports = async function({
   } 
   await page.setContent(html)
   const element = await page.$('body')
-  await element.screenshot({ path: output, type })
+  await element.screenshot({ path: output, type, omitBackground: transparent })
   await browser.close()
 }
