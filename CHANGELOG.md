@@ -1,7 +1,24 @@
 # Changelog
 
-<a name="1.0.1"></a>
-## 1.0.1 (2019-12-06)
+<a name="1.2.0"></a>
+## 1.2.0 (2020-03-24)
+
+### Added
+
+- ✨ Add transparent option to omit background ([#6](https://github.com/frinyvonnick/node-html-to-image/issues/6)) [[a63f0f2](https://github.com/frinyvonnick/node-html-to-image/commit/a63f0f2ce18f1a12e47f1dfa52765e905e175a9c)]
+
+### Changed
+
+- ♻️ Use Tesseract.js to simplify installation [[afa5f46](https://github.com/frinyvonnick/node-html-to-image/commit/afa5f4645e75c8ca2d8fc50284de057381422022)]
+
+### Miscellaneous
+
+- 📝 Add a section about dealing with images [[07cb135](https://github.com/frinyvonnick/node-html-to-image/commit/07cb135b2aab78d82370e5a417678fba4a2d3446)]
+- 📝 Add a section about output image resolution [[7ea6de7](https://github.com/frinyvonnick/node-html-to-image/commit/7ea6de72aa5df8d2ed26902fb8a8a60870d5af85)]
+
+
+<a name="1.1.0"></a>
+## 1.1.0 (2019-12-06)
 
 ### Added
 
