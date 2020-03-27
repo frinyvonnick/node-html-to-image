@@ -122,15 +122,6 @@ nodeHtmlToImage({
 
 ## Run tests
 
-You need to install tesseract on your computer before launching tests. Here is the procedure for Mac users:
-
-```sh
-brew install tesseract
-brew install tesseract-lang
-```
-
-Launch test:
-
 ```sh
 yarn test
 ```
