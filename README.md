@@ -117,9 +117,9 @@ nodeHtmlToImage({
 })
 ```
 
-### Using the buffer
+### Using the buffer instead of saving to disk
 
-If you don't want to save the image to disk and would rather do something with it immediately, you can use the return value instead! The example below shows how you can generate an image and send it back to a client via ExpressJS.
+If you don't want to save the image to disk and would rather do something with it immediately, you can use the returned value instead! The example below shows how you can generate an image and send it back to a client via using [express](https://github.com/expressjs/express).
 
 ```js
 const express = require('express');
