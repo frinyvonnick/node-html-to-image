@@ -117,6 +117,24 @@ nodeHtmlToImage({
 })
 ```
 
+### Using the buffer instead of saving to disk
+
+If you don't want to save the image to disk and would rather do something with it immediately, you can use the returned value instead! The example below shows how you can generate an image and send it back to a client via using [express](https://github.com/expressjs/express).
+
+```js
+const express = require('express');
+const router = express.Router();
+const nodeHtmlToImage = require('node-html-to-image');
+
+router.get(`/api/tweet/render`, async function(req, res) {
+  const image = await nodeHtmlToImage({
+    html: '<html><body><div>Check out what I just did! #cool</div></body></html>'
+  });
+  res.writeHead(200, { 'Content-Type': 'image/png' });
+  res.end(imgBinary, 'binary');
+});
+```
+
 ## Related
 
 - [node-html-to-image-cli](https://github.com/frinyvonnick/node-html-to-image-cli) - CLI for this module

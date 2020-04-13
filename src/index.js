@@ -21,9 +21,10 @@ module.exports = async function({
   if (content) {
     const template = handlebars.compile(html)
     html = template(content, { waitUntil })
-  } 
+  }
   await page.setContent(html)
   const element = await page.$('body')
-  await element.screenshot({ path: output, type, omitBackground: transparent })
+  const buffer = await element.screenshot({ path: output, type, omitBackground: transparent })
   await browser.close()
+  return buffer
 }
