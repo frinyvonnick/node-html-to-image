@@ -9,6 +9,7 @@ module.exports = async function({
   waitUntil = 'load',
   transparent = false,
   puppeteerArgs = {},
+  encoding
 }) {
   if (!html) {
     throw Error('You must provide an html property.')
@@ -24,7 +25,7 @@ module.exports = async function({
   }
   await page.setContent(html)
   const element = await page.$('body')
-  const buffer = await element.screenshot({ path: output, type, omitBackground: transparent })
+  const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding })
   await browser.close()
   return buffer
 }

@@ -53,7 +53,8 @@ List of all available options:
 | content                 | If provided html property is considered an handlebars template and use content value to fill it | object                     | optional    |
 | waitUntil               | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagesetcontenthtml-options).                                                        | string or Array<string>    | optional    |
 | puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions).                  | object                     | optional    |
-| transparent             | The transparent property let you generate images with transparent background (for png type).    | boolean                    | optional    |
+| transparent             | The transparent property lets you generate images with transparent background (for png type).    | boolean                    | optional    |
+| encoding             | The encoding property of the image. Options are `binary` (default) or `base64`.    | string                    | optional    |
 
 ### Setting output image resolution
 
