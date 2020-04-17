@@ -14,7 +14,7 @@ module.exports = async function({
   if (!html) {
     throw Error('You must provide an html property.')
   }
-  if (!output && !encoding) {
+  if (!output) {
     throw Error('You must provide an output property.')
   }
   const browser = await puppeteer.launch({ ...puppeteerArgs, headless: true })
