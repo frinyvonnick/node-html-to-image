@@ -136,6 +136,21 @@ router.get(`/api/tweet/render`, async function(req, res) {
 });
 ```
 
+### Using it on Docker
+You have to follow this instructions (https://github.com/puppeteer/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker) for Docker (Adde to the end of your Dockerfile, there is specific instructiosn for alpine image also) and send this in puppeteerArgs when you call nodeHtmlToImage:
+
+await nodeHtmlToImage({
+      puppeteerArgs: {
+        headless: true,
+        args: [
+          "--no-sandbox",
+          "--remote-debugging-address=0.0.0.0",
+          "--remote-debugging-port=9222",
+        ],
+      },
+      output: './image.png',
+      html: '<html><body>Hello world!</body></html>'});
+
 ## Related
 
 - [node-html-to-image-cli](https://github.com/frinyvonnick/node-html-to-image-cli) - CLI for this module
