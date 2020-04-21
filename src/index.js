@@ -14,9 +14,6 @@ module.exports = async function({
   if (!html) {
     throw Error('You must provide an html property.')
   }
-  if (!output) {
-    throw Error('You must provide an output property.')
-  }
   const browser = await puppeteer.launch({ ...puppeteerArgs, headless: true })
   const page = await browser.newPage()
   if (content) {
@@ -25,7 +22,11 @@ module.exports = async function({
   }
   await page.setContent(html)
   const element = await page.$('body')
-  const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding })
+  const screenShotOptions = { type, omitBackground: transparent };
+  if (output) {
+    Object.assign(screenShotOptions, { path: output });
+  }
+  const buffer = await element.screenshot(screenShotOptions)
   await browser.close()
   return buffer
 }

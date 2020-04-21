@@ -32,18 +32,6 @@ describe('node-html-to-image', () => {
     expect(error.message).toEqual(expect.stringContaining('html'))
   })
 
-  it('should throw an error if ouput is not provided', async () => {
-    let error
-    try {
-      await nodeHtmlToImage({
-        html: '<html></html>'
-      })
-    } catch (e) {
-      error = e
-    }
-    expect(error.message).toEqual(expect.stringContaining('output'))
-  })
-
   it('should generate an jpeg image', async () => {
     await nodeHtmlToImage({
       output: './image.jpg',
