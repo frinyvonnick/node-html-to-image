@@ -6,6 +6,7 @@ module.exports = async function({
   output,
   type,
   content,
+  quality = 80, // only applicable for jpg
   waitUntil = 'load',
   transparent = false,
   puppeteerArgs = {},
@@ -25,7 +26,7 @@ module.exports = async function({
   }
   await page.setContent(html)
   const element = await page.$('body')
-  const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding })
+  const buffer = await element.screenshot({ path: output, type, quality: quality, omitBackground: transparent, encoding })
   await browser.close()
   return buffer
 }

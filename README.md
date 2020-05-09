@@ -50,6 +50,7 @@ List of all available options:
 | output                  | The ouput path for generated image                                                              | string                     | required    |
 | html                    | The html used to generate image content                                                         | string                     | required    |
 | type                    | The type of the generated image                                                                 | jpeg or png (default: png) | optional    |
+| quality                 | The quality of the generated image (only applicable to jpg)                                     | number (default: 80)       | optional    |
 | content                 | If provided html property is considered an handlebars template and use content value to fill it | object                     | optional    |
 | waitUntil               | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagesetcontenthtml-options).                                                        | string or Array<string>    | optional    |
 | puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions).                  | object                     | optional    |
