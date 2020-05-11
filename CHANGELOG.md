@@ -1,5 +1,35 @@
 # Changelog
 
+<a name="2.0.0"></a>
+## 2.0.0 (2020-05-11)
+
+### Added
+
+- ✨ Add encoding option to allow user to change default encoding ([#11](https://github.com/frinyvonnick/node-html-to-image/issues/11)) [[8dacb45](https://github.com/frinyvonnick/node-html-to-image/commit/8dacb452c563df2b97e09294d55b155cc0150734)]
+- ✨ Return the buffer from .screenshot() in case we don&#x27;t want to save image ([#10](https://github.com/frinyvonnick/node-html-to-image/issues/10)) [[22d5085](https://github.com/frinyvonnick/node-html-to-image/commit/22d5085c59ca1be25e6ff712e06da430a7669066)]
+
+### Changed
+
+- ⬆️ Bump acorn from 5.7.3 to 5.7.4 ([#7](https://github.com/frinyvonnick/node-html-to-image/issues/7)) [[22746df](https://github.com/frinyvonnick/node-html-to-image/commit/22746df0befaf6f00f0a96225f07160f97329831)]
+
+### Breaking changes
+
+- 💥 Remove output requirement ([#16](https://github.com/frinyvonnick/node-html-to-image/issues/16)) [[3c11b84](https://github.com/frinyvonnick/node-html-to-image/commit/3c11b84a36d861251a798c98f8692757126d9f0e)]
+
+### Removed
+
+- 🔥 Remove deprecated explanations in Run tests section [[bec08d6](https://github.com/frinyvonnick/node-html-to-image/commit/bec08d6ec467362e42f428c2db7eda960210e926)]
+
+### Fixed
+
+- ✏️ Fix typo in properties table ([#15](https://github.com/frinyvonnick/node-html-to-image/issues/15)) [[df746df](https://github.com/frinyvonnick/node-html-to-image/commit/df746df38be782c348dd10dce83b55c0d2d85353)]
+
+### Miscellaneous
+
+- 📝 Update documentation to make output optional [[d4dcf1e](https://github.com/frinyvonnick/node-html-to-image/commit/d4dcf1e720737445f5e10dc62346e591d4e3d636)]
+- 💡 Improve dealing with local images instructions ([#8](https://github.com/frinyvonnick/node-html-to-image/issues/8)) [[c73a79a](https://github.com/frinyvonnick/node-html-to-image/commit/c73a79a6cba7d9ef6ba815f93772b078fe8c3ae8)]
+
+
 <a name="1.2.0"></a>
 ## 1.2.0 (2020-03-24)
 
