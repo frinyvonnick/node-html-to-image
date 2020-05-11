@@ -22,11 +22,7 @@ module.exports = async function({
   }
   await page.setContent(html)
   const element = await page.$('body')
-  const screenShotOptions = { type, omitBackground: transparent };
-  if (output) {
-    Object.assign(screenShotOptions, { path: output });
-  }
-  const buffer = await element.screenshot(screenShotOptions)
+  const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding })
   await browser.close()
   return buffer
 }
