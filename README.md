@@ -47,7 +47,7 @@ List of all available options:
 
 | option                  | description                                                                                     | type                       | required    |
 |-------------------------|-------------------------------------------------------------------------------------------------|----------------------------|-------------|
-| output                  | The ouput path for generated image                                                              | string                     | required    |
+| output                  | The ouput path for generated image                                                              | string                     | optional    |
 | html                    | The html used to generate image content                                                         | string                     | required    |
 | type                    | The type of the generated image                                                                 | jpeg or png (default: png) | optional    |
 | content                 | If provided html property is considered an handlebars template and use content value to fill it | object                     | optional    |
