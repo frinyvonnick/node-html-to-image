@@ -26,7 +26,7 @@ module.exports = async function({
   }
   await page.setContent(html)
   const element = await page.$('body')
-  const buffer = await element.screenshot({ path: output, type, quality: quality, omitBackground: transparent, encoding })
+  const buffer = await element.screenshot({ path: output, type, quality, omitBackground: transparent, encoding })
   await browser.close()
   return buffer
 }
