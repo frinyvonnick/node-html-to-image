@@ -7,7 +7,6 @@
   "author": "FRIN Yvonnick <frin.yvonnick@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "gitmoji-changelog": "^2.1.0",
     "handlebars": "^4.5.3",
     "puppeteer": "^2.0.0"
   },
@@ -15,6 +14,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "gitmoji-changelog": "^2.1.0",
     "jest": "^24.9.0",
     "tesseract.js": "^2.0.1"
   }
