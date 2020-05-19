@@ -1,5 +1,17 @@
 # Changelog
 
+<a name="2.1.0"></a>
+## 2.1.0 (2020-05-19)
+
+### Added
+
+- ✨ Add the quality parameter for jpg images ([#22](https://github.com/frinyvonnick/node-html-to-image/issues/22)) [[a4069e5](https://github.com/frinyvonnick/node-html-to-image/commit/a4069e544310f7a2c4d80a103989e753230567f3)]
+
+### Changed
+
+- 📌 Move gitmoji-changelog to dev dependencies ([#25](https://github.com/frinyvonnick/node-html-to-image/issues/25)) [[acfd889](https://github.com/frinyvonnick/node-html-to-image/commit/acfd889aa4761c7bedb9ee9b6e5fb9ffc0ef06d1)]
+
+
 <a name="2.0.0"></a>
 ## 2.0.0 (2020-05-11)
 
