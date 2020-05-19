@@ -73,7 +73,6 @@ nodeHtmlToImage({
           width: 2480px;
           height: 3508px;
         }
-      <style>
       </style>
     </head>
     <body>Hello world!</body>
