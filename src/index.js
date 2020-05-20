@@ -16,7 +16,7 @@ module.exports = async function({
     throw Error('You must provide an html property.')
   }
   let screeshotArgs = {};
-  if (/jpe?g/.test(type)) {
+  if (type === 'jpeg') {
     screeshotArgs.quality = quality ? quality : 80
   } else if (type && type !== "png") {
     throw Error(`Unknow type. Expected 'png','jpg','jpeg' got '${type}'`)
