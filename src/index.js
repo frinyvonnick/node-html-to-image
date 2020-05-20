@@ -15,11 +15,9 @@ module.exports = async function({
   if (!html) {
     throw Error('You must provide an html property.')
   }
-  let screeshotArgs = {};
+  let screeshotArgs = {}
   if (type === 'jpeg') {
     screeshotArgs.quality = quality ? quality : 80
-  } else if (type && type !== "png") {
-    throw Error(`Unknow type. Expected 'png','jpg','jpeg' got '${type}'`)
   }
   const browser = await puppeteer.launch({ ...puppeteerArgs, headless: true })
   const page = await browser.newPage()
