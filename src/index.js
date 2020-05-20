@@ -6,7 +6,7 @@ module.exports = async function({
   output,
   type,
   content,
-  quality = undefined,
+  quality,
   waitUntil = 'load',
   transparent = false,
   puppeteerArgs = {},
