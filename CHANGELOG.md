@@ -1,5 +1,18 @@
 # Changelog
 
+<a name="2.1.1"></a>
+## 2.1.1 (2020-05-20)
+
+### Removed
+
+- 🔥 Remove npm lockfile [[8a1b22f](https://github.com/frinyvonnick/node-html-to-image/commit/8a1b22fb85bc14bc53045f860dd5df57247353bb)]
+
+### Fixed
+
+- 🐛 Fix issue related to default quality property with png type ([#28](https://github.com/frinyvonnick/node-html-to-image/issues/28)) [[cddf200](https://github.com/frinyvonnick/node-html-to-image/commit/cddf200dadf85eec6ff23a349ba5793187bc16f3)]
+- ✏️ Remove extra style tag in example ([#26](https://github.com/frinyvonnick/node-html-to-image/issues/26)) [[06f16e7](https://github.com/frinyvonnick/node-html-to-image/commit/06f16e791eb026460c11394387cab95aee3ba144)]
+
+
 <a name="2.1.0"></a>
 ## 2.1.0 (2020-05-19)
 
