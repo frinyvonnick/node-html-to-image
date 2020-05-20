@@ -17,12 +17,7 @@ module.exports = async function({
   }
   let screeshotArgs = {};
   if (/jpe?g/.test(type)) {
-    if (!quality) {
-      screeshotArgs.quality = 80;
-      quality = 80
-    } else {
-      screeshotArgs.quality = quality;
-    }
+    screeshotArgs.quality = quality ? quality : 80
   } else if (type && type !== "png") {
     throw Error(`Unknow type. Expected 'png','jpg','jpeg' got '${type}'`)
   }
