@@ -17,7 +17,7 @@ describe('quality', () => {
       html: '<html><body>Hello world!</body></html>',
     })
     
-    expect(screenshot).toHaveBeenCalledWith(expect.objectContaining({ quality: undefined }))
+    expect(screenshot).toHaveBeenCalledWith(expect.objectContaining({'encoding': undefined, 'omitBackground': false, 'path': undefined, 'type': 'png'}))
   })
 
   it('should set quality option for jpg images', async () => {
