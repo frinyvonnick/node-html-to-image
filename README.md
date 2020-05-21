@@ -132,7 +132,7 @@ router.get(`/api/tweet/render`, async function(req, res) {
     html: '<html><body><div>Check out what I just did! #cool</div></body></html>'
   });
   res.writeHead(200, { 'Content-Type': 'image/png' });
-  res.end(imgBinary, 'binary');
+  res.end(image, 'binary');
 });
 ```
 
