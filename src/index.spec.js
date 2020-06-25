@@ -20,6 +20,14 @@ describe('node-html-to-image', () => {
     expect(fs.existsSync('./image.png')).toBe(true)
   })
 
+  it('should return a buffer', async () => {
+    const result = await nodeHtmlToImage({
+      html: '<html></html>'
+    })
+
+    expect(result).toBeInstanceOf(Buffer)
+  })
+
   it('should throw an error if html is not provided', async () => {
     let error
     try {
@@ -48,7 +56,7 @@ describe('node-html-to-image', () => {
       html: '<html><body>Hello world!</body></html>'
     })
 
-    const text = await getTextFromImage()
+    const text = await getTextFromImage('./image.png')
     expect(text.trim()).toBe('Hello world!')
   })
 
@@ -59,18 +67,48 @@ describe('node-html-to-image', () => {
       content: { name: 'Yvonnick' }
     })
 
-    const text = await getTextFromImage()
+    const text = await getTextFromImage('./image.png')
     expect(text.trim()).toBe('Hello Yvonnick!')
   })
 })
 
-async function getTextFromImage() {
+describe('batch', () => {
+  it('should create two images', async () => {
+    await nodeHtmlToImage({
+      type: 'png',
+      quality: 300,
+      html: '<html><body>Hello {{name}}!</body></html>',
+      content: [{ name: 'Yvonnick', output: './image1.png' }, { name: 'World', output: './image2.png' }]
+    })
+
+    const text1 = await getTextFromImage('./image1.png')
+    expect(text1.trim()).toBe('Hello Yvonnick!')
+
+    const text2 = await getTextFromImage('./image2.png')
+    expect(text2.trim()).toBe('Hello World!')
+  })
+
+  it('should return two buffer', async () => {
+    const result = await nodeHtmlToImage({
+      type: 'png',
+      quality: 300,
+      html: '<html><body>Hello {{name}}!</body></html>',
+      content: [{ name: 'Yvonnick' }, { name: 'World' }]
+    })
+
+    expect(result[0]).toBeInstanceOf(Buffer)
+    expect(result[1]).toBeInstanceOf(Buffer)
+  })
+
+})
+
+async function getTextFromImage(path) {
   const worker = createWorker()
   await worker.load()
   await worker.loadLanguage('eng')
   await worker.initialize('eng')
 
-  const { data: { text } } = await worker.recognize('./image.png');
+  const { data: { text } } = await worker.recognize(path);
   await worker.terminate();
 
   return text
