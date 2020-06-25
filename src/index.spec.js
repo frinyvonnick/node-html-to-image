@@ -88,7 +88,7 @@ describe('batch', () => {
     expect(text2.trim()).toBe('Hello World!')
   })
 
-  it('should return two buffer', async () => {
+  it('should return two buffers', async () => {
     const result = await nodeHtmlToImage({
       type: 'png',
       quality: 300,

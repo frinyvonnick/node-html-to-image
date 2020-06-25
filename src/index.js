@@ -5,6 +5,7 @@ module.exports = async function(options) {
   const {
     html,
     content,
+    output,
     puppeteerArgs = {},
   } = options
 
@@ -12,22 +13,19 @@ module.exports = async function(options) {
     throw Error('You must provide an html property.')
   }
 
-  if (Array.isArray(content)) {
-    const browser = await puppeteer.launch({ ...puppeteerArgs, headless: true })
-
-    const buffers = await Promise.all(content.map(c => {
-      const { output, ...pageContent } = c
-      return makeScreenshot(browser, { ...options, content: pageContent, output })
-    }))
-
-    await browser.close()
-    return buffers
-  }
-
   const browser = await puppeteer.launch({ ...puppeteerArgs, headless: true })
-  const buffer = await makeScreenshot(browser, options)
+
+  const shouldBatch = Array.isArray(content)
+  const contents = shouldBatch ? content : [{ ...content, output }]
+
+  const buffers = await Promise.all(contents.map(content => {
+    const { output, ...pageContent } = content
+    return makeScreenshot(browser, { ...options, content: pageContent, output })
+  }))
+
   await browser.close()
-  return buffer
+
+  return shouldBatch ? buffers : buffers[0]
 }
 
 async function makeScreenshot(browser, {
