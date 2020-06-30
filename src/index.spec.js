@@ -1,23 +1,25 @@
 const fs = require('fs')
+const rimraf = require('rimraf')
 const { createWorker } = require('tesseract.js')
 
 const nodeHtmlToImage = require('./index.js')
 
 describe('node-html-to-image', () => {
+  beforeEach(() => {
+    fs.mkdirSync('./generated')
+  })
+
   afterEach(() => {
-    if (fs.existsSync('./image.jpg'))
-      fs.unlinkSync('./image.jpg')
-    if (fs.existsSync('./image.png'))
-      fs.unlinkSync('./image.png')
+    rimraf.sync('./generated')
   })
 
   it('should generate output file', async () => {
     await nodeHtmlToImage({
-      output: './image.png',
+      output: './generated/image.png',
       html: '<html></html>'
     })
 
-    expect(fs.existsSync('./image.png')).toBe(true)
+    expect(fs.existsSync('./generated/image.png')).toBe(true)
   })
 
   it('should return a buffer', async () => {
@@ -32,7 +34,7 @@ describe('node-html-to-image', () => {
     let error
     try {
       await nodeHtmlToImage({
-        output: './image.png',
+        output: './generated/image.png',
       })
     } catch (e) {
       error = e
@@ -42,49 +44,57 @@ describe('node-html-to-image', () => {
 
   it('should generate an jpeg image', async () => {
     await nodeHtmlToImage({
-      output: './image.jpg',
+      output: './generated/image.jpg',
       html: '<html></html>',
       type: 'jpeg',
     })
 
-    expect(fs.existsSync('./image.jpg')).toBe(true)
+    expect(fs.existsSync('./generated/image.jpg')).toBe(true)
   })
 
   it('should put html in output file', async () => {
     await nodeHtmlToImage({
-      output: './image.png',
+      output: './generated/image.png',
       html: '<html><body>Hello world!</body></html>'
     })
 
-    const text = await getTextFromImage('./image.png')
+    const text = await getTextFromImage('./generated/image.png')
     expect(text.trim()).toBe('Hello world!')
   })
 
   it('should use handlebars to customize content', async () => {
     await nodeHtmlToImage({
-      output: './image.png',
+      output: './generated/image.png',
       html: '<html><body>Hello {{name}}!</body></html>',
       content: { name: 'Yvonnick' }
     })
 
-    const text = await getTextFromImage('./image.png')
+    const text = await getTextFromImage('./generated/image.png')
     expect(text.trim()).toBe('Hello Yvonnick!')
   })
 })
 
 describe('batch', () => {
+  beforeEach(() => {
+    fs.mkdirSync('./generated')
+  })
+
+  afterEach(() => {
+    rimraf.sync('./generated')
+  })
+
   it('should create two images', async () => {
     await nodeHtmlToImage({
       type: 'png',
       quality: 300,
       html: '<html><body>Hello {{name}}!</body></html>',
-      content: [{ name: 'Yvonnick', output: './image1.png' }, { name: 'World', output: './image2.png' }]
+      content: [{ name: 'Yvonnick', output: './generated/image1.png' }, { name: 'World', output: './generated/image2.png' }]
     })
 
-    const text1 = await getTextFromImage('./image1.png')
+    const text1 = await getTextFromImage('./generated/image1.png')
     expect(text1.trim()).toBe('Hello Yvonnick!')
 
-    const text2 = await getTextFromImage('./image2.png')
+    const text2 = await getTextFromImage('./generated/image2.png')
     expect(text2.trim()).toBe('Hello World!')
   })
 
@@ -100,6 +110,24 @@ describe('batch', () => {
     expect(result[1]).toBeInstanceOf(Buffer)
   })
 
+  it.skip('should handle mass volume well', async () => {
+    jest.setTimeout(60000 * 60)
+    expect.hasAssertions();
+    const NUMBER_OF_IMAGES = 2000;
+    const content = Array.from(Array(NUMBER_OF_IMAGES), (_, i) => ({
+      name: i,
+      output: `./generated/${i}.jpg`,
+    }));
+
+    await nodeHtmlToImage({
+      type: 'png',
+      quality: 300,
+      html: '<html><body>Hello {{name}}!</body></html>',
+      content,
+    })
+
+    expect(fs.readdirSync('./generated')).toHaveLength(NUMBER_OF_IMAGES)
+  })
 })
 
 async function getTextFromImage(path) {

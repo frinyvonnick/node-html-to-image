@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const { Cluster } = require('puppeteer-cluster')
 const handlebars = require('handlebars')
 
 module.exports = async function(options) {
@@ -13,22 +14,35 @@ module.exports = async function(options) {
     throw Error('You must provide an html property.')
   }
 
-  const browser = await puppeteer.launch({ ...puppeteerArgs, headless: true })
+  const cluster = await Cluster.launch({
+    concurrency: Cluster.CONCURRENCY_CONTEXT,
+    maxConcurrency: 2,
+    puppeteerOptions: { ...puppeteerArgs, headless: true },
+  });
+
+  let buffers = []
+
+  await cluster.task(async ({ page, data: { content, output } }) => {
+    const buffer = await makeScreenshot(page, { ...options, content, output })
+
+    buffers.push(buffer);
+  });
 
   const shouldBatch = Array.isArray(content)
   const contents = shouldBatch ? content : [{ ...content, output }]
 
-  const buffers = await Promise.all(contents.map(content => {
+  contents.forEach(content => {
     const { output, ...pageContent } = content
-    return makeScreenshot(browser, { ...options, content: pageContent, output })
-  }))
+    cluster.queue({ output, content: pageContent })
+  })
 
-  await browser.close()
+  await cluster.idle();
+  await cluster.close();
 
   return shouldBatch ? buffers : buffers[0]
 }
 
-async function makeScreenshot(browser, {
+async function makeScreenshot(page, {
   output,
   type,
   quality,
@@ -43,7 +57,6 @@ async function makeScreenshot(browser, {
     screeshotArgs.quality = quality ? quality : 80
   }
 
-  const page = await browser.newPage()
   if (content) {
     const template = handlebars.compile(html)
     html = template(content, { waitUntil })

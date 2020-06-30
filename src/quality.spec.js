@@ -1,7 +1,7 @@
 const nodeHtmlToImage = require('./index.js')
 const puppeteer = require('puppeteer')
 
-describe('quality', () => {
+describe.skip('quality', () => {
   let screenshot
   let puppeteer
 
@@ -47,6 +47,7 @@ jest.mock('puppeteer', () => {
       close: jest.fn(),
       newPage: () => ({
         setContent: jest.fn(),
+        close: jest.fn(),
         $: () => ({
           screenshot,
         })
