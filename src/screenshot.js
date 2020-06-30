@@ -9,7 +9,7 @@ module.exports = {
     content,
     html,
     transparent = false,
-    waitUntil = 'load',
+    waitUntil = 'networkidle0',
   }) {
     let screeshotArgs = {}
     if (type === 'jpeg') {
@@ -18,9 +18,9 @@ module.exports = {
 
     if (content) {
       const template = handlebars.compile(html)
-      html = template(content, { waitUntil })
+      html = template(content)
     }
-    await page.setContent(html)
+    await page.setContent(html, { waitUntil })
     const element = await page.$('body')
     const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding, ...screeshotArgs })
 
