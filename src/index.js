@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer')
 const { Cluster } = require('puppeteer-cluster')
-const handlebars = require('handlebars')
+
+const { makeScreenshot } = require('./screenshot.js')
 
 module.exports = async function(options) {
   const {
@@ -42,28 +43,3 @@ module.exports = async function(options) {
   return shouldBatch ? buffers : buffers[0]
 }
 
-async function makeScreenshot(page, {
-  output,
-  type,
-  quality,
-  encoding,
-  content,
-  html,
-  transparent = false,
-  waitUntil = 'load',
-}) {
-  let screeshotArgs = {}
-  if (type === 'jpeg') {
-    screeshotArgs.quality = quality ? quality : 80
-  }
-
-  if (content) {
-    const template = handlebars.compile(html)
-    html = template(content, { waitUntil })
-  }
-  await page.setContent(html)
-  const element = await page.$('body')
-  const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding, ...screeshotArgs })
-
-  return buffer
-}
