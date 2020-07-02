@@ -1,17 +1,19 @@
-const nodeHtmlToImage = require('./index.js')
 const puppeteer = require('puppeteer')
+const { makeScreenshot } = require('./screenshot')
 
 describe('quality', () => {
   let screenshot
   let puppeteer
+  let page
 
   beforeEach(() => {
     puppeteer = require('puppeteer')
-    screenshot = puppeteer.launch().newPage().$().screenshot
+    page = puppeteer.launch().newPage()
+    screenshot = page.$().screenshot
   })
 
   it('should not set quality option for png images', async () => {
-    await nodeHtmlToImage({
+    await makeScreenshot(page, {
       type: 'png',
       quality: 300,
       html: '<html><body>Hello world!</body></html>',
@@ -21,7 +23,7 @@ describe('quality', () => {
   })
 
   it('should set quality option for jpg images', async () => {
-    await nodeHtmlToImage({
+    await makeScreenshot(page, {
       type: 'jpeg',
       quality: 30,
       html: '<html><body>Hello world!</body></html>',
@@ -31,7 +33,7 @@ describe('quality', () => {
   })
 
   it('should set quality option to 80 by default for jpg images', async () => {
-    await nodeHtmlToImage({
+    await makeScreenshot(page, {
       type: 'jpeg',
       html: '<html><body>Hello world!</body></html>',
     })
@@ -47,6 +49,7 @@ jest.mock('puppeteer', () => {
       close: jest.fn(),
       newPage: () => ({
         setContent: jest.fn(),
+        close: jest.fn(),
         $: () => ({
           screenshot,
         })

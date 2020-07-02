@@ -8,7 +8,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "handlebars": "^4.5.3",
-    "puppeteer": "^2.0.0"
+    "puppeteer": "3.0.0",
+    "puppeteer-cluster": "^0.21.0"
   },
   "scripts": {
     "test": "jest"
@@ -16,6 +17,7 @@
   "devDependencies": {
     "gitmoji-changelog": "^2.1.0",
     "jest": "^24.9.0",
+    "rimraf": "^3.0.2",
     "tesseract.js": "^2.0.1"
   }
 }

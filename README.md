@@ -51,7 +51,7 @@ List of all available options:
 | html                    | The html used to generate image content                                                         | string                     | required    |
 | type                    | The type of the generated image                                                                 | jpeg or png (default: png) | optional    |
 | quality                 | The quality of the generated image (only applicable to jpg)                                     | number (default: 80)       | optional    |
-| content                 | If provided html property is considered an handlebars template and use content value to fill it | object                     | optional    |
+| content                 | If provided html property is considered an handlebars template and use content value to fill it | object|Array               | optional    |
 | waitUntil               | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagesetcontenthtml-options).                                                        | string or Array<string>    | optional    |
 | puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions).                  | object                     | optional    |
 | transparent             | The transparent property lets you generate images with transparent background (for png type).    | boolean                    | optional    |
@@ -134,6 +134,33 @@ router.get(`/api/tweet/render`, async function(req, res) {
   res.writeHead(200, { 'Content-Type': 'image/png' });
   res.end(image, 'binary');
 });
+```
+
+### Generate multiple images
+
+If you want to generate multiple images in one call you must provide an array to the content property. 
+
+#### Saving to disk
+
+To save on the disk you must provide the output property on each object in the content property.
+
+```js
+nodeHtmlToImage({
+  html: '<html><body>Hello {{name}}!</body></html>',
+  content: [{ name: 'Pierre', output: './image1.png' }, { name: 'Paul', output: './image2.png' }, { name: 'Jacques', output: './image3.png' }]
+})
+  .then(() => console.log('The images were created successfully!'))
+```
+
+#### Using buffers
+
+If you don't want to save the images to disk you can use the returned value instead. It returns an array of Buffer objects.
+
+```js
+const images = await nodeHtmlToImage({
+  html: '<html><body>Hello {{name}}!</body></html>',
+  content: [{ name: 'Pierre' }, { name: 'Paul' }, { name: 'Jacques' }]
+})
 ```
 
 ## Related

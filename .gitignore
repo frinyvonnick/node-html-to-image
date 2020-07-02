@@ -64,3 +64,5 @@ typings/
 # Tesseract.js
 
 eng.traineddata
+
+.DS_Store
