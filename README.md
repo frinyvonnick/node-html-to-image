@@ -31,6 +31,16 @@ yarn add node-html-to-image
 
 ## Usage
 
+- [Simple example](#simple-example)
+- [Options](#options)
+- [Setting output image resolution](#setting-output-image-resolution)
+- [Example with Handlebars](#example-with-handlebars)
+- [Dealing with images](#dealing-with-images)
+- [Using the buffer instead of saving to disk](#using-the-buffer-instead-of-saving-to-disk)
+- [Generating multiple images](#generating-multiple-images)
+
+### Simple example
+
 ```js
 const nodeHtmlToImage = require('node-html-to-image')
 
@@ -136,7 +146,7 @@ router.get(`/api/tweet/render`, async function(req, res) {
 });
 ```
 
-### Generate multiple images
+### Generating multiple images
 
 If you want to generate multiple images in one call you must provide an array to the content property. 
 
