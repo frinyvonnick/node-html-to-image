@@ -31,6 +31,16 @@ yarn add node-html-to-image
 
 ## Usage
 
+- [Simple example](#simple-example)
+- [Options](#options)
+- [Setting output image resolution](#setting-output-image-resolution)
+- [Example with Handlebars](#example-with-handlebars)
+- [Dealing with images](#dealing-with-images)
+- [Using the buffer instead of saving to disk](#using-the-buffer-instead-of-saving-to-disk)
+- [Generating multiple images](#generating-multiple-images)
+
+### Simple example
+
 ```js
 const nodeHtmlToImage = require('node-html-to-image')
 
@@ -51,9 +61,9 @@ List of all available options:
 | html                    | The html used to generate image content                                                         | string                     | required    |
 | type                    | The type of the generated image                                                                 | jpeg or png (default: png) | optional    |
 | quality                 | The quality of the generated image (only applicable to jpg)                                     | number (default: 80)       | optional    |
-| content                 | If provided html property is considered an handlebars template and use content value to fill it | object|Array               | optional    |
-| waitUntil               | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagesetcontenthtml-options).                                                        | string or Array<string>    | optional    |
-| puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions).                  | object                     | optional    |
+| content                 | If provided html property is considered an handlebars template and use content value to fill it | object or Array            | optional    |
+| waitUntil               | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#pagesetcontenthtml-options).                                                        | string or Array<string>    | optional    |
+| puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions).                  | object                     | optional    |
 | transparent             | The transparent property lets you generate images with transparent background (for png type).    | boolean                    | optional    |
 | encoding             | The encoding property of the image. Options are `binary` (default) or `base64`.    | string                    | optional    |
 
@@ -136,7 +146,7 @@ router.get(`/api/tweet/render`, async function(req, res) {
 });
 ```
 
-### Generate multiple images
+### Generating multiple images
 
 If you want to generate multiple images in one call you must provide an array to the content property. 
 
