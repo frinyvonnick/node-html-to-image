@@ -1,6 +1,6 @@
 {
   "name": "node-html-to-image",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "A Node.js library that generates images from HTML",
   "main": "src/index.js",
   "repository": "git@github.com:frinyvonnick/node-html-to-image.git",

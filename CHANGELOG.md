@@ -1,5 +1,26 @@
 # Changelog
 
+<a name="3.0.0"></a>
+## 3.0.0 (2020-07-03)
+
+### Added
+
+- ✨ Add the possibility to create multiple image in one call ([#38](https://github.com/frinyvonnick/node-html-to-image/issues/38)) [[fed3ee5](https://github.com/frinyvonnick/node-html-to-image/commit/fed3ee500edacf5c4af00624009978fdd41b5c2b)]
+
+### Breaking changes
+
+- 💥 Set waitUntil default value to networkidle0 [[1436613](https://github.com/frinyvonnick/node-html-to-image/commit/1436613532f32ea01231112d802a9e041f5af7c4)]
+
+### Fixed
+
+- 🐛 Pass waitUntil option to setContent method ([#40](https://github.com/frinyvonnick/node-html-to-image/issues/40)) [[ad69d33](https://github.com/frinyvonnick/node-html-to-image/commit/ad69d337f0fcd2726b3930972576eabcd328bcdb)]
+- ✏️ Fix typo in example ([#29](https://github.com/frinyvonnick/node-html-to-image/issues/29)) [[459f573](https://github.com/frinyvonnick/node-html-to-image/commit/459f573001c94ebfe85b87121197262f88689af0)]
+
+### Miscellaneous
+
+- 📝 Add a synopsis in the usage section ([#41](https://github.com/frinyvonnick/node-html-to-image/issues/41)) [[c92d252](https://github.com/frinyvonnick/node-html-to-image/commit/c92d25265d0a623b7bba7a8b3e3a590d3c1dcfed)]
+
+
 <a name="2.1.1"></a>
 ## 2.1.1 (2020-05-20)
 
