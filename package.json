@@ -14,6 +14,11 @@
   "scripts": {
     "test": "jest"
   },
+  "files": [
+    "src/*.js",
+    "!src/*.spec.js",
+    "example.js"
+   ],
   "devDependencies": {
     "gitmoji-changelog": "^2.1.0",
     "jest": "^24.9.0",
