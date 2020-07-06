@@ -34,5 +34,13 @@
     "tesseract.js": "^2.1.1",
     "ts-jest": "^26.1.1",
     "typescript": "^3.9.6"
+  },
+  "peerDependencies": {
+    "@types/puppeteer": "^3.0.1"
+  },
+  "peerDependenciesMeta": {   
+    "@types/puppeteer": {     
+      "optional": true   
+    }
   }
 }
