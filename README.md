@@ -29,6 +29,16 @@ npm install node-html-to-image
 yarn add node-html-to-image
 ```
 
+### For TypeScript users
+
+When using this package in a TypeScript project you should also add the types for Puppeteer:
+
+```sh
+npm install --save-dev @types/puppeteer
+# or
+yarn add --dev @types/puppeteer
+```
+
 ## Usage
 
 - [Simple example](#simple-example)
