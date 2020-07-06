@@ -120,4 +120,3 @@
 - 📝 Add missing comma in handlebars example [[2dc3924](https://github.com/frinyvonnick/node-html-to-image/commit/2dc39247d3ce80b8df1b5b737506e42ca5bf05cf)]
 -  Initial commit [[d75796d](https://github.com/frinyvonnick/node-html-to-image/commit/d75796d6e9908eedff32484eb416f56e92a0a6fe)]
 
-

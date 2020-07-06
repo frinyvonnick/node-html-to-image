@@ -58,7 +58,11 @@ module.exports = {
   // globalTeardown: null,
 
   // A set of global variables that need to be available in all test environments
-  // globals: {},
+  globals: {
+    "ts-jest": {
+      tsConfig: "<rootDir>/tests/tsconfig.json"
+    }
+  },
 
   // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
   // maxWorkers: "50%",
@@ -91,7 +95,7 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: null,
+  preset: "ts-jest",
 
   // Run tests from one or more projects
   // projects: null,
@@ -126,7 +130,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ["<rootDir>/tests/jest.setup.ts"],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
@@ -141,10 +145,7 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  // testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-  //   "**/?(*.)+(spec|test).[tj]s?(x)"
-  // ],
+  testMatch: ["<rootDir>/tests/**/*.spec.ts"],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -158,7 +159,7 @@ module.exports = {
   // testResultsProcessor: null,
 
   // This option allows use of a custom test runner
-  // testRunner: "jasmine2",
+  "testRunner": "jest-circus/runner"
 
   // This option sets the URL for the jsdom environment. It is reflected in properties such as location.href
   // testURL: "http://localhost",

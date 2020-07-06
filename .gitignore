@@ -66,3 +66,6 @@ typings/
 eng.traineddata
 
 .DS_Store
+
+# TypeScript output
+dist/

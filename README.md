@@ -43,6 +43,7 @@ yarn add node-html-to-image
 
 ```js
 const nodeHtmlToImage = require('node-html-to-image')
+// import nodeHtmlToImage from 'node-html-to-image' for ES modules
 
 nodeHtmlToImage({
   output: './image.png',

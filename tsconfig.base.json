@@ -1,0 +1,23 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "module": "CommonJS",
+    "target": "ES6",
+    "newLine": "lf",
+    "lib": ["ES2019", "DOM"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "incremental": true,
+    "removeComments": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  }
+}
