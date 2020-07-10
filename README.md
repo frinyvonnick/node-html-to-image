@@ -32,6 +32,7 @@ yarn add node-html-to-image
 ## Usage
 
 - [Simple example](#simple-example)
+- [TypeScript Support](#typescript-support)
 - [Options](#options)
 - [Setting output image resolution](#setting-output-image-resolution)
 - [Example with Handlebars](#example-with-handlebars)
@@ -49,6 +50,14 @@ nodeHtmlToImage({
   html: '<html><body>Hello world!</body></html>'
 })
   .then(() => console.log('The image was created successfully!'))
+```
+
+### TypeScript support
+
+Types are included in the package. Enable the `esModuleInterop` compiler flag then change all references of `require` with `import` statements and you should be good to go:
+
+```ts
+import nodeHtmlToImage from 'node-html-image'
 ```
 
 ### Options
