@@ -18,8 +18,7 @@
   "files": [
     "src",
     "types",
-    "!src/*.spec.js",
-    "example.js"
+    "!src/*.spec.js"
   ],
   "devDependencies": {
     "gitmoji-changelog": "^2.1.0",
