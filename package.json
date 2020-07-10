@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "description": "A Node.js library that generates images from HTML",
   "main": "src/index.js",
+  "types": "types/index.d.ts",
   "repository": "git@github.com:frinyvonnick/node-html-to-image.git",
   "author": "FRIN Yvonnick <frin.yvonnick@gmail.com>",
   "license": "Apache-2.0",
@@ -16,6 +17,7 @@
   },
   "files": [
     "src",
+    "types",
     "!src/*.spec.js"
   ],
   "devDependencies": {
