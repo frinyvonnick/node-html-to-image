@@ -1,5 +1,18 @@
 # Changelog
 
+<a name="3.0.1"></a>
+## 3.0.1 (2020-07-10)
+
+### Added
+
+- ✅ Add jest retryTimes and timeout ([#44](https://github.com/frinyvonnick/node-html-to-image/issues/44)) [[85724cd](https://github.com/frinyvonnick/node-html-to-image/commit/85724cd5b4a64c85e64b8e1300406ca86513b6ce)]
+
+### Miscellaneous
+
+- 🏷️ Add TypeScript types ([#45](https://github.com/frinyvonnick/node-html-to-image/issues/45)) [[ff5aa92](https://github.com/frinyvonnick/node-html-to-image/commit/ff5aa92d6aa350b9fe4c2f8360985d7f74478f6f)]
+- 📦 Clean published files ([#43](https://github.com/frinyvonnick/node-html-to-image/issues/43)) [[1163e55](https://github.com/frinyvonnick/node-html-to-image/commit/1163e5531e596d87e96b8e0a4ea133cd1a50445e)]
+
+
 <a name="3.0.0"></a>
 ## 3.0.0 (2020-07-03)
 
