@@ -57,7 +57,7 @@ nodeHtmlToImage({
 Types are included in the package. Enable the `esModuleInterop` compiler flag then change all references of `require` with `import` statements and you should be good to go:
 
 ```ts
-import nodeHtmlToImage from 'node-html-image'
+import nodeHtmlToImage from 'node-html-to-image'
 ```
 
 ### Options
