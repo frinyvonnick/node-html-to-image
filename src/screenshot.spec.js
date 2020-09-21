@@ -1,3 +1,4 @@
+const { describe } = require('jest-circus')
 const puppeteer = require('puppeteer')
 const { makeScreenshot } = require('./screenshot')
 
@@ -18,8 +19,8 @@ describe('quality', () => {
       quality: 300,
       html: '<html><body>Hello world!</body></html>',
     })
-    
-    expect(screenshot).toHaveBeenCalledWith(expect.objectContaining({'encoding': undefined, 'omitBackground': false, 'path': undefined, 'type': 'png'}))
+
+    expect(screenshot).toHaveBeenCalledWith(expect.objectContaining({ 'encoding': undefined, 'omitBackground': false, 'path': undefined, 'type': 'png' }))
   })
 
   it('should set quality option for jpg images', async () => {
@@ -28,7 +29,7 @@ describe('quality', () => {
       quality: 30,
       html: '<html><body>Hello world!</body></html>',
     })
-    
+
     expect(screenshot).toHaveBeenCalledWith(expect.objectContaining({ quality: 30 }))
   })
 
@@ -37,8 +38,30 @@ describe('quality', () => {
       type: 'jpeg',
       html: '<html><body>Hello world!</body></html>',
     })
-    
+
     expect(screenshot).toHaveBeenCalledWith(expect.objectContaining({ quality: 80 }))
+  })
+})
+
+describe('beforeScreenshot', () => {
+  let screenshot
+  let puppeteer
+  let page
+
+  beforeEach(() => {
+    puppeteer = require('puppeteer')
+    page = puppeteer.launch().newPage()
+    screenshot = page.$().screenshot
+  })
+
+  it('beforeScreenshot is called with page', async () => {
+    const beforeScreenshot = jest.fn();
+    await makeScreenshot(page, {
+      beforeScreenshot,
+      html: '<html><body>Hello world!</body></html>',
+    })
+
+    expect(beforeScreenshot).toHaveBeenCalledWith(page);
   })
 })
 
