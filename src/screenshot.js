@@ -1,13 +1,14 @@
 const handlebars = require('handlebars')
 
 module.exports = {
-  makeScreenshot: async function(page, {
+  makeScreenshot: async function (page, {
     output,
     type,
     quality,
     encoding,
     content,
     html,
+    beforeScreenshot = () => { },
     transparent = false,
     waitUntil = 'networkidle0',
   }) {
@@ -24,6 +25,7 @@ module.exports = {
     const element = await page.$('body')
     const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding, ...screeshotArgs })
 
+    await beforeScreenshot(page);
     return buffer
   }
 }
