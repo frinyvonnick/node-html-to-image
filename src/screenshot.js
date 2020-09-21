@@ -23,9 +23,9 @@ module.exports = {
     }
     await page.setContent(html, { waitUntil })
     const element = await page.$('body')
+    await beforeScreenshot(page)
     const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding, ...screeshotArgs })
 
-    await beforeScreenshot(page);
     return buffer
   }
 }
