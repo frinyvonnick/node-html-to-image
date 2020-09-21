@@ -2,7 +2,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  size:
+  test:
     runs-on: ubuntu-latest
     env:
       CI: true
