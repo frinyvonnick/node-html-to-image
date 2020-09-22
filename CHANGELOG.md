@@ -1,5 +1,30 @@
 # Changelog
 
+<a name="3.1.0"></a>
+## 3.1.0 (2020-09-21)
+
+### Added
+
+- ✨ Add beforeScreenshot parameter ([#65](https://github.com/frinyvonnick/node-html-to-image/issues/65)) [[5fcb054](https://github.com/frinyvonnick/node-html-to-image/commit/5fcb054956efe102f0f37ee6e5d7d84947f30e6d)]
+- 👷‍♂️ Add a code analysis action ([#64](https://github.com/frinyvonnick/node-html-to-image/issues/64)) [[5946e1b](https://github.com/frinyvonnick/node-html-to-image/commit/5946e1b379e293bde1accdd50a2aa2b9689589cf)]
+- 👷‍♂️ Add a CI that launchs test script ([#63](https://github.com/frinyvonnick/node-html-to-image/issues/63)) [[04e0a4a](https://github.com/frinyvonnick/node-html-to-image/commit/04e0a4a2e6c35c9cd16ba7d64bd5cabf8f34a5b3)]
+
+### Changed
+
+- 📌 Fix vulnerabilities in dependencies [[52ac3eb](https://github.com/frinyvonnick/node-html-to-image/commit/52ac3eb4b12c00a70a3002ae1abe61e85f549020)]
+- ⬆️ Upgrade dev dependencies [[a105ceb](https://github.com/frinyvonnick/node-html-to-image/commit/a105ceb2cfecc5568b31c1b60d3c8b1fc8aa06c0)]
+- ⬆️ Upgrade handlebars to 4.7.6 [[5bf8499](https://github.com/frinyvonnick/node-html-to-image/commit/5bf849928f1227d259105ba3c38bb26d5590a150)]
+- 🔧 Create FUNDING.yml [[e0fedcc](https://github.com/frinyvonnick/node-html-to-image/commit/e0fedccfcd0d875f1ac69013b6f312fe70498c59)]
+
+### Fixed
+
+- ✏️ Fix typo in Typescript section [[879bccd](https://github.com/frinyvonnick/node-html-to-image/commit/879bccdf48de7069d761043f497f210f5d8fb393)]
+
+### Miscellaneous
+
+- 📝 Update version number in README.md ([#66](https://github.com/frinyvonnick/node-html-to-image/issues/66)) [[be23aa7](https://github.com/frinyvonnick/node-html-to-image/commit/be23aa7f920efed9b02add714225b24c0de6903f)]
+
+
 <a name="3.0.1"></a>
 ## 3.0.1 (2020-07-10)
 
