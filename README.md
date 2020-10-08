@@ -185,7 +185,14 @@ const images = await nodeHtmlToImage({
 
 ## Related
 
+### Libraries
+
 - [node-html-to-image-cli](https://github.com/frinyvonnick/node-html-to-image-cli) - CLI for this module
+
+### Articles 
+
+- [Generate images from HTML in Node.js](https://yvonnickfrin.dev/node-html-to-image)
+- [node-html-to-image v1.2 is out 🎉](https://dev.to/yvonnickfrin/node-html-to-image-v1-2-is-out-42f4)
 
 ## Run tests
 
