@@ -19,7 +19,7 @@
 
 ## Description
 
-This module exposes a function that generates images (png, jpeg) from HTML. It uses puppeteer in headless mode to achieve it. Additionally, it embarks [Handlebars](https://handlebarsjs.com/) to provide a way to add logic in your HTML.
+This module exposes a function that generates images (png, jpeg) from HTML. It uses [puppeteer](https://github.com/puppeteer) in headless mode to achieve it. Additionally, it embarks [Handlebars](https://handlebarsjs.com/) to provide a way to add logic in your HTML.
 
 ## Install
 
@@ -28,6 +28,8 @@ npm install node-html-to-image
 # or
 yarn add node-html-to-image
 ```
+
+Note: When you install Puppeteer, it downloads a recent version of Chromium (~170MB Mac, ~282MB Linux, ~280MB Win) that is guaranteed to work with the API. To skip the download, or to download a different browser, see
 
 ## Usage
 
