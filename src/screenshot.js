@@ -9,6 +9,7 @@ module.exports = {
     content,
     html,
     beforeScreenshot,
+    element,
     transparent = false,
     waitUntil = 'networkidle0',
   }) {
@@ -22,11 +23,11 @@ module.exports = {
       html = template(content)
     }
     await page.setContent(html, { waitUntil })
-    const element = await page.$('body')
+    const htmlElement = await page.$(element)
     if (beforeScreenshot && typeof beforeScreenshot === "function") {
       await beforeScreenshot(page);
     }
-    const buffer = await element.screenshot({ path: output, type, omitBackground: transparent, encoding, ...screeshotArgs })
+    const buffer = await htmlElement.screenshot({ path: output, type, omitBackground: transparent, encoding, ...screeshotArgs })
 
     return buffer
   }

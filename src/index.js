@@ -8,6 +8,7 @@ module.exports = async function(options) {
     html,
     content,
     output,
+    element = 'body',
     puppeteerArgs = {},
   } = options
 
@@ -23,18 +24,18 @@ module.exports = async function(options) {
 
   let buffers = []
 
-  await cluster.task(async ({ page, data: { content, output } }) => {
-    const buffer = await makeScreenshot(page, { ...options, content, output })
+  await cluster.task(async ({ page, data: { content, output , element } }) => {
+    const buffer = await makeScreenshot(page, { ...options, content, output, element})
 
     buffers.push(buffer);
   });
 
   const shouldBatch = Array.isArray(content)
-  const contents = shouldBatch ? content : [{ ...content, output }]
+  const contents = shouldBatch ? content : [{ ...content, output, element }]
 
   contents.forEach(content => {
-    const { output, ...pageContent } = content
-    cluster.queue({ output, content: pageContent })
+    const { output, element, ...pageContent} = content
+    cluster.queue({ output, element, content: pageContent })
   })
 
   await cluster.idle();
@@ -42,4 +43,3 @@ module.exports = async function(options) {
 
   return shouldBatch ? buffers : buffers[0]
 }
-
