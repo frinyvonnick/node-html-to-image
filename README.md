@@ -139,6 +139,25 @@ nodeHtmlToImage({
   content: { imageSource: dataURI }
 })
 ```
+### Dealing with fonts
+If you want to apply fonts, you need to synchronize your parts loading of your website. One way doing it is to convert your font to base64 and add it to your style in your html. For example:
+```js
+const font2base64 = require('node-font2base64')
+
+const _data = font2base64.encodeToDataUrlSync('../my/awesome/font.ttf')
+
+const html = `
+<html>
+  <head>
+    <style>
+      @font-face {
+        font-family: 'testFont';
+        src: url(${_data}) format('woff2'); // don't forget the format!
+      }
+    </style>
+  </head>
+...
+``` 
 
 ### Using the buffer instead of saving to disk
 
