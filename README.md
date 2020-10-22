@@ -64,18 +64,19 @@ import nodeHtmlToImage from 'node-html-to-image'
 
 List of all available options:
 
-| option                  | description                                                                                     | type                       | required    |
-|-------------------------|-------------------------------------------------------------------------------------------------|----------------------------|-------------|
-| output                  | The ouput path for generated image                                                              | string                     | optional    |
-| html                    | The html used to generate image content                                                         | string                     | required    |
-| type                    | The type of the generated image                                                                 | jpeg or png (default: png) | optional    |
-| quality                 | The quality of the generated image (only applicable to jpg)                                     | number (default: 80)       | optional    |
-| content                 | If provided html property is considered an handlebars template and use content value to fill it | object or Array            | optional    |
-| waitUntil               | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#pagesetcontenthtml-options).                                                        | string or Array<string> (default: networkidle0)    | optional    |
-| puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions).                  | object                     | optional    |
-| beforeScreenshot | An async function that will execute just before screenshot is taken. Gives access to puppeteer page element. | Function | optional |
-| transparent             | The transparent property lets you generate images with transparent background (for png type).    | boolean                    | optional    |
-| encoding             | The encoding property of the image. Options are `binary` (default) or `base64`.    | string                    | optional    |
+| option           | description                                                  | type                                            | required |
+| ---------------- | ------------------------------------------------------------ | ----------------------------------------------- | -------- |
+| output           | The ouput path for generated image                           | string                                          | optional |
+| html             | The html used to generate image content                      | string                                          | required |
+| type             | The type of the generated image                              | jpeg or png (default: png)                      | optional |
+| quality          | The quality of the generated image (only applicable to jpg)  | number (default: 80)                            | optional |
+| content          | If provided html property is considered an handlebars template and use content value to fill it | object or Array                                 | optional |
+| waitUntil        | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#pagesetcontenthtml-options). | string or Array<string> (default: networkidle0) | optional |
+| puppeteerArgs    | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions). | object                                          | optional |
+| beforeScreenshot | An async function that will execute just before screenshot is taken. Gives access to puppeteer page element. | Function                                        | optional |
+| transparent      | The transparent property lets you generate images with transparent background (for png type). | boolean                                         | optional |
+| encoding         | The encoding property of the image. Options are `binary` (default) or `base64`. | string                                          | optional |
+| element          | The element you want to render.                              | string                                          | optional |
 
 ### Setting output image resolution
 
@@ -156,6 +157,29 @@ router.get(`/api/tweet/render`, async function(req, res) {
 });
 ```
 
+### Generating image for specified element
+
+You can use the [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to set the element option to specify the page to render.
+
+```js
+const nodeHtmlToImage = require('node-html-to-image')
+
+nodeHtmlToImage({
+  output: './image.png',
+  html: `<html>
+    <body>
+      <div class="content1">
+          Here is the content1.
+      </div>
+      <div class="content2">
+          Here is the content2.
+      </div>
+    </body>
+  </html>`,
+  element: '.content1'
+})
+```
+
 ### Generating multiple images
 
 If you want to generate multiple images in one call you must provide an array to the content property. 
@@ -182,6 +206,37 @@ const images = await nodeHtmlToImage({
   content: [{ name: 'Pierre' }, { name: 'Paul' }, { name: 'Jacques' }]
 })
 ```
+
+#### Using element option
+
+To set element option you must provide the element property on each object (which you want to specify a element) in the content property.
+
+```js
+const nodeHtmlToImage = require('node-html-to-image')
+
+nodeHtmlToImage({
+  html: `<html>
+    <body>
+      <div class="content1">
+          His name is {{boyName}}.
+      </div>
+      <div class="content2">
+          Her name is {{girlName}}.
+      </div>
+      <div class="content3">
+          Hello everyone.
+      </div>
+    </body>
+  </html>`,
+  content: [
+      { boyName: 'Jobs', output: './image1.png' , element: '.content1' },
+      { girlName: 'Dan', output: './image2.png' , element: '.content2' },
+      { output: './image3.png' , element: '.content3' }
+  ]
+})
+```
+
+
 
 ## Related
 
