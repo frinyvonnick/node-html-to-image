@@ -50,4 +50,9 @@ export interface NodeHtmlToImageOptions {
    * @default binary
    */
   encoding?: 'binary' | 'base64';
+  /**
+   * The CSS selector of the element that will be used for taking the screenshot.
+   * @default body
+   */
+  selector?: string;
 }
