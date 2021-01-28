@@ -1,5 +1,13 @@
 import type { LaunchOptions, LoadEvent } from 'puppeteer';
 
+export interface NodeHtmlToImageConstructorOptions {
+  /**
+   * The puppeteerArgs property let you pass down custom configuration to puppeteer.
+   * {@link https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions Learn more}
+   */
+  puppeteerArgs?: LaunchOptions;
+}
+
 /**
  * Available options to pass to the library
  */
@@ -32,11 +40,6 @@ export interface NodeHtmlToImageOptions {
    * {@link https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#pagesetcontenthtml-options Learn more}
    */
   waitUntil?: LoadEvent;
-  /**
-   * The puppeteerArgs property let you pass down custom configuration to puppeteer.
-   * {@link https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions Learn more}
-   */
-  puppeteerArgs?: LaunchOptions;
   /**
    * Function executes before screenshot is taken and provides access to puppeteer page element
    */
