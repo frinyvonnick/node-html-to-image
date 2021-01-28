@@ -1,45 +1,57 @@
 const puppeteer = require('puppeteer')
 const { Cluster } = require('puppeteer-cluster')
-
 const { makeScreenshot } = require('./screenshot.js')
 
-module.exports = async function(options) {
+module.exports = function(options) {
+  let instance = {};
+
   const {
-    html,
-    content,
-    output,
     puppeteerArgs = {},
-  } = options
+  } = options;
 
-  if (!html) {
-    throw Error('You must provide an html property.')
-  }
-
-  const cluster = await Cluster.launch({
+  const _cp = Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: 2,
     puppeteerOptions: { ...puppeteerArgs, headless: true },
   });
 
-  let buffers = []
+  instance.shutdown = async () => {
+    const _cluster = await _cp;
+    await _cluster.close();
+  }
 
-  await cluster.task(async ({ page, data: { content, output } }) => {
-    const buffer = await makeScreenshot(page, { ...options, content, output })
+  instance.render = async (renderOpts) => {
+    const {
+      html,
+      content,
+      output,
+    } = renderOpts;
 
-    buffers.push(buffer);
-  });
+    if (!html) {
+      throw Error('You must provide an html property.')
+    }
 
-  const shouldBatch = Array.isArray(content)
-  const contents = shouldBatch ? content : [{ ...content, output }]
+    let buffers = [];
 
-  contents.forEach(content => {
-    const { output, ...pageContent } = content
-    cluster.queue({ output, content: pageContent })
-  })
+    const _cluster = await _cp;
+    await _cluster.task(async ({ page, data: { content, output } }) => {
+      const buffer = await makeScreenshot(page, { ...renderOpts, content, output })
+      buffers.push(buffer);
+    });
 
-  await cluster.idle();
-  await cluster.close();
+    const shouldBatch = Array.isArray(content)
+    const contents = shouldBatch ? content : [{ ...content, output }]
 
-  return shouldBatch ? buffers : buffers[0]
+    let promises = [];
+
+    contents.forEach(content => {
+      const { output, ...pageContent } = content;
+      promises.push(_cluster.execute({ output, content: pageContent }));
+    })
+
+    await Promise.all(promises);
+    return shouldBatch ? buffers : buffers[0];
+  };
+
+  return instance;
 }
-
