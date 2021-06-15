@@ -31,27 +31,14 @@ yarn add node-html-to-image
 
 ## Usage
 
-- [Description](#description)
-- [Install](#install)
-- [Usage](#usage)
-  - [Simple example](#simple-example)
-  - [TypeScript support](#typescript-support)
-  - [Options](#options)
-  - [Setting output image resolution](#setting-output-image-resolution)
-  - [Example with Handlebars](#example-with-handlebars)
-  - [Dealing with images](#dealing-with-images)
-  - [Using the buffer instead of saving to disk](#using-the-buffer-instead-of-saving-to-disk)
-  - [Generating multiple images](#generating-multiple-images)
-    - [Saving to disk](#saving-to-disk)
-    - [Using buffers](#using-buffers)
-- [Related](#related)
-  - [Libraries](#libraries)
-  - [Articles](#articles)
-- [Run tests](#run-tests)
-- [Author](#author)
-- [🤝 Contributing](#-contributing)
-- [Show your support](#show-your-support)
-- [📝 License](#-license)
+- [Simple example](#simple-example)
+- [TypeScript Support](#typescript-support)
+- [Options](#options)
+- [Setting output image resolution](#setting-output-image-resolution)
+- [Example with Handlebars](#example-with-handlebars)
+- [Dealing with images](#dealing-with-images)
+- [Using the buffer instead of saving to disk](#using-the-buffer-instead-of-saving-to-disk)
+- [Generating multiple images](#generating-multiple-images)
 
 ### Simple example
 
