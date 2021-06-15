@@ -50,4 +50,10 @@ export interface NodeHtmlToImageOptions {
    * @default binary
    */
   encoding?: 'binary' | 'base64';
+
+  /**
+   * The selector property of generate selected element image
+   * @default body
+   */
+  selector?: string;
 }

@@ -31,14 +31,27 @@ yarn add node-html-to-image
 
 ## Usage
 
-- [Simple example](#simple-example)
-- [TypeScript Support](#typescript-support)
-- [Options](#options)
-- [Setting output image resolution](#setting-output-image-resolution)
-- [Example with Handlebars](#example-with-handlebars)
-- [Dealing with images](#dealing-with-images)
-- [Using the buffer instead of saving to disk](#using-the-buffer-instead-of-saving-to-disk)
-- [Generating multiple images](#generating-multiple-images)
+- [Description](#description)
+- [Install](#install)
+- [Usage](#usage)
+  - [Simple example](#simple-example)
+  - [TypeScript support](#typescript-support)
+  - [Options](#options)
+  - [Setting output image resolution](#setting-output-image-resolution)
+  - [Example with Handlebars](#example-with-handlebars)
+  - [Dealing with images](#dealing-with-images)
+  - [Using the buffer instead of saving to disk](#using-the-buffer-instead-of-saving-to-disk)
+  - [Generating multiple images](#generating-multiple-images)
+    - [Saving to disk](#saving-to-disk)
+    - [Using buffers](#using-buffers)
+- [Related](#related)
+  - [Libraries](#libraries)
+  - [Articles](#articles)
+- [Run tests](#run-tests)
+- [Author](#author)
+- [🤝 Contributing](#-contributing)
+- [Show your support](#show-your-support)
+- [📝 License](#-license)
 
 ### Simple example
 
@@ -76,6 +89,7 @@ List of all available options:
 | beforeScreenshot | An async function that will execute just before screenshot is taken. Gives access to puppeteer page element. | Function | optional |
 | transparent             | The transparent property lets you generate images with transparent background (for png type).    | boolean                    | optional    |
 | encoding             | The encoding property of the image. Options are `binary` (default) or `base64`.    | string                    | optional    |
+| selector             | The selector property of generate selected element image. (default `body`)    | string                    | optional    |
 
 ### Setting output image resolution
 

@@ -70,6 +70,18 @@ describe('node-html-to-image', () => {
       const text = await getTextFromImage('./generated/image.png')
       expect(text.trim()).toBe('Hello Yvonnick!')
     })
+
+    it('should create selected element', async () => {
+      await nodeHtmlToImage({
+        output: './generated/image.png',
+        html: '<html><body>Hello <div id="section">{{name}}!</div></body></html>',
+        content: { name: 'Sangwoo' },
+        selector: 'div#section',
+      })
+
+      const text = await getTextFromImage('./generated/image.png')
+      expect(text.trim()).toBe('Sangwoo!')
+    })
   })
 
   describe('batch', () => {
@@ -98,6 +110,19 @@ describe('node-html-to-image', () => {
 
       expect(result[0]).toBeInstanceOf(Buffer)
       expect(result[1]).toBeInstanceOf(Buffer)
+    })
+
+    it('should create selected element', async () => {
+      await nodeHtmlToImage({
+        html: '<html><body>Hello <div id="section">{{name}}!</div></body></html>',
+        content: [{ name: 'Sangwoo', output: './generated/image1.png' }, {name: 'World', output: './generated/image2.png'}],
+        selector: 'div#section',
+      })
+
+      const text1 = await getTextFromImage('./generated/image1.png')
+      expect(text1.trim()).toBe('Sangwoo!')
+      const text2 = await getTextFromImage('./generated/image2.png')
+      expect(text2.trim()).toBe('World!')
     })
 
     it.skip('should handle mass volume well', async () => {

@@ -8,6 +8,7 @@ module.exports = async function(options) {
     html,
     content,
     output,
+    selector = 'body',
     puppeteerArgs = {},
   } = options
 
@@ -23,8 +24,8 @@ module.exports = async function(options) {
 
   let buffers = []
 
-  await cluster.task(async ({ page, data: { content, output } }) => {
-    const buffer = await makeScreenshot(page, { ...options, content, output })
+  await cluster.task(async ({ page, data: { content, output, selector } }) => {
+    const buffer = await makeScreenshot(page, { ...options, content, output, selector })
 
     buffers.push(buffer);
   });
@@ -34,7 +35,7 @@ module.exports = async function(options) {
 
   contents.forEach(content => {
     const { output, ...pageContent } = content
-    cluster.queue({ output, content: pageContent })
+    cluster.queue({ output, content: pageContent, selector })
   })
 
   await cluster.idle();
