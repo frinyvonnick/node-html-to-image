@@ -112,7 +112,7 @@ describe('node-html-to-image', () => {
       expect(result[1]).toBeInstanceOf(Buffer)
     })
 
-    it('should create selected element image', async () => {
+    it('should create selected elements images', async () => {
       await nodeHtmlToImage({
         html: '<html><body>Hello <div id="section1">{{name}}!</div><div id="section2">World!</div></body></html>',
         content: [{ name: 'Sangwoo', output: './generated/image1.png', selector: 'div#section1' }, {output: './generated/image2.png', selector: 'div#section2'}],
