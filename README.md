@@ -76,6 +76,7 @@ List of all available options:
 | beforeScreenshot | An async function that will execute just before screenshot is taken. Gives access to puppeteer page element. | Function | optional |
 | transparent             | The transparent property lets you generate images with transparent background (for png type).    | boolean                    | optional    |
 | encoding             | The encoding property of the image. Options are `binary` (default) or `base64`.    | string                    | optional    |
+| selector             | The selector property lets you target a specific element to perform the screenshot on. (default `body`)    | string                    | optional    |
 
 ### Setting output image resolution
 

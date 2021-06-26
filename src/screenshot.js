@@ -8,6 +8,7 @@ module.exports = {
     encoding,
     content,
     html,
+    selector,
     beforeScreenshot,
     transparent = false,
     waitUntil = 'networkidle0',
@@ -22,7 +23,10 @@ module.exports = {
       html = template(content)
     }
     await page.setContent(html, { waitUntil })
-    const element = await page.$('body')
+    const element = await page.$(selector)
+    if (!element) {
+      throw Error('No element matches selector: ' + selector)
+    }
     if (beforeScreenshot && typeof beforeScreenshot === "function") {
       await beforeScreenshot(page);
     }

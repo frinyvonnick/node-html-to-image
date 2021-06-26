@@ -50,4 +50,10 @@ export interface NodeHtmlToImageOptions {
    * @default binary
    */
   encoding?: 'binary' | 'base64';
+
+  /**
+   * The selector property lets you target a specific element to perform the screenshot on.
+   * @default body
+   */
+  selector?: string;
 }
