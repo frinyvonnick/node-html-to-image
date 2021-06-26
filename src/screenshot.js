@@ -25,7 +25,7 @@ module.exports = {
     await page.setContent(html, { waitUntil })
     const element = await page.$(selector)
     if (!element) {
-      throw Error('Not exist element')
+      throw Error('No element matches selector: ' + selector)
     }
     if (beforeScreenshot && typeof beforeScreenshot === "function") {
       await beforeScreenshot(page);
