@@ -52,7 +52,7 @@ export interface NodeHtmlToImageOptions {
   encoding?: 'binary' | 'base64';
 
   /**
-   * The selector property of generate selected element image
+   * The selector property lets you target a specific element to perform the screenshot on.
    * @default body
    */
   selector?: string;
