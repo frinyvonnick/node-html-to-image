@@ -1,5 +1,32 @@
 # Changelog
 
+<a name="3.2.0"></a>
+## 3.2.0 (2021-06-26)
+
+### Added
+
+- ✨ Add selector option ([#114](https://github.com/frinyvonnick/node-html-to-image/issues/114)) [[701b514](https://github.com/frinyvonnick/node-html-to-image/commit/701b5143220aa80eac945945356743d6cb8e70a7)]
+
+### Changed
+
+- ⬆️ Bump y18n from 3.2.1 to 3.2.2 ([#103](https://github.com/frinyvonnick/node-html-to-image/issues/103)) [[3ba0e96](https://github.com/frinyvonnick/node-html-to-image/commit/3ba0e966cf450f0112c06ffd0a7c2bc36cf66a02)]
+- ⬆️ Bump ssri from 6.0.1 to 6.0.2 ([#105](https://github.com/frinyvonnick/node-html-to-image/issues/105)) [[b419b3b](https://github.com/frinyvonnick/node-html-to-image/commit/b419b3b61eb7506dd912f4f8f98d8adecfa9cf4a)]
+- ⬆️ Bump handlebars from 4.7.6 to 4.7.7 ([#106](https://github.com/frinyvonnick/node-html-to-image/issues/106)) [[0dda192](https://github.com/frinyvonnick/node-html-to-image/commit/0dda1927a424dec0388626b5fdf2d59a4d67ac8a)]
+- ⬆️ Bump hosted-git-info from 2.8.8 to 2.8.9 ([#107](https://github.com/frinyvonnick/node-html-to-image/issues/107)) [[27614ac](https://github.com/frinyvonnick/node-html-to-image/commit/27614ac1851defc061435110f9e6c50dedde7768)]
+- ⬆️ Upgrade dependencies [[bc747a8](https://github.com/frinyvonnick/node-html-to-image/commit/bc747a8982d592b9e3942e7474925a4e79d7ac74)]
+- ⬆️ Bump node-notifier from 8.0.0 to 8.0.1 ([#86](https://github.com/frinyvonnick/node-html-to-image/issues/86)) [[a9db417](https://github.com/frinyvonnick/node-html-to-image/commit/a9db417d3a34564fd8797b5fffa61d331a3051fe)]
+- ⬆️ Bump ini from 1.3.5 to 1.3.8 ([#84](https://github.com/frinyvonnick/node-html-to-image/issues/84)) [[8724c5d](https://github.com/frinyvonnick/node-html-to-image/commit/8724c5db1b2d6fdbcb2eb4dbcbf060333062408f)]
+- ⬆️ Bump node-fetch from 2.6.0 to 2.6.1 ([#59](https://github.com/frinyvonnick/node-html-to-image/issues/59)) [[44595a7](https://github.com/frinyvonnick/node-html-to-image/commit/44595a79835b113d380d095ac285527e273f618d)]
+- ⬆️ Update puppeteer to 3.0.4 ([#113](https://github.com/frinyvonnick/node-html-to-image/issues/113)) [[5239595](https://github.com/frinyvonnick/node-html-to-image/commit/5239595894be9b46bd351780d124d13ba0accf22)]
+
+### Miscellaneous
+
+- 📝 Remove unfinished sentence from README [[e9d1ddb](https://github.com/frinyvonnick/node-html-to-image/commit/e9d1ddb0f17c6142836091c6b14281780e45110f)]
+- 📝 Dealing with Fonts ([#76](https://github.com/frinyvonnick/node-html-to-image/issues/76)) [[2b8da4e](https://github.com/frinyvonnick/node-html-to-image/commit/2b8da4ec59a070e0de8956a135bef9503c0d2040)]
+- 📝 Add related articles in the README ([#69](https://github.com/frinyvonnick/node-html-to-image/issues/69)) [[dd258dd](https://github.com/frinyvonnick/node-html-to-image/commit/dd258ddecf873c874c686e641050190b3b4f7cba)]
+- 📝 Add CODE_OF_CONDUCT.md file [[e8a6ff8](https://github.com/frinyvonnick/node-html-to-image/commit/e8a6ff84215895b78c249d1a2e643bab2102ec2c)]
+
+
 <a name="3.1.0"></a>
 ## 3.1.0 (2020-09-21)
 
