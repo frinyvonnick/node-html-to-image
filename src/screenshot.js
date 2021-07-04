@@ -13,6 +13,8 @@ module.exports = {
     transparent = false,
     waitUntil = 'networkidle0',
   }) {
+    if (!type) type = 'png';
+    
     let screeshotArgs = {}
     if (type === 'jpeg') {
       screeshotArgs.quality = quality ? quality : 80
