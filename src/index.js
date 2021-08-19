@@ -10,6 +10,7 @@ module.exports = async function(options) {
     output,
     selector = 'body',
     puppeteerArgs = {},
+    viewport = undefined,
   } = options
 
   if (!html) {
@@ -25,6 +26,10 @@ module.exports = async function(options) {
   let buffers = []
 
   await cluster.task(async ({ page, data: { content, output, selector } }) => {
+    if (viewport !== undefined) {
+      page.setViewport(viewport)
+    }
+    
     const buffer = await makeScreenshot(page, { ...options, content, output, selector })    
     buffers.push(buffer);
   });
