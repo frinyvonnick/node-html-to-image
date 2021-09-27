@@ -3,7 +3,7 @@ const { Cluster } = require('puppeteer-cluster')
 
 const { makeScreenshot } = require('./screenshot.js')
 
-module.exports = async function(options) {
+const nodeHtmlToImage = async function(options) {
   const {
     html,
     content,
@@ -45,6 +45,9 @@ module.exports = async function(options) {
   await cluster.close();
 
   return shouldBatch ? buffers : buffers[0]
- 
 }
 
+module.exports = {
+  default: nodeHtmlToImage,
+  nodeHtmlToImage,
+}

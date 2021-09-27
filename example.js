@@ -1,4 +1,4 @@
-const nodeHtmlToImage = require('./src/index.js')
+const {nodeHtmlToImage} = require('./src/index.js')
 
 nodeHtmlToImage({
   output: './image.png',

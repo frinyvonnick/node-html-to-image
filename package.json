@@ -21,6 +21,7 @@
     "!src/*.spec.js"
   ],
   "devDependencies": {
+    "@types/node": "^16.10.1",
     "gitmoji-changelog": "^2.1.0",
     "jest": "^26.1.0",
     "jest-circus": "^26.1.0",
