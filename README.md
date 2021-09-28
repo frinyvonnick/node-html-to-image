@@ -45,7 +45,7 @@ Note: When you install Puppeteer, it downloads a recent version of Chromium (~17
 ### Simple example
 
 ```js
-const nodeHtmlToImage = require('node-html-to-image')
+const {nodeHtmlToImage} = require('node-html-to-image')
 
 nodeHtmlToImage({
   output: './image.png',
@@ -85,7 +85,7 @@ List of all available options:
 `node-html-to-image` takes a screenshot of the body tag's content. If you want to set output image's resolution you need to set its dimension using CSS like in the following example.
 
 ```js
-const nodeHtmlToImage = require('node-html-to-image')
+const {nodeHtmlToImage} = require('node-html-to-image')
 
 nodeHtmlToImage({
   output: './image.png',
@@ -110,7 +110,7 @@ nodeHtmlToImage({
 [Handlerbars](https://handlebarsjs.com/) is a templating language. It generates HTML from a template and an input object. In the following example we provide a template to `node-html-to-image` and a content object to fill the template.
 
 ```js
-const nodeHtmlToImage = require('node-html-to-image')
+const {nodeHtmlToImage} = require('node-html-to-image')
 
 nodeHtmlToImage({
   output: './image.png',
@@ -127,7 +127,7 @@ nodeHtmlToImage({
 If you want to display an image which is stored remotely do it as usual. In case your image is stored locally I recommend having your image in `base64`. Then you need to pass it to the template with the content property. Here is an example:
 
 ```js
-const nodeHtmlToImage = require('node-html-to-image')
+const {nodeHtmlToImage} = require('node-html-to-image')
 const fs = require('fs');
 
 const image = fs.readFileSync('./image.jpg');
@@ -167,7 +167,7 @@ If you don't want to save the image to disk and would rather do something with i
 ```js
 const express = require('express');
 const router = express.Router();
-const nodeHtmlToImage = require('node-html-to-image');
+const {nodeHtmlToImage} = require('node-html-to-image');
 
 router.get(`/api/tweet/render`, async function(req, res) {
   const image = await nodeHtmlToImage({
