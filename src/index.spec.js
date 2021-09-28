@@ -2,7 +2,7 @@ const fs = require('fs')
 const rimraf = require('rimraf')
 const { createWorker } = require('tesseract.js')
 
-const nodeHtmlToImage = require('./index.js')
+const {nodeHtmlToImage} = require('./index.js')
 
 describe('node-html-to-image', () => {
   beforeEach(() => {
