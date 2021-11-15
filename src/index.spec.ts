@@ -10,6 +10,10 @@ describe("node-html-to-image", () => {
     mkdirSync("./generated");
   });
 
+  afterAll(() => {
+    rimraf.sync("./generated");
+  });
+
   describe("single image", () => {
     it("should generate output file", async () => {
       await nodeHtmlToImage({
