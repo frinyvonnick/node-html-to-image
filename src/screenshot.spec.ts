@@ -1,8 +1,4 @@
 import { describe } from "jest-circus";
-/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-unused-vars */
-// @ts-ignore
-import puppeteer from "puppeteer";
-/* eslint-enable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-unused-vars */
 import { makeScreenshot } from "./screenshot";
 
 describe("quality", () => {
