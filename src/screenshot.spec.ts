@@ -1,6 +1,8 @@
 import { describe } from "jest-circus";
-// @ts-ignore needed for the mock
+/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-unused-vars */
+// @ts-ignore
 import puppeteer from "puppeteer";
+/* eslint-enable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-unused-vars */
 import { makeScreenshot } from "./screenshot";
 
 describe("quality", () => {
@@ -56,14 +58,12 @@ describe("quality", () => {
 });
 
 describe("beforeScreenshot", () => {
-  let screenshot;
   let puppeteer;
   let page;
 
   beforeEach(() => {
     puppeteer = require("puppeteer");
     page = puppeteer.launch().newPage();
-    screenshot = page.$().screenshot;
   });
 
   it("beforeScreenshot is called with page", async () => {

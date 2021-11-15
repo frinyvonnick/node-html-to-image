@@ -1,6 +1,6 @@
 import { Cluster } from "puppeteer-cluster";
 
-import { Options, Content } from "./types";
+import { Options } from "./types";
 import { makeScreenshot } from "./screenshot";
 
 export default async function (options: Options) {
@@ -26,7 +26,7 @@ export default async function (options: Options) {
     puppeteerOptions: { ...puppeteerArgs, headless: true },
   });
 
-  let buffers: Array<Buffer | string> = [];
+  const buffers: Array<Buffer | string> = [];
 
   await cluster.task(async ({ page, data: { content, output, selector } }) => {
     const buffer = await makeScreenshot(page, {
@@ -38,7 +38,7 @@ export default async function (options: Options) {
     buffers.push(buffer);
   });
 
-  cluster.on("taskerror", (err, data) => {
+  cluster.on("taskerror", (err) => {
     throw err;
   });
 

@@ -35,6 +35,8 @@ describe("node-html-to-image", () => {
     it("should throw an error if html is not provided", async () => {
       let error;
       try {
+        // We want to test this for JS users
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         await nodeHtmlToImage({
           output: "./generated/image.png",

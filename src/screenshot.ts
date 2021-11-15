@@ -1,4 +1,4 @@
-import { Page, Base64ScreenShotOptions } from "puppeteer";
+import { Page } from "puppeteer";
 import { compile } from "handlebars";
 
 import { Options } from "./types";
@@ -18,7 +18,7 @@ export async function makeScreenshot(
     waitUntil = "networkidle0",
   }: Options
 ) {
-  let screenshotArgs: { quality?: number } = {};
+  const screenshotArgs: { quality?: number } = {};
   if (type === "jpeg") {
     screenshotArgs.quality = quality ? quality : 80;
   }
