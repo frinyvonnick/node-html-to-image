@@ -30,7 +30,6 @@
     "@types/node": "^16.11.6",
     "@types/puppeteer": "^5.4.4",
     "@types/puppeteer-core": "^5.4.0",
-    "babel-jest": "^27.3.1",
     "gitmoji-changelog": "^2.1.0",
     "jest": "^26.1.0",
     "jest-circus": "^26.1.0",
