@@ -18,10 +18,7 @@ export async function makeScreenshot(
     waitUntil = "networkidle0",
   }: Options
 ) {
-  const screenshotArgs: { quality?: number } = {};
-  if (type === "jpeg") {
-    screenshotArgs.quality = quality ? quality : 80;
-  }
+  const screenshotArgs = type === "jpeg" ? { quality: quality ?? 80 } : {};
 
   if (content) {
     const template = compile(html);
