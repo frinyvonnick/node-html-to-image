@@ -18,7 +18,7 @@ module.exports = {
       screeshotArgs.quality = quality ? quality : 80
     }
 
-    if (content) {
+    if (content && !(Object.keys(content).length === 0 && Object.getPrototypeOf(content) === Object.prototype)) {
       const template = handlebars.compile(html)
       html = template(content)
     }
