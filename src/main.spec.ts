@@ -2,7 +2,7 @@ import { mkdirSync, existsSync, readdirSync } from "fs";
 import rimraf from "rimraf";
 import { createWorker } from "tesseract.js";
 
-import nodeHtmlToImage from "./index";
+import { nodeHtmlToImage } from "./main";
 
 describe("node-html-to-image", () => {
   beforeEach(() => {
