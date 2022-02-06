@@ -13,4 +13,6 @@ jobs:
         with:
           node-version: 12
       - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn lint
       - run: yarn test
