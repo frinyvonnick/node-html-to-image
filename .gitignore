@@ -66,3 +66,5 @@ typings/
 eng.traineddata
 
 .DS_Store
+
+dist
