@@ -1,4 +1,4 @@
-import { LoadEvent, Page, LaunchOptions } from "puppeteer";
+import { PuppeteerLifeCycleEvent, Page, LaunchOptions } from "puppeteer";
 
 export type Content = Array<{ output: string; selector?: string }> | object;
 
@@ -14,6 +14,6 @@ export interface Options {
   type?: "png" | "jpeg";
   encoding?: "base64" | "binary";
   transparent?: boolean;
-  waitUntil?: LoadEvent | LoadEvent[];
+  waitUntil?: PuppeteerLifeCycleEvent | PuppeteerLifeCycleEvent[];
   beforeScreenshot?: (page: Page) => void;
 }

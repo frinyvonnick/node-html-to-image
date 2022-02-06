@@ -9,8 +9,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "handlebars": "^4.5.3",
-    "puppeteer": "3.0.4",
-    "puppeteer-cluster": "^0.21.0"
+    "puppeteer": "^13.1.1",
+    "puppeteer-cluster": "^0.23.0"
   },
   "scripts": {
     "test": "jest",
