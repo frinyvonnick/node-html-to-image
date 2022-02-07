@@ -5,13 +5,43 @@ import { createWorker } from "tesseract.js";
 import { nodeHtmlToImage } from "./main";
 
 describe("node-html-to-image", () => {
+  let mockExit;
+  let mockConsoleErr;
+  const originalConsoleError = console.error;
   beforeEach(() => {
     rimraf.sync("./generated");
     mkdirSync("./generated");
+    mockExit = jest.spyOn(process, "exit").mockImplementation((number) => {
+      throw new Error("process.exit: " + number);
+    });
+    mockConsoleErr = jest
+      .spyOn(console, "error")
+      .mockImplementation((value) => originalConsoleError(value));
+  });
+
+  afterEach(() => {
+    mockExit.mockRestore();
+    mockConsoleErr.mockRestore();
   });
 
   afterAll(() => {
     rimraf.sync("./generated");
+  });
+  describe("error", () => {
+    it("should stop the program properly", async () => {
+      /* eslint-disable @typescript-eslint/ban-ts-comment */
+      await expect(async () => {
+        await nodeHtmlToImage({
+          html: "<html></html>",
+          type: "jpeg",
+          // @ts-ignore
+          quality: "wrong value",
+        });
+      }).rejects.toThrow();
+
+      expect(mockExit).toHaveBeenCalledWith(1);
+      /* eslint-enable @typescript-eslint/ban-ts-comment */
+    });
   });
 
   describe("single image", () => {
@@ -33,18 +63,16 @@ describe("node-html-to-image", () => {
     });
 
     it("should throw an error if html is not provided", async () => {
-      let error;
-      try {
-        // We want to test this for JS users
+      await expect(async () => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         await nodeHtmlToImage({
           output: "./generated/image.png",
         });
-      } catch (e) {
-        error = e;
-      }
-      expect(error.message).toEqual(expect.stringContaining("html"));
+      }).rejects.toThrow();
+      expect(mockConsoleErr).toHaveBeenCalledWith(
+        new Error("You must provide an html property.")
+      );
     });
 
     it("should generate an jpeg image", async () => {
