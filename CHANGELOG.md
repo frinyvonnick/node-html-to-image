@@ -1,5 +1,27 @@
 # Changelog
 
+<a name="3.2.1"></a>
+## 3.2.1 (2022-02-08)
+
+### Added
+
+- ✅ Add a test to guarantee buffers order ([#157](https://github.com/frinyvonnick/node-html-to-image/issues/157)) [[1a9bf4f](https://github.com/frinyvonnick/node-html-to-image/commit/1a9bf4fbf03768ea054b74c89b2ab3bc9a495ec4)]
+- 👷‍♂️ Add Typescript build to CI [[c6d4fa3](https://github.com/frinyvonnick/node-html-to-image/commit/c6d4fa36b520166fd3b861ed47f1963009db33b3)]
+- ➕ Move to TypeScript ([#141](https://github.com/frinyvonnick/node-html-to-image/issues/141)) [[d1d08cd](https://github.com/frinyvonnick/node-html-to-image/commit/d1d08cdca309d1e6fa130c4b2b0de3942cd44615)]
+
+### Changed
+
+- ⬆️ Bump tar from 4.4.13 to 4.4.19 ([#126](https://github.com/frinyvonnick/node-html-to-image/issues/126)) [[ab7cce1](https://github.com/frinyvonnick/node-html-to-image/commit/ab7cce1100b10c6ba23c42999fc1d6f72fe0c2a2)]
+- ⬆️ Bump tmpl from 1.0.4 to 1.0.5 ([#128](https://github.com/frinyvonnick/node-html-to-image/issues/128)) [[d94e9fc](https://github.com/frinyvonnick/node-html-to-image/commit/d94e9fc8a604fbe5f8a7a7a57183dc39452d86d1)]
+- ⬆️ Bump node-fetch from 2.6.1 to 2.6.7 ([#153](https://github.com/frinyvonnick/node-html-to-image/issues/153)) [[520d1e7](https://github.com/frinyvonnick/node-html-to-image/commit/520d1e73583ea905d29a97524449cf715a7c1c31)]
+- ♻️ Refactor code to make issues easier to fix ([#155](https://github.com/frinyvonnick/node-html-to-image/issues/155)) [[d28d88e](https://github.com/frinyvonnick/node-html-to-image/commit/d28d88ecd757f2f11f976ce110c469db6015388a)]
+- ⬆️ Upgrade puppeteer and puppeteer-cluster ([#154](https://github.com/frinyvonnick/node-html-to-image/issues/154)) [[c42b6f0](https://github.com/frinyvonnick/node-html-to-image/commit/c42b6f08561af9af18b1cc436506a065ca003b77)]
+
+### Fixed
+
+- 🐛 Prevent handlebar to compile template if content is empty ([#156](https://github.com/frinyvonnick/node-html-to-image/issues/156)) [[2684645](https://github.com/frinyvonnick/node-html-to-image/commit/2684645f9bc883f9f7b43ae78240d1b6d000a986)]
+
+
 <a name="3.2.0"></a>
 ## 3.2.0 (2021-06-26)
 
