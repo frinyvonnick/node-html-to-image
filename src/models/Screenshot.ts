@@ -32,7 +32,7 @@ export class Screenshot {
     this.transparent = transparent;
     this.type = type;
     this.output = output;
-    this.content = content;
+    this.content = isEmpty(content) ? undefined : content;
     this.selector = selector;
     this.quality = type === "jpeg" ? quality : undefined;
   }
@@ -47,4 +47,8 @@ export class Screenshot {
   setBuffer(buffer: Buffer | string) {
     this.buffer = buffer;
   }
+}
+
+function isEmpty(val: object) {
+  return val == null || !Object.keys(val).length;
 }

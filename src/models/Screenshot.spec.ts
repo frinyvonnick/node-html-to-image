@@ -112,6 +112,15 @@ describe("Screenshot", () => {
     expect(screenshot.quality).toEqual(undefined);
   });
 
+  it("should handle empty content", () => {
+    const screenshot = new Screenshot({
+      html,
+      content: {},
+    });
+
+    expect(screenshot.content).toEqual(undefined);
+  });
+
   it("should set quality if type is jpeg", () => {
     const screenshot = new Screenshot({
       html,

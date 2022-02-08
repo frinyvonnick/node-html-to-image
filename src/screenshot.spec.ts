@@ -49,6 +49,20 @@ describe("beforeScreenshot", () => {
     );
   });
 
+  it("should not compile a screenshot if content is empty", async () => {
+    await makeScreenshot(page, {
+      screenshot: new Screenshot({
+        html: "<html><body>{{message}}</body></html>",
+        content: {},
+      }),
+    });
+
+    expect(page.setContent).toHaveBeenCalledWith(
+      "<html><body>{{message}}</body></html>",
+      expect.anything()
+    );
+  });
+
   it("should wait until load event", async () => {
     await makeScreenshot(page, {
       screenshot: new Screenshot({
