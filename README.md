@@ -56,7 +56,7 @@ nodeHtmlToImage({
 
 ### TypeScript support
 
-Types are included in the package. Enable the `esModuleInterop` compiler flag then change all references of `require` with `import` statements and you should be good to go:
+The library is written in Typescript so it is available out of the box:
 
 ```ts
 import nodeHtmlToImage from 'node-html-to-image'
