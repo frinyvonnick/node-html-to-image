@@ -1,90 +1,76 @@
 import { describe } from "jest-circus";
 import { makeScreenshot } from "./screenshot";
-
-describe("quality", () => {
-  let screenshot;
-  let puppeteer;
-  let page;
-
-  beforeEach(() => {
-    puppeteer = require("puppeteer");
-    page = puppeteer.launch().newPage();
-    screenshot = page.$().screenshot;
-  });
-
-  it("should not set quality option for png images", async () => {
-    await makeScreenshot(page, {
-      type: "png",
-      quality: 300,
-      html: "<html><body>Hello world!</body></html>",
-    });
-
-    expect(screenshot).toHaveBeenCalledWith(
-      expect.objectContaining({
-        encoding: undefined,
-        omitBackground: false,
-        path: undefined,
-        type: "png",
-      })
-    );
-  });
-
-  it("should set quality option for jpg images", async () => {
-    await makeScreenshot(page, {
-      type: "jpeg",
-      quality: 30,
-      html: "<html><body>Hello world!</body></html>",
-    });
-
-    expect(screenshot).toHaveBeenCalledWith(
-      expect.objectContaining({ quality: 30 })
-    );
-  });
-
-  it("should set quality option to 80 by default for jpg images", async () => {
-    await makeScreenshot(page, {
-      type: "jpeg",
-      html: "<html><body>Hello world!</body></html>",
-    });
-
-    expect(screenshot).toHaveBeenCalledWith(
-      expect.objectContaining({ quality: 80 })
-    );
-  });
-});
+import { Screenshot } from "./models/Screenshot";
 
 describe("beforeScreenshot", () => {
-  let puppeteer;
   let page;
+  const buffer = Symbol("Buffer");
 
   beforeEach(() => {
-    puppeteer = require("puppeteer");
-    page = puppeteer.launch().newPage();
+    page = {
+      setContent: jest.fn(),
+      $: jest.fn(() => ({ screenshot: jest.fn(() => buffer) })),
+    };
   });
 
-  it("beforeScreenshot is called with page", async () => {
+  it("should call beforeScreenshot with page", async () => {
     const beforeScreenshot = jest.fn();
     await makeScreenshot(page, {
       beforeScreenshot,
-      html: "<html><body>Hello world!</body></html>",
+      screenshot: new Screenshot({
+        html: "<html><body>Hello world!</body></html>",
+      }),
     });
 
     expect(beforeScreenshot).toHaveBeenCalledWith(page);
   });
-});
 
-jest.mock("puppeteer", () => {
-  const screenshot = jest.fn();
-  return {
-    launch: () => ({
-      close: jest.fn(),
-      newPage: () => ({
-        setContent: jest.fn(),
-        close: jest.fn(),
-        $: () => ({
-          screenshot,
-        }),
+  it("should return a screenshot with a buffer", async () => {
+    const screenshot = await makeScreenshot(page, {
+      screenshot: new Screenshot({
+        html: "<html><body>Hello world!</body></html>",
       }),
-    }),
-  };
+    });
+
+    expect(screenshot.buffer).toEqual(buffer);
+  });
+
+  it("should compile a screenshot if there is content", async () => {
+    await makeScreenshot(page, {
+      screenshot: new Screenshot({
+        html: "<html><body>{{message}}</body></html>",
+        content: { message: "Hello world!" },
+      }),
+    });
+
+    expect(page.setContent).toHaveBeenCalledWith(
+      "<html><body>Hello world!</body></html>",
+      expect.anything()
+    );
+  });
+
+  it("should wait until load event", async () => {
+    await makeScreenshot(page, {
+      screenshot: new Screenshot({
+        html: "<html><body>Hello world!</body></html>",
+      }),
+      waitUntil: "load",
+    });
+
+    expect(page.setContent).toHaveBeenCalledWith(expect.anything(), {
+      waitUntil: "load",
+    });
+  });
+
+  it("should throw an error if not element is found", async () => {
+    page.$.mockImplementationOnce(jest.fn());
+    await expect(async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          selector: "toto",
+          html: "<html><body>Hello world!</body></html>",
+        }),
+      });
+    }).rejects.toThrow("No element matches selector: toto");
+  });
 });

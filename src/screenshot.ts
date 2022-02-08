@@ -1,43 +1,45 @@
 import { Page } from "puppeteer";
 import { compile } from "handlebars";
 
-import { Options } from "./types";
+import { MakeScreenshotParams } from "./types";
 
 export async function makeScreenshot(
   page: Page,
   {
-    output,
-    type,
-    quality,
-    encoding,
-    content,
-    html,
-    selector,
+    screenshot,
     beforeScreenshot,
-    transparent = false,
     waitUntil = "networkidle0",
-  }: Options
+  }: MakeScreenshotParams
 ) {
-  const screenshotArgs = type === "jpeg" ? { quality: quality ?? 80 } : {};
+  if (screenshot?.content) {
+    const template = compile(screenshot.html);
+    screenshot.setHTML(template(screenshot.content));
+  }
 
-  if (content) {
-    const template = compile(html);
-    html = template(content);
-  }
-  await page.setContent(html, { waitUntil });
-  const element = await page.$(selector);
+  await page.setContent(screenshot.html, { waitUntil });
+  const element = await page.$(screenshot.selector);
   if (!element) {
-    throw Error("No element matches selector: " + selector);
+    throw Error("No element matches selector: " + screenshot.selector);
   }
-  if (beforeScreenshot && typeof beforeScreenshot === "function") {
+
+  if (isFunction(beforeScreenshot)) {
     await beforeScreenshot(page);
   }
 
-  return element.screenshot({
-    path: output,
-    type,
-    omitBackground: transparent,
-    encoding,
-    ...screenshotArgs,
+  const buffer = await element.screenshot({
+    path: screenshot.output,
+    type: screenshot.type,
+    omitBackground: screenshot.transparent,
+    encoding: screenshot.encoding,
+    quality: screenshot.quality,
   });
+
+  screenshot.setBuffer(buffer);
+
+  return screenshot;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isFunction(f: any) {
+  return f && typeof f === "function";
 }
