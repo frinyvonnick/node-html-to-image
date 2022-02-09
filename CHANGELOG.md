@@ -1,5 +1,17 @@
 # Changelog
 
+<a name="3.2.2"></a>
+## 3.2.2 (2022-02-09)
+
+### Changed
+
+- 🔧 Generate d.ts file [[66a4199](https://github.com/frinyvonnick/node-html-to-image/commit/66a41997944913f5368adab7c0e491025827d6a4)]
+
+### Miscellaneous
+
+- 📝 Update Typescript section of README [[054fc88](https://github.com/frinyvonnick/node-html-to-image/commit/054fc883f3743cba178979f1eb2647938fbf5131)]
+
+
 <a name="3.2.1"></a>
 ## 3.2.1 (2022-02-08)
 
