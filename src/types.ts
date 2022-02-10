@@ -1,9 +1,9 @@
-import { PuppeteerLifeCycleEvent, Page, LaunchOptions } from "puppeteer";
-import { Screenshot } from "./models/Screenshot";
+import { PuppeteerLifeCycleEvent, Page, LaunchOptions } from 'puppeteer';
+import { Screenshot } from './models/screenshot';
 
 export type Content = Array<{ output: string; selector?: string }> | object;
-export type Encoding = "base64" | "binary";
-export type ImageType = "png" | "jpeg";
+export type Encoding = 'base64' | 'binary';
+export type ImageType = 'png' | 'jpeg';
 
 export interface ScreenshotParams {
   html: string;

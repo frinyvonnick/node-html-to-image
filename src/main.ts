@@ -1,8 +1,8 @@
-import { Cluster } from "puppeteer-cluster";
+import { Cluster } from 'puppeteer-cluster';
 
-import { Options, ScreenshotParams } from "./types";
-import { makeScreenshot } from "./screenshot";
-import { Screenshot } from "./models/Screenshot";
+import { Options, ScreenshotParams } from './types';
+import { makeScreenshot } from './screenshot';
+import { Screenshot } from './models/screenshot';
 
 export async function nodeHtmlToImage(options: Options) {
   const {
