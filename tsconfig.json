@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
     "noImplicitAny": true,
     "rootDir": "./src",
