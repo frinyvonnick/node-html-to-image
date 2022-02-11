@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="3.2.3"></a>
+## 3.2.3 (2022-02-11)
+
+### Changed
+
+- 🔧 Add forceConsistentCasingInFileNames in compilerOptions ([#161](https://github.com/frinyvonnick/node-html-to-image/issues/161)) [[2212e35](https://github.com/frinyvonnick/node-html-to-image/commit/2212e354e028f6fec80e564ab290d4b707220be7)]
+
+
 <a name="3.2.2"></a>
 ## 3.2.2 (2022-02-09)
 
