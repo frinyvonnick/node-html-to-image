@@ -1,5 +1,5 @@
-import { PuppeteerLifeCycleEvent, Page, LaunchOptions } from "puppeteer";
-import { Screenshot } from "./models/Screenshot";
+import type { PuppeteerLifeCycleEvent, Page, PuppeteerNodeLaunchOptions } from "puppeteer";
+import type { Screenshot } from "./models/Screenshot";
 
 export type Content = Array<{ output: string; selector?: string }> | object;
 export type Encoding = "base64" | "binary";
@@ -17,7 +17,7 @@ export interface ScreenshotParams {
 }
 
 export interface Options extends ScreenshotParams {
-  puppeteerArgs?: LaunchOptions;
+  puppeteerArgs?: PuppeteerNodeLaunchOptions;
   waitUntil?: PuppeteerLifeCycleEvent | PuppeteerLifeCycleEvent[];
   beforeScreenshot?: (page: Page) => void;
 }
