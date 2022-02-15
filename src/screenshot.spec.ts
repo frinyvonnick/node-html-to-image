@@ -287,7 +287,7 @@ describe("handlebarsHelpers", () => {
         expectedHtml: emptyHtml,
       },
       {
-        label: "render the conditional code if helpers and content are valid, and the condition is met",
+        label: "helpers and content are valid, and the condition is met",
         options: {
           content: { myVar: "foo" },
           handlebarsHelpers: {
@@ -305,7 +305,7 @@ describe("handlebarsHelpers", () => {
         `),
       },
       {
-        label: "not render the conditional code if helpers and content are valid, and the condition is not met",
+        label: "helpers and content are valid, and the condition is not met",
         options: {
           content: { myVar: "bar" },
           handlebarsHelpers: {
