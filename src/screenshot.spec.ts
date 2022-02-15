@@ -1,4 +1,5 @@
 import { describe } from "jest-circus";
+import handlebars from "handlebars";
 import { makeScreenshot } from "./screenshot";
 import { Screenshot } from "./models/Screenshot";
 
@@ -86,5 +87,251 @@ describe("beforeScreenshot", () => {
         }),
       });
     }).rejects.toThrow("No element matches selector: toto");
+  });
+});
+
+describe("handlebarsHelpers", () => {
+  let page;
+  const buffer = Symbol("Buffer");
+
+  beforeEach(() => {
+    page = {
+      setContent: jest.fn(),
+      $: jest.fn(() => ({ screenshot: jest.fn(() => buffer) })),
+    };
+    if (
+      handlebars.helpers.hasOwnProperty("equals") &&
+      !!handlebars.helpers.equals
+    ) {
+      handlebars.registerHelper({ equals: undefined });
+    }
+  });
+
+  const compactHtml = (htmlString) =>
+    htmlString.replace(/((^|\n)\s+)/gm, "");
+
+  describe("if no logic is given in the template", () => {
+    const html = "<html><body><h1>Hello world!</h1></body></html>";
+
+    const cleanTests = [
+      {
+        label: "handlebarsHelpers is not passed",
+        options: { content: { myVar: "foo" }, html: html },
+      },
+      {
+        label: "handlebarsHelpers is undefined",
+        options: {
+          content: { myVar: "foo" },
+          handlebarsHelpers: undefined,
+          html: html,
+        },
+      },
+      {
+        label: "handlebarsHelpers is not an object",
+        options: {
+          content: { myVar: "foo" },
+          handlebarsHelpers: "I'm not an object",
+          html: html,
+        },
+      },
+      {
+        label: "all helpers are functions but no content is passed",
+        options: {
+          handlebarsHelpers: {
+            equals: (a, b) => a === b,
+          },
+          html: html,
+        },
+      },
+      {
+        label: "all helpers are functions but content has not the sought variable",
+        options: {
+          content: { myOtherVar: "bar" },
+          handlebarsHelpers: {
+            equals: (a, b) => a === b,
+          },
+          html: html,
+        },
+      },
+    ];
+
+    for (const test of cleanTests) {
+      it(`if no logic is given in the template, it should not throw error when ${test.label}`, async () => {
+        await expect(
+          makeScreenshot(page, { screenshot: new Screenshot(test.options), handlebarsHelpers: test.options.handlebarsHelpers })
+        ).resolves.not.toThrow();
+      });
+
+      it(`if no logic is given in the template, it should render the original template when ${test.label}`, async () => {
+        const p = jest.fn(() => page);
+        await makeScreenshot(p(), { screenshot: new Screenshot(test.options), handlebarsHelpers: test.options.handlebarsHelpers });
+        expect(p().setContent).toHaveBeenCalledWith(
+          html,
+          expect.anything()
+        );
+      });
+    }
+
+    it("if no logic is given in the template, it should throw error when handlebarsHelpers is an object but some helper is not a function", async () => {
+      await expect(
+        makeScreenshot(page, {
+          handlebarsHelpers: {
+            foo: () => myVar === "foo",
+            bar: "I'm not a valid function",
+          },
+          screenshot: new Screenshot({
+            content: { myVar: "foo" },
+            html: html,
+          })
+        })
+      ).rejects.toThrow(/Some helper is not a valid function/);
+    });
+  });
+
+  describe("if logic is given in the template", () => {
+    const html = compactHtml(`
+      <html>
+        <body>
+          <h1>Hello world!</h1>
+          {{#if (equals myVar 'foo')}}<div>Foo</div>{{/if}}
+        </body>
+      </html>
+    `);
+
+    const errorTests = [
+      {
+        label: "handlebarsHelpers is not passed",
+        options: { content: { myVar: "foo" }, html: html },
+        error: /Missing helper: "equals"/,
+      },
+      {
+        label: "handlebarsHelpers is passed as undefined",
+        options: {
+          content: { myVar: "foo" },
+          handlebarsHelpers: undefined,
+          html: html,
+        },
+        error: /Missing helper: "equals"/,
+      },
+      {
+        label: "handlebarsHelpers is not an object",
+        options: {
+          content: { myVar: "foo" },
+          handlebarsHelpers: "I'm not an object",
+          html: html,
+        },
+        error: /Missing helper: "equals"/,
+      },
+      {
+        label: "handlebarsHelpers is an object, but some helper is not a function",
+        options: {
+          handlebarsHelpers: {
+            equals: (a, b) => a === b,
+            bar: "I'm not a function",
+          },
+          html: html,
+        },
+        error: /Some helper is not a valid function/,
+      },
+    ];
+
+    for (const test of errorTests) {
+      it(`if logic is given in the template, it should throw error when ${test.label}`, async () => {
+        await expect(
+          makeScreenshot(page, { screenshot: new Screenshot(test.options), handlebarsHelpers: test.options.handlebarsHelpers })
+        ).rejects.toThrow(test.error);
+      });
+    }
+
+    // --
+
+    const emptyHtml = compactHtml(`
+      <html>
+        <body>
+          <h1>Hello world!</h1>
+        </body>
+      </html>
+    `);
+
+    const validTests = [
+      {
+        label: "all helpers are functions but no content is passed",
+        options: {
+          handlebarsHelpers: {
+            equals: (a, b) => a === b,
+          },
+          html: html,
+        },
+        expectedHtml: emptyHtml,
+      },
+      {
+        label: "all helpers are functions but content is passed as undefined",
+        options: {
+          content: undefined,
+          handlebarsHelpers: {
+            equals: (a, b) => a === b,
+          },
+          html: html,
+        },
+        expectedHtml: emptyHtml,
+      },
+      {
+        label: "all helpers are functions but content has not the sought variable",
+        options: {
+          content: { myOtherVar: "bar" },
+          handlebarsHelpers: {
+            equals: (a, b) => a === b,
+          },
+          html: html,
+        },
+        expectedHtml: emptyHtml,
+      },
+      {
+        label: "render the conditional code if helpers and content are valid, and the condition is met",
+        options: {
+          content: { myVar: "foo" },
+          handlebarsHelpers: {
+            equals: (a, b) => a === b,
+          },
+          html: html,
+        },
+        expectedHtml: compactHtml(`
+          <html>
+            <body>
+              <h1>Hello world!</h1>
+              <div>Foo</div>
+            </body>
+          </html>
+        `),
+      },
+      {
+        label: "not render the conditional code if helpers and content are valid, and the condition is not met",
+        options: {
+          content: { myVar: "bar" },
+          handlebarsHelpers: {
+            equals: (a, b) => a === b,
+          },
+          html: html,
+        },
+        expectedHtml: emptyHtml,
+      },
+    ];
+
+    for (const test of validTests) {
+      it(`if logic is given in the template, it should not throw error when ${test.label}`, async () => {
+        await expect(
+          makeScreenshot(page, { screenshot: new Screenshot(test.options), handlebarsHelpers: test.options.handlebarsHelpers })
+        ).resolves.not.toThrow();
+      });
+
+      it(`if logic is given in the template, it should render the expected template when ${test.label}`, async () => {
+        const p = jest.fn(() => page);
+        await makeScreenshot(p(), { screenshot: new Screenshot(test.options), handlebarsHelpers: test.options.handlebarsHelpers });
+        expect(p().setContent).toHaveBeenCalledWith(
+          test.expectedHtml,
+          expect.anything()
+        );
+      });
+    }
   });
 });

@@ -12,7 +12,8 @@ export async function makeScreenshot(
     handlebarsHelpers,
   }: MakeScreenshotParams
 ) {
-  if (handlebarsHelpers && typeof handlebarsHelpers === "object") {
+  const hasHelpers = handlebarsHelpers && typeof handlebarsHelpers === "object";
+  if (hasHelpers) {
     if (
       Object.values(handlebarsHelpers).every(
         (h) => typeof h === "function"
@@ -25,7 +26,7 @@ export async function makeScreenshot(
   }
 
 
-  if (screenshot?.content) {
+  if (screenshot?.content || hasHelpers) {
     const template = compile(screenshot.html);
     screenshot.setHTML(template(screenshot.content));
   }
