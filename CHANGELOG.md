@@ -1,5 +1,17 @@
 # Changelog
 
+<a name="3.2.4"></a>
+## 3.2.4 (2022-02-15)
+
+### Changed
+
+- ⬆️ Upgrade gitmoji-changelog to v2.3.0 [[d5aae40](https://github.com/frinyvonnick/node-html-to-image/commit/d5aae4017d1a7cfa25ec2efb8e263ca3c927da46)]
+
+### Fixed
+
+- 🐛 Fix typings for &#x60;puppeteerArgs&#x60; ([#163](https://github.com/frinyvonnick/node-html-to-image/issues/163)) [[e206ee6](https://github.com/frinyvonnick/node-html-to-image/commit/e206ee669d95020026d8d98d12ac97156529f31e)]
+
+
 <a name="3.2.3"></a>
 ## 3.2.3 (2022-02-11)
 
