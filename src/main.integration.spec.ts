@@ -1,4 +1,4 @@
-import { mkdirSync, existsSync, readdirSync } from "fs";
+import { existsSync, mkdirSync, readdirSync } from "fs";
 import * as puppeteerCore from 'puppeteer-core';
 import rimraf from "rimraf";
 import { createWorker } from "tesseract.js";
@@ -198,7 +198,7 @@ describe("node-html-to-image", () => {
         output: "./generated/image.png",
         html: "<html></html>",
         puppeteerArgs: { executablePath },
-        puppeteerInstance: puppeteerCore,
+        puppeteer: puppeteerCore,
       });
 
       expect(existsSync("./generated/image.png")).toBe(true);
@@ -209,7 +209,7 @@ describe("node-html-to-image", () => {
         await nodeHtmlToImage({
           output: "./generated/image.png",
           html: "<html></html>",
-          puppeteerInstance: puppeteerCore,
+          puppeteer: puppeteerCore,
         });
       }).rejects.toThrow();
     });
