@@ -34,12 +34,11 @@ Note: When you install Puppeteer, it downloads a recent version of Chromium (~17
 ## Usage
 
 - [Simple example](#simple-example)
-- [TypeScript support](#typescript-support)
+- [TypeScript Support](#typescript-support)
 - [Options](#options)
 - [Setting output image resolution](#setting-output-image-resolution)
 - [Example with Handlebars](#example-with-handlebars)
 - [Dealing with images](#dealing-with-images)
-- [Dealing with fonts](#dealing-with-fonts)
 - [Using the buffer instead of saving to disk](#using-the-buffer-instead-of-saving-to-disk)
 - [Generating multiple images](#generating-multiple-images)
 - [Using different puppeteer libraries](#using-different-puppeteer-libraries)
