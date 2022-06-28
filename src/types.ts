@@ -18,6 +18,7 @@ export interface ScreenshotParams {
 
 export interface Options extends ScreenshotParams {
   puppeteerArgs?: PuppeteerNodeLaunchOptions;
+  puppeteerInstance?: any,
   waitUntil?: PuppeteerLifeCycleEvent | PuppeteerLifeCycleEvent[];
   beforeScreenshot?: (page: Page) => void;
 }

@@ -1,4 +1,5 @@
 import { mkdirSync, existsSync, readdirSync } from "fs";
+import * as puppeteerCore from 'puppeteer-core';
 import rimraf from "rimraf";
 import { createWorker } from "tesseract.js";
 
@@ -188,6 +189,32 @@ describe("node-html-to-image", () => {
       expect(readdirSync("./generated")).toHaveLength(NUMBER_OF_IMAGES);
     });
   });
+  describe("different instance", () => {
+    it("should pass puppeteer instance and generate image", async () => {
+
+      const executablePath = require("puppeteer").executablePath();
+
+      await nodeHtmlToImage({
+        output: "./generated/image.png",
+        html: "<html></html>",
+        puppeteerArgs: { executablePath },
+        puppeteerInstance: puppeteerCore,
+      });
+
+      expect(existsSync("./generated/image.png")).toBe(true);
+    });
+
+    it("should throw an error if executablePath is not provided", async () => {
+      await expect(async () => {
+        await nodeHtmlToImage({
+          output: "./generated/image.png",
+          html: "<html></html>",
+          puppeteerInstance: puppeteerCore,
+        });
+      }).rejects.toThrow();
+    });
+  });
+
 });
 
 async function getTextFromImage(path) {
