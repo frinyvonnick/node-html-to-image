@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readdirSync } from "fs";
-import puppeteerCore from 'puppeteer-core';
+import puppeteer from "puppeteer";
+import puppeteerCore from "puppeteer-core";
 import rimraf from "rimraf";
 import { createWorker } from "tesseract.js";
 
@@ -147,8 +148,8 @@ describe("node-html-to-image", () => {
         content: [{ name: "Yvonnick" }, { name: "World" }],
       });
 
-      expect(result[0]).toBeInstanceOf(Buffer);
-      expect(result[1]).toBeInstanceOf(Buffer);
+      expect(result?.[0]).toBeInstanceOf(Buffer);
+      expect(result?.[1]).toBeInstanceOf(Buffer);
     });
 
     it("should create selected elements images", async () => {
@@ -191,8 +192,7 @@ describe("node-html-to-image", () => {
   });
   describe("different instance", () => {
     it("should pass puppeteer instance and generate image", async () => {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const executablePath = require("puppeteer").executablePath();
+      const executablePath = puppeteer.executablePath();
 
       await nodeHtmlToImage({
         output: "./generated/image.png",
@@ -214,7 +214,6 @@ describe("node-html-to-image", () => {
       }).rejects.toThrow();
     });
   });
-
 });
 
 async function getTextFromImage(path) {
