@@ -100,7 +100,7 @@ describe("handlebarsHelpers", () => {
       $: jest.fn(() => ({ screenshot: jest.fn(() => buffer) })),
     };
     if (
-      handlebars.helpers.hasOwnProperty("equals") &&
+      Object.prototype.hasOwnProperty.call(handlebars.helpers, "equals") &&
       !!handlebars.helpers.equals
     ) {
       handlebars.registerHelper({ equals: undefined });
