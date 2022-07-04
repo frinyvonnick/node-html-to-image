@@ -37,7 +37,7 @@
     "gitmoji-changelog": "2.3.0",
     "jest": "^26.1.0",
     "jest-circus": "^26.1.0",
-    "puppeteer-core": "^15.1.1",
+    "puppeteer-core": "^13.7.0",
     "rimraf": "^3.0.2",
     "tesseract.js": "^2.0.1",
     "typescript": "^4.4.4"

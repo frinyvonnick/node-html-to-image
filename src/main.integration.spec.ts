@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync, readdirSync } from "fs";
-import * as puppeteerCore from 'puppeteer-core';
+import puppeteerCore from 'puppeteer-core';
 import rimraf from "rimraf";
 import { createWorker } from "tesseract.js";
 
@@ -191,7 +191,7 @@ describe("node-html-to-image", () => {
   });
   describe("different instance", () => {
     it("should pass puppeteer instance and generate image", async () => {
-
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const executablePath = require("puppeteer").executablePath();
 
       await nodeHtmlToImage({
