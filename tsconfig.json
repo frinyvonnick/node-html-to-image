@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "es6",
     "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
     "noImplicitAny": true,
