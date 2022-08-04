@@ -334,4 +334,143 @@ describe("handlebarsHelpers", () => {
       });
     }
   });
+
+  describe("functional tests", () => {
+    it("should do conditional rendering correctly", async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          html: "<html><body>{{#if (equals hello 'world')}}<div>Hello world!</div>{{/if}}</body></html>",
+          content: { hello: "world" },
+        }),
+        handlebarsHelpers: {
+          equals: (a, b) => a === b,
+        },
+      });
+
+      expect(page.setContent).toHaveBeenCalledWith(
+        "<html><body><div>Hello world!</div></body></html>",
+        expect.anything()
+      );
+    });
+
+    it("should do conditional rendering on an array correctly", async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          html: "<html><body>{{#each arr}}{{#if (shows this)}}<div>{{this.word}}</div>{{/if}}{{/each}}</body></html>",
+          content: {
+            arr: [
+              { show: true, word: "Hi!" },
+              { show: false, word: "I'm hidden!" },
+              { show: true, word: "Hello!" },
+            ],
+          },
+        }),
+        handlebarsHelpers: {
+          shows: (a) => a.show,
+        },
+      });
+
+      expect(page.setContent).toHaveBeenCalledWith(
+        "<html><body><div>Hi!</div><div>Hello!</div></body></html>",
+        expect.anything()
+      );
+    });
+
+    it("should do conditional rendering with unless correctly", async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          html: "<html><body>{{#unless (equals hello 'there')}}<div>Not hello world!</div>{{/unless}}</body></html>",
+          content: { hello: "world" },
+        }),
+        handlebarsHelpers: {
+          equals: (a, b) => a === b,
+        },
+      });
+
+      expect(page.setContent).toHaveBeenCalledWith(
+        "<html><body><div>Not hello world!</div></body></html>",
+        expect.anything()
+      );
+    });
+
+    it("should do conditional rendering with unless on an array correctly", async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          html: "<html><body>{{#each arr}}{{#unless (shows this)}}<div>{{{this.word}}}</div>{{/unless}}{{/each}}</body></html>",
+          content: {
+            arr: [
+              { show: true, word: "Hi!" },
+              { show: false, word: "I'm not hidden!" },
+              { show: true, word: "Hello!" },
+            ],
+          },
+        }),
+        handlebarsHelpers: {
+          shows: (a) => a.show,
+        },
+      });
+
+      expect(page.setContent).toHaveBeenCalledWith(
+        "<html><body><div>I'm not hidden!</div></body></html>",
+        expect.anything()
+      );
+    });
+
+    it("should transform a string correctly", async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          html: "<html><body>{{#with (upcase str) as |upstr|}}<div>{{upstr}}</div>{{/with}}</body></html>",
+          content: {
+            str: "Hi there",
+          },
+        }),
+        handlebarsHelpers: {
+          upcase: (a: string) => a.toUpperCase(),
+        },
+      });
+
+      expect(page.setContent).toHaveBeenCalledWith(
+        "<html><body><div>HI THERE</div></body></html>",
+        expect.anything()
+      );
+    });
+
+    it("should transform a number correctly", async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          html: "<html><body>{{#with (addTwo number) as |numPlusTwo|}}<div>{{numPlusTwo}}</div>{{/with}}</body></html>",
+          content: {
+            number: 5,
+          },
+        }),
+        handlebarsHelpers: {
+          addTwo: (a: number) => a + 2,
+        },
+      });
+
+      expect(page.setContent).toHaveBeenCalledWith(
+        "<html><body><div>7</div></body></html>",
+        expect.anything()
+      );
+    });
+
+    it("should replace a character correctly", async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          html: "<html><body>{{#with (fooToBar str) as |newstr|}}<div>{{newstr}}</div>{{/with}}</body></html>",
+          content: {
+            str: "This is foo",
+          },
+        }),
+        handlebarsHelpers: {
+          fooToBar: (a: string) => a.replace(/foo/, "bar"),
+        },
+      });
+
+      expect(page.setContent).toHaveBeenCalledWith(
+        "<html><body><div>This is bar</div></body></html>",
+        expect.anything()
+      );
+    });
+  });
 });
