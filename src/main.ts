@@ -1,8 +1,8 @@
 import { Cluster } from "puppeteer-cluster";
 
-import { Options, ScreenshotParams } from "./types";
-import { makeScreenshot } from "./screenshot";
 import { Screenshot } from "./models/Screenshot";
+import { makeScreenshot } from "./screenshot";
+import { Options, ScreenshotParams } from "./types";
 
 export async function nodeHtmlToImage(options: Options) {
   const {
@@ -15,12 +15,14 @@ export async function nodeHtmlToImage(options: Options) {
     type,
     quality,
     puppeteerArgs = {},
+    puppeteer = undefined,
   } = options;
 
   const cluster: Cluster<ScreenshotParams> = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: 2,
     puppeteerOptions: { ...puppeteerArgs, headless: true },
+    puppeteer: puppeteer,
   });
 
   const shouldBatch = Array.isArray(content);

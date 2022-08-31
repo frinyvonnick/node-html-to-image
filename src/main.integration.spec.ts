@@ -1,4 +1,6 @@
-import { mkdirSync, existsSync, readdirSync } from "fs";
+import { existsSync, mkdirSync, readdirSync } from "fs";
+import puppeteer from "puppeteer";
+import puppeteerCore from "puppeteer-core";
 import rimraf from "rimraf";
 import { createWorker } from "tesseract.js";
 
@@ -146,8 +148,8 @@ describe("node-html-to-image", () => {
         content: [{ name: "Yvonnick" }, { name: "World" }],
       });
 
-      expect(result[0]).toBeInstanceOf(Buffer);
-      expect(result[1]).toBeInstanceOf(Buffer);
+      expect(result?.[0]).toBeInstanceOf(Buffer);
+      expect(result?.[1]).toBeInstanceOf(Buffer);
     });
 
     it("should create selected elements images", async () => {
@@ -186,6 +188,30 @@ describe("node-html-to-image", () => {
       });
 
       expect(readdirSync("./generated")).toHaveLength(NUMBER_OF_IMAGES);
+    });
+  });
+  describe("different instance", () => {
+    it("should pass puppeteer instance and generate image", async () => {
+      const executablePath = puppeteer.executablePath();
+
+      await nodeHtmlToImage({
+        output: "./generated/image.png",
+        html: "<html></html>",
+        puppeteerArgs: { executablePath },
+        puppeteer: puppeteerCore,
+      });
+
+      expect(existsSync("./generated/image.png")).toBe(true);
+    });
+
+    it("should throw an error if executablePath is not provided", async () => {
+      await expect(async () => {
+        await nodeHtmlToImage({
+          output: "./generated/image.png",
+          html: "<html></html>",
+          puppeteer: puppeteerCore,
+        });
+      }).rejects.toThrow();
     });
   });
 });
