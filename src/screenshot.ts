@@ -1,5 +1,5 @@
 import { Page } from "puppeteer";
-import { compile } from "handlebars";
+import handlebars, { compile } from "handlebars";
 
 import { MakeScreenshotParams } from "./types";
 
@@ -9,9 +9,24 @@ export async function makeScreenshot(
     screenshot,
     beforeScreenshot,
     waitUntil = "networkidle0",
+    handlebarsHelpers,
   }: MakeScreenshotParams
 ) {
-  if (screenshot?.content) {
+  const hasHelpers = handlebarsHelpers && typeof handlebarsHelpers === "object";
+  if (hasHelpers) {
+    if (
+      Object.values(handlebarsHelpers).every(
+        (h) => typeof h === "function"
+      )
+    ) {
+      handlebars.registerHelper(handlebarsHelpers);
+    } else {
+      throw Error("Some helper is not a valid function");
+    }
+  }
+
+
+  if (screenshot?.content || hasHelpers) {
     const template = compile(screenshot.html);
     screenshot.setHTML(template(screenshot.content));
   }

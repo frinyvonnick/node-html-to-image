@@ -29,4 +29,5 @@ export interface MakeScreenshotParams {
   screenshot: Screenshot;
   waitUntil?: PuppeteerLifeCycleEvent | PuppeteerLifeCycleEvent[];
   beforeScreenshot?: (page: Page) => void;
+  handlebarsHelpers?: { [helpers: string]: (...args: any[]) => any };
 }

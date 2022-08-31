@@ -38,6 +38,7 @@ Note: When you install Puppeteer, it downloads a recent version of Chromium (~17
 - [Options](#options)
 - [Setting output image resolution](#setting-output-image-resolution)
 - [Example with Handlebars](#example-with-handlebars)
+- [Using Handlebars helpers](#using-handlebars-helpers)
 - [Dealing with images](#dealing-with-images)
 - [Using the buffer instead of saving to disk](#using-the-buffer-instead-of-saving-to-disk)
 - [Generating multiple images](#generating-multiple-images)
@@ -81,6 +82,7 @@ List of all available options:
 | transparent             | The transparent property lets you generate images with transparent background (for png type).    | boolean                    | optional    |
 | encoding             | The encoding property of the image. Options are `binary` (default) or `base64`.    | string                    | optional    |
 | selector             | The selector property lets you target a specific element to perform the screenshot on. (default `body`)    | string                    | optional    |
+| handlebarsHelpers | The handlebarsHelpers property lets add custom logic to the templates using Handlebars sub-expressions. [Learn more](https://handlebarsjs.com/guide/builtin-helpers.html#sub-expressions). | object | optional |
 
 ### Setting output image resolution
 
@@ -123,6 +125,33 @@ nodeHtmlToImage({
 ```
 
 [Handlebars](https://handlebarsjs.com/) provides a lot of expressions to handle common use cases like conditions or loops.
+
+
+### Using Handlebars helpers
+
+[Handlerbars sub-expressions](https://handlebarsjs.com/guide/builtin-helpers.html#sub-expressions) can be used to add custom logic to the templates. To do this, you must pass a `handlebarsHelpers` object with functions defined within.
+
+For example, if you had a variable and wanted to do some conditional rendering depending on its value, you could do this:
+
+```js
+const nodeHtmlToImage = require('node-html-to-image')
+
+nodeHtmlToImage({
+  output: './image.png',
+  content: { myVar: 'foo' },
+  handlebarsHelpers: {
+    equals: (a, b) => a === b,
+  },
+  html: `
+    <html>
+      <body>
+        {{#if (equals myVar 'foo')}}<div>Foo</div>{{/if}}
+        {{#if (equals myVar 'bar')}}<div>Bar</div>{{/if}}
+      </body>
+    </html>`
+  
+})
+```
 
 ### Dealing with images
 
