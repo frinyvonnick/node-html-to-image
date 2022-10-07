@@ -18,6 +18,8 @@ export interface ScreenshotParams {
 
 export interface Options extends ScreenshotParams {
   puppeteerArgs?: PuppeteerNodeLaunchOptions;
+  browserTimeout?: number;
+  maxConcurrency?: number;
   // https://github.com/thomasdondorf/puppeteer-cluster/blob/b5b098aed84b8d2c170b3f9d0ac050f53582df45/src/Cluster.ts#L30
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   puppeteer?: any,
