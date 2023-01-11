@@ -14,6 +14,7 @@ export async function nodeHtmlToImage(options: Options) {
     selector,
     type,
     quality,
+    chromiumPath,
     puppeteerArgs = {},
     puppeteer = undefined,
   } = options;
@@ -22,6 +23,9 @@ export async function nodeHtmlToImage(options: Options) {
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: 2,
     puppeteerOptions: { ...puppeteerArgs, headless: true },
+    perBrowserOptions: [{
+      executablePath: chromiumPath
+    }],
     puppeteer: puppeteer,
   });
 
