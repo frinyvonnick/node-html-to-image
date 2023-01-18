@@ -1,5 +1,19 @@
 # Changelog
 
+<a name="3.3.0"></a>
+## 3.3.0 (2022-08-31)
+
+### Added
+
+- ✨ Add puppeteer object property to use different libraries  ([#173](https://github.com/frinyvonnick/node-html-to-image/issues/173)) [[e9aa9d2](https://github.com/frinyvonnick/node-html-to-image/commit/e9aa9d27992ef7a36df5b0411e1ef3ede1501442)]
+- ✨ Add new option to register handlebars helpers ([#145](https://github.com/frinyvonnick/node-html-to-image/issues/145)) [[a2ab82a](https://github.com/frinyvonnick/node-html-to-image/commit/a2ab82afe46c9e8c2ab41d267760520267c59839)]
+
+### Changed
+
+- ⬆️ Bump jpeg-js from 0.4.3 to 0.4.4 ([#170](https://github.com/frinyvonnick/node-html-to-image/issues/170)) [[bbe0b86](https://github.com/frinyvonnick/node-html-to-image/commit/bbe0b865b24a9b9ae242e175081667eb0be5d275)]
+- ⬆️ Bump minimist from 1.2.5 to 1.2.6 ([#166](https://github.com/frinyvonnick/node-html-to-image/issues/166)) [[8ee87d2](https://github.com/frinyvonnick/node-html-to-image/commit/8ee87d22cbfd5c47b30d870a8dfd9703d581d538)]
+
+
 <a name="3.2.4"></a>
 ## 3.2.4 (2022-02-15)
 

@@ -1,6 +1,6 @@
 {
   "name": "node-html-to-image",
-  "version": "3.2.4",
+  "version": "3.3.0",
   "description": "A Node.js library that generates images from HTML",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
