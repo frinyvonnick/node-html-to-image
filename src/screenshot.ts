@@ -9,9 +9,11 @@ export async function makeScreenshot(
     screenshot,
     beforeScreenshot,
     waitUntil = "networkidle0",
+    timeout,
     handlebarsHelpers,
   }: MakeScreenshotParams
 ) {
+  page.setDefaultTimeout(timeout);
   const hasHelpers = handlebarsHelpers && typeof handlebarsHelpers === "object";
   if (hasHelpers) {
     if (
