@@ -26,6 +26,21 @@ describe("beforeScreenshot", () => {
     expect(beforeScreenshot).toHaveBeenCalledWith(page);
   });
 
+  it("should selected element after calling beforeScreenshot", async () => {
+    const beforeScreenshot = jest.fn();
+    await makeScreenshot(page, {
+      beforeScreenshot,
+      screenshot: new Screenshot({
+        html: `<html><body>Hello world!</body></html>`,
+      }),
+    });
+
+    const beforeScreenshotOrder = beforeScreenshot.mock.invocationCallOrder[0];
+    const selectElementOrder = page.$.mock.invocationCallOrder[0];
+
+    expect(selectElementOrder).toBeGreaterThan(beforeScreenshotOrder);
+  });
+
   it("should return a screenshot with a buffer", async () => {
     const screenshot = await makeScreenshot(page, {
       screenshot: new Screenshot({
