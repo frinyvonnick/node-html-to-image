@@ -32,13 +32,14 @@ export async function makeScreenshot(
   }
 
   await page.setContent(screenshot.html, { waitUntil });
-  const element = await page.$(screenshot.selector);
-  if (!element) {
-    throw Error("No element matches selector: " + screenshot.selector);
-  }
 
   if (isFunction(beforeScreenshot)) {
     await beforeScreenshot(page);
+  }
+
+  const element = await page.$(screenshot.selector);
+  if (!element) {
+    throw Error("No element matches selector: " + screenshot.selector);
   }
 
   const buffer = await element.screenshot({
