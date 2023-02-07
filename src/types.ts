@@ -22,12 +22,12 @@ export interface Options extends ScreenshotParams {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   puppeteer?: any,
   waitUntil?: PuppeteerLifeCycleEvent | PuppeteerLifeCycleEvent[];
-  beforeScreenshot?: (page: Page) => void;
+  beforeScreenshot?: (page: Page) => Promise<void>;
 }
 
 export interface MakeScreenshotParams {
   screenshot: Screenshot;
   waitUntil?: PuppeteerLifeCycleEvent | PuppeteerLifeCycleEvent[];
-  beforeScreenshot?: (page: Page) => void;
+  beforeScreenshot?: (page: Page) => Promise<void>;
   handlebarsHelpers?: { [helpers: string]: (...args: any[]) => any };
 }
