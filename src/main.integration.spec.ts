@@ -218,14 +218,14 @@ describe("node-html-to-image", () => {
 
 async function getTextFromImage(path) {
   const worker = createWorker();
-  await worker.load();
-  await worker.loadLanguage("eng");
-  await worker.initialize("eng");
+  // await (await worker).load();
+  await (await worker).loadLanguage("eng");
+  await (await worker).initialize("eng");
 
   const {
     data: { text },
-  } = await worker.recognize(path);
-  await worker.terminate();
+  } = await (await worker).recognize(path);
+  await (await worker).terminate();
 
   return text;
 }
