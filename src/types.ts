@@ -14,7 +14,7 @@ export interface ScreenshotParams {
   selector?: string;
   content?: Content;
   output?: string;
-  insecurePrototype: boolean;
+  insecurePrototype?: boolean;
 }
 
 export interface Options extends ScreenshotParams {
@@ -31,5 +31,5 @@ export interface MakeScreenshotParams {
   waitUntil?: PuppeteerLifeCycleEvent | PuppeteerLifeCycleEvent[];
   beforeScreenshot?: (page: Page) => void;
   handlebarsHelpers?: { [helpers: string]: (...args: any[]) => any };
-  insecurePrototype: boolean;
+  insecurePrototype?: boolean;
 }
