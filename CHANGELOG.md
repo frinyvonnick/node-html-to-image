@@ -1,5 +1,12 @@
 # Changelog
 
+<a name="3.3.0a"></a>
+## 3.3.0a (2023-03-29)
+
+### Added
+
+- ✨ Add @handlebars/allow-prototype-access to bypass handlebars proto method errors, when the function in core doens't work. 
+
 <a name="3.3.0"></a>
 ## 3.3.0 (2022-08-31)
 

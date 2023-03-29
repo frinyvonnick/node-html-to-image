@@ -988,6 +988,11 @@
     lodash "^4.17.11"
     semver "^5.6.0"
 
+"@handlebars/allow-prototype-access@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@handlebars/allow-prototype-access/-/allow-prototype-access-1.0.5.tgz#364384d1879765aad210a61becd849afab3954b3"
+  integrity sha512-D5AJO9dM6B+1scVVQ4ma05cAku5M2dEnlycggIg6RW539TdQlgbNg1G1r86fNqqNI0CHv/TVwKEB9M6ILJQCWQ==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.5.tgz#2cbaf9a89460da24b5ca6531b8bbfc23e1df50c7"

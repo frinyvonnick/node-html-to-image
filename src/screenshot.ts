@@ -1,5 +1,8 @@
+import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access';
 import { Page } from "puppeteer";
-import handlebars, { compile } from "handlebars";
+import hndl, { compile } from "handlebars";
+
+const handlebars = allowInsecurePrototypeAccess(hndl);
 
 import { MakeScreenshotParams } from "./types";
 
