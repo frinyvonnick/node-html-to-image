@@ -1,6 +1,6 @@
 import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access';
 import { Page } from "puppeteer";
-import hndl, { compile } from "handlebars";
+import hndl from "handlebars";
 
 import { MakeScreenshotParams } from "./types";
 
@@ -32,7 +32,7 @@ export async function makeScreenshot(
 
 
   if (screenshot?.content || hasHelpers) {
-    const template = compile(screenshot.html);
+    const template = handlebars.compile(screenshot.html);
     screenshot.setHTML(template(screenshot.content));
   }
 
