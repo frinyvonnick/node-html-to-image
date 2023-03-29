@@ -2,8 +2,6 @@ import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access
 import { Page } from "puppeteer";
 import hndl, { compile } from "handlebars";
 
-const handlebars = allowInsecurePrototypeAccess(hndl);
-
 import { MakeScreenshotParams } from "./types";
 
 export async function makeScreenshot(
@@ -13,8 +11,12 @@ export async function makeScreenshot(
     beforeScreenshot,
     waitUntil = "networkidle0",
     handlebarsHelpers,
+    insecurePrototype
   }: MakeScreenshotParams
 ) {
+  let handlebars;
+  if (insecurePrototype) handlebars = allowInsecurePrototypeAccess(hndl);
+  else handlebars = hndl;
   const hasHelpers = handlebarsHelpers && typeof handlebarsHelpers === "object";
   if (hasHelpers) {
     if (

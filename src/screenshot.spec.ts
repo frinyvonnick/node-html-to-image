@@ -472,5 +472,24 @@ describe("handlebarsHelpers", () => {
         expect.anything()
       );
     });
+
+    it("should bypass proto/method error", async () => {
+      await makeScreenshot(page, {
+        screenshot: new Screenshot({
+          html: "<html><body>{{message.content}}</body></html>",
+          content: {
+            message: {
+              content: "Hello World!"
+            }
+          },
+          insecurePrototype: true
+        })
+      });
+
+      expect(page.setContent).toHaveBeenCalledWith(
+        "<html><body>Hello World!</body></html>",
+        expect.anything()
+      );
+    });
   });
 });

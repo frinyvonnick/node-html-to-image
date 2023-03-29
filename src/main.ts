@@ -16,6 +16,7 @@ export async function nodeHtmlToImage(options: Options) {
     quality,
     puppeteerArgs = {},
     puppeteer = undefined,
+    insecurePrototype
   } = options;
 
   const cluster: Cluster<ScreenshotParams> = await Cluster.launch({
@@ -42,6 +43,7 @@ export async function nodeHtmlToImage(options: Options) {
             selector: contentSelector ? contentSelector : selector,
             type,
             quality,
+            insecurePrototype
           },
           async ({ page, data }) => {
             const screenshot = await makeScreenshot(page, {
