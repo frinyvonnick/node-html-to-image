@@ -167,7 +167,7 @@ const dataURI = 'data:image/jpeg;base64,' + base64Image
 
 nodeHtmlToImage({
   output: './image.png',
-  html: '<html><body><img src="{{imageSource}}" /></body></html>',
+  html: '<html><body><img src="{{{imageSource}}}" /></body></html>',
   content: { imageSource: dataURI }
 })
 ```
@@ -184,7 +184,7 @@ const html = `
     <style>
       @font-face {
         font-family: 'testFont';
-        src: url(${_data}) format('woff2'); // don't forget the format!
+        src: url("{{{_data}}}") format('woff2'); // don't forget the format!
       }
     </style>
   </head>
