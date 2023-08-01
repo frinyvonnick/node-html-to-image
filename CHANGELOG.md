@@ -1,5 +1,17 @@
 # Changelog
 
+<a name="3.4.0"></a>
+## 3.4.0 (2023-08-01)
+
+### Added
+
+- ✨ Add timeout option ([#189](https://github.com/frinyvonnick/node-html-to-image/issues/189)) [[20110bc](https://github.com/frinyvonnick/node-html-to-image/commit/20110bc38d42e2d9cc71ac8f16fb847fbb863622)]
+
+### Changed
+
+- ⬆️ Bump json5 from 2.2.1 to 2.2.3 ([#185](https://github.com/frinyvonnick/node-html-to-image/issues/185)) [[7486250](https://github.com/frinyvonnick/node-html-to-image/commit/748625068ebfa165a37769a1af49f9a99ad0d9cb)]
+
+
 <a name="3.3.0"></a>
 ## 3.3.0 (2022-08-31)
 
