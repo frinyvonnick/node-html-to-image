@@ -79,8 +79,6 @@ describe("node-html-to-image", () => {
 
     it("should throw timeout error", async () => {
       await expect(async () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         await nodeHtmlToImage({
           timeout: 500,
           html: "<html></html>"
