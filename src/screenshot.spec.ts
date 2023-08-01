@@ -10,6 +10,7 @@ describe("beforeScreenshot", () => {
   beforeEach(() => {
     page = {
       setContent: jest.fn(),
+      setDefaultTimeout: jest.fn(),
       $: jest.fn(() => ({ screenshot: jest.fn(() => buffer) })),
     };
   });
@@ -48,6 +49,20 @@ describe("beforeScreenshot", () => {
       "<html><body>Hello world!</body></html>",
       expect.anything()
     );
+  });
+
+  it("should call 'setDefaultTimeout' with option's timeout", async () => {
+    const TIMEOUT = 40 * 1000;
+
+    await makeScreenshot(page, {
+      timeout: TIMEOUT,
+      screenshot: new Screenshot({
+        html: "<html><body>{{message}}</body></html>",
+        content: { message: "Hello world!" },
+      }),
+    });
+
+    expect(page.setDefaultTimeout).toHaveBeenCalledWith(TIMEOUT);
   });
 
   it("should not compile a screenshot if content is empty", async () => {
@@ -97,6 +112,7 @@ describe("handlebarsHelpers", () => {
   beforeEach(() => {
     page = {
       setContent: jest.fn(),
+      setDefaultTimeout: jest.fn(),
       $: jest.fn(() => ({ screenshot: jest.fn(() => buffer) })),
     };
     if (

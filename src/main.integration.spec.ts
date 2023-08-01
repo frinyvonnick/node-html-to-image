@@ -77,6 +77,18 @@ describe("node-html-to-image", () => {
       );
     });
 
+    it("should throw timeout error", async () => {
+      await expect(async () => {
+        await nodeHtmlToImage({
+          timeout: 500,
+          html: "<html></html>"
+        });
+      }).rejects.toThrow();
+      expect(mockConsoleErr).toHaveBeenCalledWith(
+        new Error("Timeout hit: 500")
+      );
+    });
+
     it("should generate an jpeg image", async () => {
       await nodeHtmlToImage({
         output: "./generated/image.jpg",
