@@ -23,7 +23,7 @@ export async function nodeHtmlToImage(options: Options) {
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: 2,
     timeout,
-    puppeteerOptions: { ...puppeteerArgs, headless: true },
+    puppeteerOptions: { ...puppeteerArgs, headless: 'new' },
     puppeteer: puppeteer,
   });
 
