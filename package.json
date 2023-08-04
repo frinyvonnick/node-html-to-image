@@ -28,8 +28,6 @@
     "@babel/preset-typescript": "^7.18.6",
     "@types/jest": "^28.1.4",
     "@types/node": "^16.11.43",
-    "@types/puppeteer": "^5.4.6",
-    "@types/puppeteer-core": "^5.4.0",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
     "@typescript-eslint/parser": "^5.30.4",
     "eslint": "^8.19.0",
