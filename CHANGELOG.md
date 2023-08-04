@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="4.0.0"></a>
+## 4.0.0 (2023-08-04)
+
+### Changed
+
+- ⬆️ Upgrade dependencies (puppeteer@21.0.1 , handlebars@4.7.8) ([#209](https://github.com/frinyvonnick/node-html-to-image/issues/209)) [[6fc5cac](https://github.com/frinyvonnick/node-html-to-image/commit/6fc5cac18df21b35c2eb6216fa6e3d7e681ba969)]
+
+
 <a name="3.4.0"></a>
 ## 3.4.0 (2023-08-01)
 
