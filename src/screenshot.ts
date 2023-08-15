@@ -7,6 +7,7 @@ export async function makeScreenshot(
   page: Page,
   {
     screenshot,
+    beforeRendering,
     beforeScreenshot,
     waitUntil = "networkidle0",
     timeout,
@@ -17,9 +18,7 @@ export async function makeScreenshot(
   const hasHelpers = handlebarsHelpers && typeof handlebarsHelpers === "object";
   if (hasHelpers) {
     if (
-      Object.values(handlebarsHelpers).every(
-        (h) => typeof h === "function"
-      )
+      Object.values(handlebarsHelpers).every((h) => typeof h === "function")
     ) {
       handlebars.registerHelper(handlebarsHelpers);
     } else {
@@ -27,10 +26,13 @@ export async function makeScreenshot(
     }
   }
 
-
   if (screenshot?.content || hasHelpers) {
     const template = compile(screenshot.html);
     screenshot.setHTML(template(screenshot.content));
+  }
+
+  if (isFunction(beforeRendering)) {
+    await beforeRendering(page);
   }
 
   await page.setContent(screenshot.html, { waitUntil });
