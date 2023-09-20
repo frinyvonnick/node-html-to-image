@@ -77,7 +77,7 @@ List of all available options:
 | content           | If provided html property is considered an handlebars template and use content value to fill it                                                                                                                        | object or Array                                 | optional    |
 | waitUntil         | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#pagesetcontenthtml-options).                                    | string or Array<string> (default: networkidle0) | optional    |
 | puppeteer         | The puppeteer property let you use a different puppeteer library (like puppeteer-core or puppeteer-extra).                                                                                                             | object (default: puppeteer)                     | optional    |
-| puppeteerArgs     | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions). | object                                          | optional    |
+| puppeteerArgs     | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions). | Array<string>                                          | optional    |
 | beforeScreenshot  | An async function that will execute just before screenshot is taken. Gives access to puppeteer page element.                                                                                                           | Function                                        | optional |
 | transparent       | The transparent property lets you generate images with transparent background (for png type).                                                                                                                          | boolean                                         | optional    |
 | encoding          | The encoding property of the image. Options are `binary` (default) or `base64`.                                                                                                                                        | string                                          | optional    |
@@ -254,6 +254,21 @@ const image = await nodeHtmlToImage({
       args: chromium.args,
       executablePath: await chrome.executablePath,
   }
+})
+```
+
+### Passing args to puppeteer
+
+You can pass command line arguments to the puppeteer browser instance. Full list can be found [here.](https://peter.sh/experiments/chromium-command-line-switches)
+
+```js
+const nodeHtmlToImage = require('node-html-to-image')
+
+const image = await nodeHtmlToImage({
+    html: '<html><body><div>Hello</div></body></html>',
+    puppeteerArgs: {
+        args: ['--no-sandbox'],
+    }
 })
 ```
 
