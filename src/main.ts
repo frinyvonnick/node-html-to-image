@@ -23,7 +23,7 @@ export async function nodeHtmlToImage(options: Options) {
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: 2,
     timeout,
-    puppeteerOptions: { ...puppeteerArgs, headless: 'new' },
+    puppeteerOptions: { ...puppeteerArgs, headless: "shell" },
     puppeteer: puppeteer,
   });
 
@@ -51,9 +51,9 @@ export async function nodeHtmlToImage(options: Options) {
               screenshot: new Screenshot(data),
             });
             return screenshot;
-          }
+          },
         );
-      })
+      }),
     );
     await cluster.idle();
     await cluster.close();
