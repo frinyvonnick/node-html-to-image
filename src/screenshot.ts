@@ -11,22 +11,19 @@ export async function makeScreenshot(
     waitUntil = "networkidle0",
     timeout,
     handlebarsHelpers,
-  }: MakeScreenshotParams
+  }: MakeScreenshotParams,
 ) {
   page.setDefaultTimeout(timeout);
   const hasHelpers = handlebarsHelpers && typeof handlebarsHelpers === "object";
   if (hasHelpers) {
     if (
-      Object.values(handlebarsHelpers).every(
-        (h) => typeof h === "function"
-      )
+      Object.values(handlebarsHelpers).every((h) => typeof h === "function")
     ) {
       handlebars.registerHelper(handlebarsHelpers);
     } else {
       throw Error("Some helper is not a valid function");
     }
   }
-
 
   if (screenshot?.content || hasHelpers) {
     const template = compile(screenshot.html);
@@ -43,7 +40,7 @@ export async function makeScreenshot(
     await beforeScreenshot(page);
   }
 
-  const buffer = await element.screenshot({
+  const result = await element.screenshot({
     path: screenshot.output,
     type: screenshot.type,
     omitBackground: screenshot.transparent,
@@ -51,7 +48,7 @@ export async function makeScreenshot(
     quality: screenshot.quality,
   });
 
-  screenshot.setBuffer(buffer);
+  screenshot.setBuffer(Buffer.from(result));
 
   return screenshot;
 }
