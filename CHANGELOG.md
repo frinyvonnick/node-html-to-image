@@ -1,5 +1,21 @@
 # Changelog
 
+<a name="5.0.0"></a>
+## 5.0.0 (2024-09-03)
+
+### Changed
+
+- ⬆️ upgrade dependencies according to package.json [[70f3f56](https://github.com/frinyvonnick/node-html-to-image/commit/70f3f562d6e5b56403018d18f36aa1ae0a2dcdd0)]
+- ⬆️ Bump semver from 5.7.1 to 5.7.2 ([#205](https://github.com/frinyvonnick/node-html-to-image/issues/205)) [[64955f9](https://github.com/frinyvonnick/node-html-to-image/commit/64955f9f9f1f6f6c2d56fd0d631f8d995d3d12f4)]
+- ⬆️ Bump word-wrap from 1.2.3 to 1.2.4 ([#207](https://github.com/frinyvonnick/node-html-to-image/issues/207)) [[5db0d38](https://github.com/frinyvonnick/node-html-to-image/commit/5db0d384055bdd4ba64cc2c010bd61d2c1c9b45e)]
+
+### Miscellaneous
+
+-  :arrow-up: upgrade puppeteer to 23.2.2 [[2c05eaf](https://github.com/frinyvonnick/node-html-to-image/commit/2c05eaf015844065726e9c93302ad5d345a83830)]
+-  :arrow-up: upgrade puppeteer to 22.8.2 [[d8800c6](https://github.com/frinyvonnick/node-html-to-image/commit/d8800c6d7f5bd81c5de46672295d0696443335a6)]
+- 📝 Update sample code in README ([#204](https://github.com/frinyvonnick/node-html-to-image/issues/204)) [[5ac5bc8](https://github.com/frinyvonnick/node-html-to-image/commit/5ac5bc8fc25456704b85ef2eb664008f06e490d6)]
+
+
 <a name="4.0.0"></a>
 ## 4.0.0 (2023-08-04)
 
