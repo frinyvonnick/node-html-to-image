@@ -1,5 +1,21 @@
 # Changelog
 
+<a name="6.0.0"></a>
+## 6.0.0 (2026-07-13)
+
+### Changed
+
+- 🚨 Replace ESLint config with flat config [[78c5d48](https://github.com/frinyvonnick/node-html-to-image/commit/78c5d48d5d755257d257a56b5ecd6e9c51389ee1)]
+- ♻️ Migrate test runner from Jest to Vitest [[984dd57](https://github.com/frinyvonnick/node-html-to-image/commit/984dd57639c82c555036b2f640354dd38c8a64f1)]
+- ⬆️ Upgrade dependencies and bump to v6.0.0 [[e4879f1](https://github.com/frinyvonnick/node-html-to-image/commit/e4879f1fe78d89c65aa17a743c93f629a020bba7)]
+
+### Miscellaneous
+
+- 🔨 Add one-command release script [[fd81a36](https://github.com/frinyvonnick/node-html-to-image/commit/fd81a369201956ff2c8acb2fa87d86abef2134a1)]
+- 📝 Add v5 -&gt; v6 migration guide [[8012675](https://github.com/frinyvonnick/node-html-to-image/commit/801267506bb01159557d02debb4d7ba0578aeedc)]
+- 🏷️ Enable strict TypeScript and adapt to the puppeteer 25 API [[888b0b7](https://github.com/frinyvonnick/node-html-to-image/commit/888b0b7f848cd941099e6b248c2d54a431473c31)]
+
+
 <a name="5.0.0"></a>
 ## 5.0.0 (2024-09-03)
 
