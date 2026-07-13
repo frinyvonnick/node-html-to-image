@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to node-html-to-image 🌄</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-3.1.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-6.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/frinyvonnick/node-html-to-image#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -68,21 +68,23 @@ import nodeHtmlToImage from 'node-html-to-image'
 
 List of all available options:
 
-| option                  | description                                                                                     | type                       | required    |
-|-------------------------|-------------------------------------------------------------------------------------------------|----------------------------|-------------|
-| output                  | The ouput path for generated image                                                              | string                     | optional    |
-| html                    | The html used to generate image content                                                         | string                     | required    |
-| type                    | The type of the generated image                                                                 | jpeg or png (default: png) | optional    |
-| quality                 | The quality of the generated image (only applicable to jpg)                                     | number (default: 80)       | optional    |
-| content                 | If provided html property is considered an handlebars template and use content value to fill it | object or Array            | optional    |
-| waitUntil               | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#pagesetcontenthtml-options).                                                        | string or Array<string> (default: networkidle0)    | optional    |
-| puppeteer               | The puppeteer property let you use a different puppeteer library (like puppeteer-core or puppeteer-extra).                 | object (default: puppeteer)                     | optional    |
-| puppeteerArgs           | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions).                  | object                     | optional    |
-| beforeScreenshot | An async function that will execute just before screenshot is taken. Gives access to puppeteer page element. | Function | optional |
-| transparent             | The transparent property lets you generate images with transparent background (for png type).    | boolean                    | optional    |
-| encoding             | The encoding property of the image. Options are `binary` (default) or `base64`.    | string                    | optional    |
-| selector             | The selector property lets you target a specific element to perform the screenshot on. (default `body`)    | string                    | optional    |
-| handlebarsHelpers | The handlebarsHelpers property lets add custom logic to the templates using Handlebars sub-expressions. [Learn more](https://handlebarsjs.com/guide/builtin-helpers.html#sub-expressions). | object | optional |
+| option            | description                                                                                                                                                                                                            | type                                            | required    |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|-------------|
+| output            | The ouput path for generated image                                                                                                                                                                                     | string                                          | optional    |
+| html              | The html used to generate image content                                                                                                                                                                                | string                                          | required    |
+| type              | The type of the generated image                                                                                                                                                                                        | jpeg or png (default: png)                      | optional    |
+| quality           | The quality of the generated image (only applicable to jpg)                                                                                                                                                            | number (default: 80)                            | optional    |
+| content           | If provided html property is considered an handlebars template and use content value to fill it                                                                                                                        | object or Array                                 | optional    |
+| waitUntil         | Define when to consider markup succeded. Accepts `load` and `domcontentloaded` (puppeteer no longer supports `networkidle0`/`networkidle2` for `setContent`). [Learn more](https://pptr.dev/api/puppeteer.page.setcontent).                     | string or Array<string> (default: load)         | optional    |
+| puppeteer         | The puppeteer property let you use a different puppeteer library (like puppeteer-core or puppeteer-extra).                                                                                                             | object (default: puppeteer)                     | optional    |
+| puppeteerArgs     | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions). | object                                          | optional    |
+| beforeScreenshot  | An async function that will execute just before screenshot is taken. Gives access to puppeteer page element.                                                                                                           | Function                                        | optional |
+| transparent       | The transparent property lets you generate images with transparent background (for png type).                                                                                                                          | boolean                                         | optional    |
+| encoding          | The encoding property of the image. Options are `binary` (default) or `base64`.                                                                                                                                        | string                                          | optional    |
+| selector          | The selector property lets you target a specific element to perform the screenshot on. (default `body`)                                                                                                                | string                                          | optional    |
+| handlebarsHelpers | The handlebarsHelpers property lets add custom logic to the templates using Handlebars sub-expressions. [Learn more](https://handlebarsjs.com/guide/builtin-helpers.html#sub-expressions).                             | object                                          | optional |
+| timeout           | Timeout for a [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster#clusterlaunchoptions) (in `ms`). Defaults to `30000` (30 seconds).                                                                | number                                          | optional |
+
 
 ### Setting output image resolution
 
@@ -167,7 +169,7 @@ const dataURI = 'data:image/jpeg;base64,' + base64Image
 
 nodeHtmlToImage({
   output: './image.png',
-  html: '<html><body><img src="{{imageSource}}" /></body></html>',
+  html: '<html><body><img src="{{{imageSource}}}" /></body></html>',
   content: { imageSource: dataURI }
 })
 ```
@@ -184,7 +186,7 @@ const html = `
     <style>
       @font-face {
         font-family: 'testFont';
-        src: url(${_data}) format('woff2'); // don't forget the format!
+        src: url("{{{_data}}}") format('woff2'); // don't forget the format!
       }
     </style>
   </head>

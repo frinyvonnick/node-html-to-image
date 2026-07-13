@@ -15,13 +15,15 @@ export async function nodeHtmlToImage(options: Options) {
     type,
     quality,
     puppeteerArgs = {},
+    timeout = 30000,
     puppeteer = undefined,
   } = options;
 
   const cluster: Cluster<ScreenshotParams> = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: 2,
-    puppeteerOptions: { ...puppeteerArgs, headless: true },
+    timeout,
+    puppeteerOptions: { ...puppeteerArgs, headless: "shell" },
     puppeteer: puppeteer,
   });
 
@@ -49,9 +51,9 @@ export async function nodeHtmlToImage(options: Options) {
               screenshot: new Screenshot(data),
             });
             return screenshot;
-          }
+          },
         );
-      })
+      }),
     );
     await cluster.idle();
     await cluster.close();

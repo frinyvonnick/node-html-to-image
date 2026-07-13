@@ -1,5 +1,57 @@
 # Changelog
 
+<a name="6.0.0"></a>
+## 6.0.0 (2026-07-13)
+
+### Changed
+
+- 🚨 Replace ESLint config with flat config [[78c5d48](https://github.com/frinyvonnick/node-html-to-image/commit/78c5d48d5d755257d257a56b5ecd6e9c51389ee1)]
+- ♻️ Migrate test runner from Jest to Vitest [[984dd57](https://github.com/frinyvonnick/node-html-to-image/commit/984dd57639c82c555036b2f640354dd38c8a64f1)]
+- ⬆️ Upgrade dependencies and bump to v6.0.0 [[e4879f1](https://github.com/frinyvonnick/node-html-to-image/commit/e4879f1fe78d89c65aa17a743c93f629a020bba7)]
+
+### Miscellaneous
+
+- 🔨 Add one-command release script [[fd81a36](https://github.com/frinyvonnick/node-html-to-image/commit/fd81a369201956ff2c8acb2fa87d86abef2134a1)]
+- 📝 Add v5 -&gt; v6 migration guide [[8012675](https://github.com/frinyvonnick/node-html-to-image/commit/801267506bb01159557d02debb4d7ba0578aeedc)]
+- 🏷️ Enable strict TypeScript and adapt to the puppeteer 25 API [[888b0b7](https://github.com/frinyvonnick/node-html-to-image/commit/888b0b7f848cd941099e6b248c2d54a431473c31)]
+
+
+<a name="5.0.0"></a>
+## 5.0.0 (2024-09-03)
+
+### Changed
+
+- ⬆️ upgrade dependencies according to package.json [[70f3f56](https://github.com/frinyvonnick/node-html-to-image/commit/70f3f562d6e5b56403018d18f36aa1ae0a2dcdd0)]
+- ⬆️ Bump semver from 5.7.1 to 5.7.2 ([#205](https://github.com/frinyvonnick/node-html-to-image/issues/205)) [[64955f9](https://github.com/frinyvonnick/node-html-to-image/commit/64955f9f9f1f6f6c2d56fd0d631f8d995d3d12f4)]
+- ⬆️ Bump word-wrap from 1.2.3 to 1.2.4 ([#207](https://github.com/frinyvonnick/node-html-to-image/issues/207)) [[5db0d38](https://github.com/frinyvonnick/node-html-to-image/commit/5db0d384055bdd4ba64cc2c010bd61d2c1c9b45e)]
+
+### Miscellaneous
+
+-  :arrow-up: upgrade puppeteer to 23.2.2 [[2c05eaf](https://github.com/frinyvonnick/node-html-to-image/commit/2c05eaf015844065726e9c93302ad5d345a83830)]
+-  :arrow-up: upgrade puppeteer to 22.8.2 [[d8800c6](https://github.com/frinyvonnick/node-html-to-image/commit/d8800c6d7f5bd81c5de46672295d0696443335a6)]
+- 📝 Update sample code in README ([#204](https://github.com/frinyvonnick/node-html-to-image/issues/204)) [[5ac5bc8](https://github.com/frinyvonnick/node-html-to-image/commit/5ac5bc8fc25456704b85ef2eb664008f06e490d6)]
+
+
+<a name="4.0.0"></a>
+## 4.0.0 (2023-08-04)
+
+### Changed
+
+- ⬆️ Upgrade dependencies (puppeteer@21.0.1 , handlebars@4.7.8) ([#209](https://github.com/frinyvonnick/node-html-to-image/issues/209)) [[6fc5cac](https://github.com/frinyvonnick/node-html-to-image/commit/6fc5cac18df21b35c2eb6216fa6e3d7e681ba969)]
+
+
+<a name="3.4.0"></a>
+## 3.4.0 (2023-08-01)
+
+### Added
+
+- ✨ Add timeout option ([#189](https://github.com/frinyvonnick/node-html-to-image/issues/189)) [[20110bc](https://github.com/frinyvonnick/node-html-to-image/commit/20110bc38d42e2d9cc71ac8f16fb847fbb863622)]
+
+### Changed
+
+- ⬆️ Bump json5 from 2.2.1 to 2.2.3 ([#185](https://github.com/frinyvonnick/node-html-to-image/issues/185)) [[7486250](https://github.com/frinyvonnick/node-html-to-image/commit/748625068ebfa165a37769a1af49f9a99ad0d9cb)]
+
+
 <a name="3.3.0"></a>
 ## 3.3.0 (2022-08-31)
 

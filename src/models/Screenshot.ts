@@ -1,8 +1,8 @@
 import { ImageType, Encoding, Content, ScreenshotParams } from "../types";
 
 export class Screenshot {
-  output: string;
-  content: Content;
+  output?: string;
+  content?: Content;
   selector: string;
   html: string;
   quality?: number;
@@ -49,6 +49,6 @@ export class Screenshot {
   }
 }
 
-function isEmpty(val: object) {
+function isEmpty(val: Content | undefined) {
   return val == null || !Object.keys(val).length;
 }

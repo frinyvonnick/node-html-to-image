@@ -1,4 +1,4 @@
-import { Page } from "puppeteer";
+import type { Page } from "puppeteer";
 import handlebars, { compile } from "handlebars";
 
 import { MakeScreenshotParams } from "./types";
@@ -8,23 +8,24 @@ export async function makeScreenshot(
   {
     screenshot,
     beforeScreenshot,
-    waitUntil = "networkidle0",
+    waitUntil = "load",
+    timeout,
     handlebarsHelpers,
-  }: MakeScreenshotParams
+  }: MakeScreenshotParams,
 ) {
+  if (timeout !== undefined) {
+    page.setDefaultTimeout(timeout);
+  }
   const hasHelpers = handlebarsHelpers && typeof handlebarsHelpers === "object";
   if (hasHelpers) {
     if (
-      Object.values(handlebarsHelpers).every(
-        (h) => typeof h === "function"
-      )
+      Object.values(handlebarsHelpers).every((h) => typeof h === "function")
     ) {
       handlebars.registerHelper(handlebarsHelpers);
     } else {
       throw Error("Some helper is not a valid function");
     }
   }
-
 
   if (screenshot?.content || hasHelpers) {
     const template = compile(screenshot.html);
@@ -37,11 +38,11 @@ export async function makeScreenshot(
     throw Error("No element matches selector: " + screenshot.selector);
   }
 
-  if (isFunction(beforeScreenshot)) {
+  if (typeof beforeScreenshot === "function") {
     await beforeScreenshot(page);
   }
 
-  const buffer = await element.screenshot({
+  const result = await element.screenshot({
     path: screenshot.output,
     type: screenshot.type,
     omitBackground: screenshot.transparent,
@@ -49,12 +50,7 @@ export async function makeScreenshot(
     quality: screenshot.quality,
   });
 
-  screenshot.setBuffer(buffer);
+  screenshot.setBuffer(Buffer.from(result));
 
   return screenshot;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function isFunction(f: any) {
-  return f && typeof f === "function";
 }
