@@ -1,4 +1,3 @@
-import { describe } from "jest-circus";
 import { Screenshot } from "./Screenshot";
 
 describe("Screenshot", () => {
@@ -42,7 +41,6 @@ describe("Screenshot", () => {
     });
 
     expect(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       screenshot.setHTML();
     }).toThrow("You must provide an html property.");
@@ -56,6 +54,7 @@ describe("Screenshot", () => {
     });
 
     expect(() => {
+      // @ts-expect-error - passing null on purpose to test validation
       screenshot.setHTML(null);
     }).toThrow("You must provide an html property.");
 
@@ -142,7 +141,6 @@ describe("Screenshot", () => {
 
   it("should throw an Error if no params are passed", () => {
     expect(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       new Screenshot();
     }).toThrow("You must provide an html property.");
@@ -150,7 +148,6 @@ describe("Screenshot", () => {
 
   it("should throw an Error if html is missing", () => {
     expect(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       new Screenshot({});
     }).toThrow("You must provide an html property.");
@@ -158,6 +155,7 @@ describe("Screenshot", () => {
 
   it("should throw an Error if html is null", () => {
     expect(() => {
+      // @ts-expect-error - passing null on purpose to test validation
       new Screenshot({ html: null });
     }).toThrow("You must provide an html property.");
   });

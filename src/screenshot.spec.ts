@@ -1,22 +1,31 @@
-import { describe } from "jest-circus";
 import handlebars from "handlebars";
 import { makeScreenshot } from "./screenshot";
 import { Screenshot } from "./models/Screenshot";
 
+// These fixtures deliberately feed invalid values (non-object helpers, undefined
+// content, ...) to exercise runtime validation, so `options` stays intentionally
+// loose.
+type HelperTestCase = {
+  label: string;
+  options: any;
+  error?: RegExp;
+  expectedHtml?: string;
+};
+
 describe("beforeScreenshot", () => {
-  let page;
+  let page: any;
   const buffer = new ArrayBuffer();
 
   beforeEach(() => {
     page = {
-      setContent: jest.fn(),
-      setDefaultTimeout: jest.fn(),
-      $: jest.fn(() => ({ screenshot: jest.fn(() => buffer) })),
+      setContent: vi.fn(),
+      setDefaultTimeout: vi.fn(),
+      $: vi.fn(() => ({ screenshot: vi.fn(() => buffer) })),
     };
   });
 
   it("should call beforeScreenshot with page", async () => {
-    const beforeScreenshot = jest.fn();
+    const beforeScreenshot = vi.fn();
     await makeScreenshot(page, {
       beforeScreenshot,
       screenshot: new Screenshot({
@@ -93,7 +102,7 @@ describe("beforeScreenshot", () => {
   });
 
   it("should throw an error if not element is found", async () => {
-    page.$.mockImplementationOnce(jest.fn());
+    page.$.mockImplementationOnce(vi.fn());
     await expect(async () => {
       await makeScreenshot(page, {
         screenshot: new Screenshot({
@@ -106,29 +115,30 @@ describe("beforeScreenshot", () => {
 });
 
 describe("handlebarsHelpers", () => {
-  let page;
+  let page: any;
   const buffer = new ArrayBuffer();
 
   beforeEach(() => {
     page = {
-      setContent: jest.fn(),
-      setDefaultTimeout: jest.fn(),
-      $: jest.fn(() => ({ screenshot: jest.fn(() => buffer) })),
+      setContent: vi.fn(),
+      setDefaultTimeout: vi.fn(),
+      $: vi.fn(() => ({ screenshot: vi.fn(() => buffer) })),
     };
     if (
       Object.prototype.hasOwnProperty.call(handlebars.helpers, "equals") &&
       !!handlebars.helpers.equals
     ) {
-      handlebars.registerHelper({ equals: undefined });
+      handlebars.unregisterHelper("equals");
     }
   });
 
-  const compactHtml = (htmlString) => htmlString.replace(/((^|\n)\s+)/gm, "");
+  const compactHtml = (htmlString: string) =>
+    htmlString.replace(/((^|\n)\s+)/gm, "");
 
   describe("if no logic is given in the template", () => {
     const html = "<html><body><h1>Hello world!</h1></body></html>";
 
-    const cleanTests = [
+    const cleanTests: HelperTestCase[] = [
       {
         label: "handlebarsHelpers is not passed",
         options: { content: { myVar: "foo" }, html: html },
@@ -153,7 +163,7 @@ describe("handlebarsHelpers", () => {
         label: "all helpers are functions but no content is passed",
         options: {
           handlebarsHelpers: {
-            equals: (a, b) => a === b,
+            equals: (a: unknown, b: unknown) => a === b,
           },
           html: html,
         },
@@ -164,7 +174,7 @@ describe("handlebarsHelpers", () => {
         options: {
           content: { myOtherVar: "bar" },
           handlebarsHelpers: {
-            equals: (a, b) => a === b,
+            equals: (a: unknown, b: unknown) => a === b,
           },
           html: html,
         },
@@ -182,7 +192,7 @@ describe("handlebarsHelpers", () => {
       });
 
       it(`if no logic is given in the template, it should render the original template when ${test.label}`, async () => {
-        const p = jest.fn(() => page);
+        const p = vi.fn(() => page);
         await makeScreenshot(p(), {
           screenshot: new Screenshot(test.options),
           handlebarsHelpers: test.options.handlebarsHelpers,
@@ -195,7 +205,8 @@ describe("handlebarsHelpers", () => {
       await expect(
         makeScreenshot(page, {
           handlebarsHelpers: {
-            foo: () => myVar === "foo",
+            foo: () => true,
+            // @ts-expect-error - invalid non-function helper on purpose
             bar: "I'm not a valid function",
           },
           screenshot: new Screenshot({
@@ -217,7 +228,7 @@ describe("handlebarsHelpers", () => {
       </html>
     `);
 
-    const errorTests = [
+    const errorTests: HelperTestCase[] = [
       {
         label: "handlebarsHelpers is not passed",
         options: { content: { myVar: "foo" }, html: html },
@@ -246,7 +257,7 @@ describe("handlebarsHelpers", () => {
           "handlebarsHelpers is an object, but some helper is not a function",
         options: {
           handlebarsHelpers: {
-            equals: (a, b) => a === b,
+            equals: (a: unknown, b: unknown) => a === b,
             bar: "I'm not a function",
           },
           html: html,
@@ -276,12 +287,12 @@ describe("handlebarsHelpers", () => {
       </html>
     `);
 
-    const validTests = [
+    const validTests: HelperTestCase[] = [
       {
         label: "all helpers are functions but no content is passed",
         options: {
           handlebarsHelpers: {
-            equals: (a, b) => a === b,
+            equals: (a: unknown, b: unknown) => a === b,
           },
           html: html,
         },
@@ -292,7 +303,7 @@ describe("handlebarsHelpers", () => {
         options: {
           content: undefined,
           handlebarsHelpers: {
-            equals: (a, b) => a === b,
+            equals: (a: unknown, b: unknown) => a === b,
           },
           html: html,
         },
@@ -304,7 +315,7 @@ describe("handlebarsHelpers", () => {
         options: {
           content: { myOtherVar: "bar" },
           handlebarsHelpers: {
-            equals: (a, b) => a === b,
+            equals: (a: unknown, b: unknown) => a === b,
           },
           html: html,
         },
@@ -315,7 +326,7 @@ describe("handlebarsHelpers", () => {
         options: {
           content: { myVar: "foo" },
           handlebarsHelpers: {
-            equals: (a, b) => a === b,
+            equals: (a: unknown, b: unknown) => a === b,
           },
           html: html,
         },
@@ -333,7 +344,7 @@ describe("handlebarsHelpers", () => {
         options: {
           content: { myVar: "bar" },
           handlebarsHelpers: {
-            equals: (a, b) => a === b,
+            equals: (a: unknown, b: unknown) => a === b,
           },
           html: html,
         },
@@ -352,7 +363,7 @@ describe("handlebarsHelpers", () => {
       });
 
       it(`if logic is given in the template, it should render the expected template when ${test.label}`, async () => {
-        const p = jest.fn(() => page);
+        const p = vi.fn(() => page);
         await makeScreenshot(p(), {
           screenshot: new Screenshot(test.options),
           handlebarsHelpers: test.options.handlebarsHelpers,
@@ -373,7 +384,7 @@ describe("handlebarsHelpers", () => {
           content: { hello: "world" },
         }),
         handlebarsHelpers: {
-          equals: (a, b) => a === b,
+          equals: (a: unknown, b: unknown) => a === b,
         },
       });
 
@@ -396,7 +407,7 @@ describe("handlebarsHelpers", () => {
           },
         }),
         handlebarsHelpers: {
-          shows: (a) => a.show,
+          shows: (a: { show: boolean }) => a.show,
         },
       });
 
@@ -413,7 +424,7 @@ describe("handlebarsHelpers", () => {
           content: { hello: "world" },
         }),
         handlebarsHelpers: {
-          equals: (a, b) => a === b,
+          equals: (a: unknown, b: unknown) => a === b,
         },
       });
 
@@ -436,7 +447,7 @@ describe("handlebarsHelpers", () => {
           },
         }),
         handlebarsHelpers: {
-          shows: (a) => a.show,
+          shows: (a: { show: boolean }) => a.show,
         },
       });
 

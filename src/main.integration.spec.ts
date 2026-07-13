@@ -1,22 +1,22 @@
 import { existsSync, mkdirSync, readdirSync } from "fs";
 import puppeteer from "puppeteer";
 import puppeteerCore from "puppeteer-core";
-import rimraf from "rimraf";
+import { rimrafSync } from "rimraf";
 import { createWorker } from "tesseract.js";
 
 import { nodeHtmlToImage } from "./main";
 
 describe("node-html-to-image", () => {
-  let mockExit;
-  let mockConsoleErr;
+  let mockExit: ReturnType<typeof vi.spyOn>;
+  let mockConsoleErr: ReturnType<typeof vi.spyOn>;
   const originalConsoleError = console.error;
   beforeEach(() => {
-    rimraf.sync("./generated");
+    rimrafSync("./generated");
     mkdirSync("./generated");
-    mockExit = jest.spyOn(process, "exit").mockImplementation((number) => {
+    mockExit = vi.spyOn(process, "exit").mockImplementation((number) => {
       throw new Error("process.exit: " + number);
     });
-    mockConsoleErr = jest
+    mockConsoleErr = vi
       .spyOn(console, "error")
       .mockImplementation((value) => originalConsoleError(value));
   });
@@ -27,11 +27,10 @@ describe("node-html-to-image", () => {
   });
 
   afterAll(() => {
-    rimraf.sync("./generated");
+    rimrafSync("./generated");
   });
   describe("error", () => {
     it("should stop the program properly", async () => {
-      /* eslint-disable @typescript-eslint/ban-ts-comment */
       await expect(async () => {
         await nodeHtmlToImage({
           html: "<html></html>",
@@ -42,7 +41,6 @@ describe("node-html-to-image", () => {
       }).rejects.toThrow();
 
       expect(mockExit).toHaveBeenCalledWith(1);
-      /* eslint-enable @typescript-eslint/ban-ts-comment */
     });
   });
 
@@ -66,7 +64,6 @@ describe("node-html-to-image", () => {
 
     it("should throw an error if html is not provided", async () => {
       await expect(async () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         await nodeHtmlToImage({
           output: "./generated/image.png",
@@ -80,12 +77,12 @@ describe("node-html-to-image", () => {
     it("should throw timeout error", async () => {
       await expect(async () => {
         await nodeHtmlToImage({
-          timeout: 500,
+          timeout: 1,
           html: "<html></html>"
         });
       }).rejects.toThrow();
       expect(mockConsoleErr).toHaveBeenCalledWith(
-        new Error("Timeout hit: 500")
+        new Error("Timeout hit: 1")
       );
     });
 
@@ -184,7 +181,6 @@ describe("node-html-to-image", () => {
     });
 
     it.skip("should handle mass volume well", async () => {
-      jest.setTimeout(60000 * 60);
       expect.hasAssertions();
       const NUMBER_OF_IMAGES = 2000;
       const content = Array.from(Array(NUMBER_OF_IMAGES), (_, i) => ({
@@ -200,11 +196,11 @@ describe("node-html-to-image", () => {
       });
 
       expect(readdirSync("./generated")).toHaveLength(NUMBER_OF_IMAGES);
-    });
+    }, 60000 * 60);
   });
   describe("different instance", () => {
     it("should pass puppeteer instance and generate image", async () => {
-      const executablePath = puppeteer.executablePath();
+      const executablePath = await puppeteer.executablePath();
 
       await nodeHtmlToImage({
         output: "./generated/image.png",
@@ -228,10 +224,8 @@ describe("node-html-to-image", () => {
   });
 });
 
-async function getTextFromImage(path) {
-  const worker = await createWorker();
-  await worker.loadLanguage("eng");
-  await worker.initialize("eng");
+async function getTextFromImage(path: string) {
+  const worker = await createWorker("eng");
 
   const {
     data: { text },
