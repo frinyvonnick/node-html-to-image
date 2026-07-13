@@ -21,6 +21,7 @@ export interface Options extends ScreenshotParams {
   // https://github.com/thomasdondorf/puppeteer-cluster/blob/b5b098aed84b8d2c170b3f9d0ac050f53582df45/src/Cluster.ts#L30
   puppeteer?: any,
   waitUntil?: SetContentWaitForOptions["waitUntil"];
+  beforeRendering?: (page: Page) => void;
   beforeScreenshot?: (page: Page) => void;
   handlebarsHelpers?: { [helpers: string]: (...args: any[]) => any };
   timeout?: number
@@ -29,6 +30,7 @@ export interface Options extends ScreenshotParams {
 export interface MakeScreenshotParams {
   screenshot: Screenshot;
   waitUntil?: SetContentWaitForOptions["waitUntil"];
+  beforeRendering?: (page: Page) => void;
   beforeScreenshot?: (page: Page) => void;
   handlebarsHelpers?: { [helpers: string]: (...args: any[]) => any };
 

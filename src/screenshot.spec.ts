@@ -12,6 +12,39 @@ type HelperTestCase = {
   expectedHtml?: string;
 };
 
+describe("beforeRendering", () => {
+  let page: any;
+  const buffer = new ArrayBuffer();
+
+  beforeEach(() => {
+    page = {
+      setContent: vi.fn(),
+      setDefaultTimeout: vi.fn(),
+      $: vi.fn(() => ({ screenshot: vi.fn(() => buffer) })),
+    };
+  });
+
+  it("should call beforeRendering with the page before setContent", async () => {
+    const calls: string[] = [];
+    page.setContent = vi.fn(() => {
+      calls.push("setContent");
+    });
+    const beforeRendering = vi.fn(() => {
+      calls.push("beforeRendering");
+    });
+
+    await makeScreenshot(page, {
+      beforeRendering,
+      screenshot: new Screenshot({
+        html: "<html><body>Hello world!</body></html>",
+      }),
+    });
+
+    expect(beforeRendering).toHaveBeenCalledWith(page);
+    expect(calls).toEqual(["beforeRendering", "setContent"]);
+  });
+});
+
 describe("beforeScreenshot", () => {
   let page: any;
   const buffer = new ArrayBuffer();

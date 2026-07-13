@@ -7,6 +7,7 @@ export async function makeScreenshot(
   page: Page,
   {
     screenshot,
+    beforeRendering,
     beforeScreenshot,
     waitUntil = "load",
     timeout,
@@ -30,6 +31,10 @@ export async function makeScreenshot(
   if (screenshot?.content || hasHelpers) {
     const template = compile(screenshot.html);
     screenshot.setHTML(template(screenshot.content));
+  }
+
+  if (typeof beforeRendering === "function") {
+    await beforeRendering(page);
   }
 
   await page.setContent(screenshot.html, { waitUntil });
