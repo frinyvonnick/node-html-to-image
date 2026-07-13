@@ -16,4 +16,7 @@ jobs:
       - run: yarn build
       - run: yarn typecheck
       - run: yarn lint
+      # Chromium's sandbox needs unprivileged user namespaces, which Ubuntu 24.04
+      # runners disable via AppArmor. Re-enable them before the browser tests.
+      - run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       - run: yarn test
