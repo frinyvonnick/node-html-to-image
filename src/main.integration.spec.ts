@@ -199,6 +199,38 @@ describe("node-html-to-image", () => {
       expect(readdirSync("./generated")).toHaveLength(NUMBER_OF_IMAGES);
     }, 60000 * 60);
   });
+
+  describe("beforeRendering + maxConcurrency (functional)", () => {
+    it("enables request interception via beforeRendering across a concurrent batch", async () => {
+      const requested: string[] = [];
+
+      await nodeHtmlToImage({
+        html: '<html><body>Hi {{name}} <img src="https://example.invalid/{{name}}.png" /></body></html>',
+        maxConcurrency: 3,
+        beforeRendering: async (page) => {
+          await page.setRequestInterception(true);
+          page.on("request", (req) => {
+            requested.push(req.url());
+            req.abort();
+          });
+        },
+        content: [
+          { name: "a", output: "./generated/a.png" },
+          { name: "b", output: "./generated/b.png" },
+          { name: "c", output: "./generated/c.png" },
+        ],
+      });
+
+      expect(existsSync("./generated/a.png")).toBe(true);
+      expect(existsSync("./generated/b.png")).toBe(true);
+      expect(existsSync("./generated/c.png")).toBe(true);
+
+      expect(requested).toContain("https://example.invalid/a.png");
+      expect(requested).toContain("https://example.invalid/b.png");
+      expect(requested).toContain("https://example.invalid/c.png");
+    });
+  });
+
   describe("different instance", () => {
     it("should pass puppeteer instance and generate image", async () => {
       const executablePath = await puppeteer.executablePath();
