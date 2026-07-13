@@ -20,7 +20,8 @@
     "lint": "eslint ./src",
     "typecheck": "tsc -p tsconfig.typecheck.json",
     "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "release": "node scripts/release.js"
   },
   "files": [
     "dist"
