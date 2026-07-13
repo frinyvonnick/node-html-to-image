@@ -22,6 +22,7 @@ export interface Options extends ScreenshotParams {
   puppeteer?: any,
   waitUntil?: SetContentWaitForOptions["waitUntil"];
   beforeScreenshot?: (page: Page) => void;
+  handlebarsHelpers?: { [helpers: string]: (...args: any[]) => any };
   timeout?: number
 }
 

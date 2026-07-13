@@ -104,6 +104,20 @@ describe("node-html-to-image", () => {
       expect(text.trim()).toBe("Hello Yvonnick!");
     });
 
+    it("should accept handlebarsHelpers via the public API", async () => {
+      await nodeHtmlToImage({
+        output: "./generated/image.png",
+        html: "<html><body>{{greet name}}</body></html>",
+        content: { name: "world" },
+        handlebarsHelpers: {
+          greet: (name) => "Hello " + name,
+        },
+      });
+
+      const text = await getTextFromImage("./generated/image.png");
+      expect(text.trim()).toBe("Hello world");
+    });
+
     it("should create selected element image", async () => {
       await nodeHtmlToImage({
         output: "./generated/image.png",
