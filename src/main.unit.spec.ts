@@ -53,6 +53,25 @@ describe("node-html-to-image | Unit", () => {
 
     expect(launchMock).toHaveBeenCalledWith(expect.objectContaining({ timeout: CLUSTER_TIMEOUT }))
   });
+
+  it("should pass 'maxConcurrency' to 'puppeteer-cluster' via options", async () => {
+    await nodeHtmlToImage({
+      html,
+      maxConcurrency: 5,
+    });
+
+    expect(launchMock).toHaveBeenCalledWith(
+      expect.objectContaining({ maxConcurrency: 5 }),
+    );
+  });
+
+  it("should default 'maxConcurrency' to 2", async () => {
+    await nodeHtmlToImage({ html });
+
+    expect(launchMock).toHaveBeenCalledWith(
+      expect.objectContaining({ maxConcurrency: 2 }),
+    );
+  });
 });
 
 vi.mock("puppeteer-cluster");

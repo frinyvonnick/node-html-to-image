@@ -85,6 +85,7 @@ List of all available options:
 | selector          | The selector property lets you target a specific element to perform the screenshot on. (default `body`)                                                                                                                | string                                          | optional    |
 | handlebarsHelpers | The handlebarsHelpers property lets add custom logic to the templates using Handlebars sub-expressions. [Learn more](https://handlebarsjs.com/guide/builtin-helpers.html#sub-expressions).                             | object                                          | optional |
 | timeout           | Timeout for a [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster#clusterlaunchoptions) (in `ms`). Defaults to `30000` (30 seconds).                                                                | number                                          | optional |
+| maxConcurrency    | Maximum number of concurrent [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster#clusterlaunchoptions) workers. Defaults to `2`.                                                                    | number                                          | optional |
 
 
 ### Setting output image resolution

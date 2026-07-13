@@ -24,6 +24,7 @@ export interface Options extends ScreenshotParams {
   beforeRendering?: (page: Page) => void;
   beforeScreenshot?: (page: Page) => void;
   handlebarsHelpers?: { [helpers: string]: (...args: any[]) => any };
+  maxConcurrency?: number;
   timeout?: number
 }
 
