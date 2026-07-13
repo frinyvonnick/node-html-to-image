@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to node-html-to-image 🌄</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-3.1.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-6.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/frinyvonnick/node-html-to-image#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -75,7 +75,7 @@ List of all available options:
 | type              | The type of the generated image                                                                                                                                                                                        | jpeg or png (default: png)                      | optional    |
 | quality           | The quality of the generated image (only applicable to jpg)                                                                                                                                                            | number (default: 80)                            | optional    |
 | content           | If provided html property is considered an handlebars template and use content value to fill it                                                                                                                        | object or Array                                 | optional    |
-| waitUntil         | Define when to consider markup succeded. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#pagesetcontenthtml-options).                                    | string or Array<string> (default: networkidle0) | optional    |
+| waitUntil         | Define when to consider markup succeded. Accepts `load` and `domcontentloaded` (puppeteer no longer supports `networkidle0`/`networkidle2` for `setContent`). [Learn more](https://pptr.dev/api/puppeteer.page.setcontent).                     | string or Array<string> (default: load)         | optional    |
 | puppeteer         | The puppeteer property let you use a different puppeteer library (like puppeteer-core or puppeteer-extra).                                                                                                             | object (default: puppeteer)                     | optional    |
 | puppeteerArgs     | The puppeteerArgs property let you pass down custom configuration to puppeteer. [Learn more](https://github.com/puppeteer/puppeteer/blob/8370ec88ae94fa59d9e9dc0c154e48527d48c9fe/docs/api.md#puppeteerlaunchoptions). | object                                          | optional    |
 | beforeScreenshot  | An async function that will execute just before screenshot is taken. Gives access to puppeteer page element.                                                                                                           | Function                                        | optional |
