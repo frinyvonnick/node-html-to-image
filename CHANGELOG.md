@@ -1,5 +1,19 @@
 # Changelog
 
+<a name="6.2.0"></a>
+## 6.2.0 (2026-07-13)
+
+### Added
+
+- ✅ Add a real-browser test for beforeRendering + maxConcurrency [[597f191](https://github.com/frinyvonnick/node-html-to-image/commit/597f19105900b4dad6ded63996380ec0357056f6)]
+- ✨ Expose maxConcurrency option ([#80](https://github.com/frinyvonnick/node-html-to-image/issues/80)) [[9a6ed13](https://github.com/frinyvonnick/node-html-to-image/commit/9a6ed131404189ccd3f44c5f0194de3cd8246703)]
+- ✨ Add a beforeRendering hook ([#211](https://github.com/frinyvonnick/node-html-to-image/issues/211), [#210](https://github.com/frinyvonnick/node-html-to-image/issues/210)) [[4cf5973](https://github.com/frinyvonnick/node-html-to-image/commit/4cf5973ab28d11272b2b3d11400f4470144d80f4)]
+
+### Fixed
+
+- 🐛 Expose handlebarsHelpers on the Options type ([#228](https://github.com/frinyvonnick/node-html-to-image/issues/228)) [[d8542a0](https://github.com/frinyvonnick/node-html-to-image/commit/d8542a092adedd6bb7a77eb03fd9db8124398e66)]
+
+
 <a name="6.1.0"></a>
 ## 6.1.0 (2026-07-13)
 
