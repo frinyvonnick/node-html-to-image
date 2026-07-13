@@ -7,7 +7,6 @@ const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 describe("node-html-to-image | Unit", () => {
-  let mockExit: ReturnType<typeof vi.spyOn>;
   let launchMock: ReturnType<typeof vi.spyOn>;
   const buffer1 = Buffer.alloc(1);
   const buffer2 = Buffer.alloc(1);
@@ -34,13 +33,6 @@ describe("node-html-to-image | Unit", () => {
         close: vi.fn(),
       }))
     );
-    mockExit = vi.spyOn(process, "exit").mockImplementation((number) => {
-      throw new Error("process.exit: " + number);
-    });
-  });
-
-  afterEach(() => {
-    mockExit.mockRestore();
   });
 
   it("should sort buffer in the right order", async () => {

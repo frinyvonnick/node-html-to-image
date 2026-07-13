@@ -50,7 +50,11 @@ export async function makeScreenshot(
     quality: screenshot.quality,
   });
 
-  screenshot.setBuffer(Buffer.from(result));
+  // With `encoding: "base64"` Puppeteer returns a string; keep it as-is instead
+  // of wrapping the base64 text in a Buffer.
+  screenshot.setBuffer(
+    typeof result === "string" ? result : Buffer.from(result),
+  );
 
   return screenshot;
 }

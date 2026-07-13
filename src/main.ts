@@ -62,8 +62,9 @@ export async function nodeHtmlToImage(options: Options) {
       ? screenshots.map(({ buffer }) => buffer)
       : screenshots[0].buffer;
   } catch (err) {
-    console.error(err);
+    // A library must not kill its host process. Close the cluster and let the
+    // caller handle the failure.
     await cluster.close();
-    process.exit(1);
+    throw err;
   }
 }

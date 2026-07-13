@@ -7,30 +7,16 @@ import { createWorker } from "tesseract.js";
 import { nodeHtmlToImage } from "./main";
 
 describe("node-html-to-image", () => {
-  let mockExit: ReturnType<typeof vi.spyOn>;
-  let mockConsoleErr: ReturnType<typeof vi.spyOn>;
-  const originalConsoleError = console.error;
   beforeEach(() => {
     rimrafSync("./generated");
     mkdirSync("./generated");
-    mockExit = vi.spyOn(process, "exit").mockImplementation((number) => {
-      throw new Error("process.exit: " + number);
-    });
-    mockConsoleErr = vi
-      .spyOn(console, "error")
-      .mockImplementation((value) => originalConsoleError(value));
-  });
-
-  afterEach(() => {
-    mockExit.mockRestore();
-    mockConsoleErr.mockRestore();
   });
 
   afterAll(() => {
     rimrafSync("./generated");
   });
   describe("error", () => {
-    it("should stop the program properly", async () => {
+    it("should reject instead of killing the process on invalid options", async () => {
       await expect(async () => {
         await nodeHtmlToImage({
           html: "<html></html>",
@@ -39,8 +25,6 @@ describe("node-html-to-image", () => {
           quality: "wrong value",
         });
       }).rejects.toThrow();
-
-      expect(mockExit).toHaveBeenCalledWith(1);
     });
   });
 
@@ -68,10 +52,7 @@ describe("node-html-to-image", () => {
         await nodeHtmlToImage({
           output: "./generated/image.png",
         });
-      }).rejects.toThrow();
-      expect(mockConsoleErr).toHaveBeenCalledWith(
-        new Error("You must provide an html property.")
-      );
+      }).rejects.toThrow("You must provide an html property.");
     });
 
     it("should throw timeout error", async () => {
@@ -80,10 +61,16 @@ describe("node-html-to-image", () => {
           timeout: 1,
           html: "<html></html>"
         });
-      }).rejects.toThrow();
-      expect(mockConsoleErr).toHaveBeenCalledWith(
-        new Error("Timeout hit: 1")
-      );
+      }).rejects.toThrow("Timeout hit: 1");
+    });
+
+    it("should return a base64 string", async () => {
+      const result = await nodeHtmlToImage({
+        html: "<html></html>",
+        encoding: "base64",
+      });
+
+      expect(typeof result).toBe("string");
     });
 
     it("should generate an jpeg image", async () => {
