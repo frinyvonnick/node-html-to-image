@@ -1,5 +1,22 @@
 # Changelog
 
+<a name="6.1.0"></a>
+## 6.1.0 (2026-07-13)
+
+### Changed
+
+- ⬆️ Update CodeQL action to v3 ([#196](https://github.com/frinyvonnick/node-html-to-image/issues/196)) [[c5e4ac1](https://github.com/frinyvonnick/node-html-to-image/commit/c5e4ac11904df89bd0a076409bbafd4e1858e55d)]
+
+### Fixed
+
+- 🐛 Don&#x27;t kill the host process and return base64 as a string [[b468cff](https://github.com/frinyvonnick/node-html-to-image/commit/b468cff266a6ce40c5f7d5606579a5ad1d7ac19d)]
+- 💚 Fix CI browser launch on Ubuntu runners [[4a77e8f](https://github.com/frinyvonnick/node-html-to-image/commit/4a77e8ffbdd7977b22c5c25112406cff0388f55c)]
+
+### Miscellaneous
+
+- 🔨 Harden the release script [[2267c8e](https://github.com/frinyvonnick/node-html-to-image/commit/2267c8e711733e3c6b6594bf2de8cf39cb04e8e3)]
+
+
 <a name="6.0.0"></a>
 ## 6.0.0 (2026-07-13)
 
