@@ -11,7 +11,7 @@
     "node": ">=22.12.0"
   },
   "dependencies": {
-    "handlebars": "4.7.9",
+    "handlebars": "4.7.10",
     "puppeteer": "25.3.0",
     "puppeteer-cluster": "0.25.0"
   },
